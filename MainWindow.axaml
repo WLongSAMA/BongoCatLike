@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BongoCat_Like"
+        x:Class="BongoCat_Like.MainWindow"
+        Title="BongoCat_Like"
+        Width="{Binding Source={x:Static local:GlobalHelper.WindowWidth}}"
+        Height="{Binding Source={x:Static local:GlobalHelper.WindowHeight}}"
+        SystemDecorations="None"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Width="256" Height="256" Margin="-30,50,0,0">
+        <Image x:Name="SkinImage"
+               Source="/Assets/CatLeft.png" 
+               Stretch="UniformToFill"/>
+        <Image x:Name="HandImage"
+               Source="/Assets/CatRight.png" 
+               Stretch="UniformToFill"/>
+        <Image x:Name="HatImage"
+               Classes="jelly"
+               Source=""
+               Stretch="UniformToFill">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    <TranslateTransform X="32" Y="-70" />
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+            <Button Content="测试动画"
+                   Margin="0,0,0,20"
+                   Click="PlayAnimation"/>
+            <Button Content="退出"
+                   Margin="0,0,0,20"
+                   Click="Exit"/>
+        </StackPanel>
+    </Grid>
+</Window>
