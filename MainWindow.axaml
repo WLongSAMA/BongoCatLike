@@ -37,10 +37,10 @@
         </Grid.Styles>
 
         <Image x:Name="SkinImage"
-               Source="/Assets/CatLeft.png"
+               Source="/Assets/default/CatLeft.png"
                Stretch="UniformToFill"/>
         <Image x:Name="HandImage"
-               Source="/Assets/CatRight.png"
+               Source="/Assets/default/CatRight.png"
                Stretch="UniformToFill"/>
         <Image x:Name="HatImage"
                Classes="jelly"

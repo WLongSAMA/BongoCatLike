@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -32,6 +33,7 @@ namespace BongoCat_Like
 
         private void MainWindow_Opened(object? sender, EventArgs e)
         {
+            ReadAssets();
             ReadConfig();
             SetLocalization();
             SetTrayIcon();
@@ -61,6 +63,12 @@ namespace BongoCat_Like
         {
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 desktop.Shutdown();
+        }
+
+        private static void ReadAssets()
+        {
+            string json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json")).ToString()!;
+            GlobalHelper.Items = JsonSerializer.Deserialize<ItemsJson>(json);
         }
 
         private void ReadConfig()
@@ -156,13 +164,13 @@ namespace BongoCat_Like
 
         private void SetSkin()
         {
-            SkinImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/FullGreyLeft.png")));
-            HandImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/FullGreyRight.png")));
+            SkinImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/FullGreyLeft.png")));
+            HandImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/FullGreyRight.png")));
         }
 
         private void SetHat()
         {
-            HatImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/MusketeerHat.png")));
+            HatImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/MusketeerHat.png")));
         }
 
         private async void HatAnimation()
