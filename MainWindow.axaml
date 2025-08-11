@@ -21,7 +21,7 @@
                 <Style.Animations>
                     <Animation Duration="0:0:1"
                                IterationCount="Infinite"
-                               Easing="QuadraticEaseInOut">
+                               Easing="QuadraticEaseIn">
                         <KeyFrame Cue="0%">
                             <Setter Property="ScaleTransform.ScaleY" Value="1.0"/>
                         </KeyFrame>
