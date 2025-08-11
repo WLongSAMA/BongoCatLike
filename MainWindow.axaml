@@ -11,12 +11,36 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen">
 
+
     <Grid Width="256" Height="256" Margin="-30,50,0,0">
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+        <Grid.Styles>
+            <Style Selector="Grid">
+                <Style.Animations>
+                    <Animation Duration="0:0:1"
+                               IterationCount="Infinite"
+                               Easing="QuadraticEaseInOut">
+                        <KeyFrame Cue="0%">
+                            <Setter Property="ScaleTransform.ScaleY" Value="1.0"/>
+                        </KeyFrame>
+                        <KeyFrame Cue="50%">
+                            <Setter Property="ScaleTransform.ScaleY" Value="1.05"/>
+                        </KeyFrame>
+                        <KeyFrame Cue="100%">
+                            <Setter Property="ScaleTransform.ScaleY" Value="1.0"/>
+                        </KeyFrame>
+                    </Animation>
+                </Style.Animations>
+            </Style>
+        </Grid.Styles>
+
         <Image x:Name="SkinImage"
-               Source="/Assets/CatLeft.png" 
+               Source="/Assets/CatLeft.png"
                Stretch="UniformToFill"/>
         <Image x:Name="HandImage"
-               Source="/Assets/CatRight.png" 
+               Source="/Assets/CatRight.png"
                Stretch="UniformToFill"/>
         <Image x:Name="HatImage"
                Classes="jelly"
