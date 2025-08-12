@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia;
@@ -67,8 +68,9 @@ namespace BongoCat_Like
 
         private static void ReadAssets()
         {
-            string json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json")).ToString()!;
-            GlobalHelper.Items = JsonSerializer.Deserialize<ItemsJson>(json);
+            Stream json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json"));
+            using StreamReader streamReader = new(json);
+            GlobalHelper.Items = JsonSerializer.Deserialize<ItemsJson>(streamReader.ReadToEnd());
         }
 
         private void ReadConfig()
@@ -164,13 +166,13 @@ namespace BongoCat_Like
 
         private void SetSkin()
         {
-            SkinImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/FullGreyLeft.png")));
-            HandImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/FullGreyRight.png")));
+            SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
+            HandImage.Source = GlobalHelper.CatSkin.SkinImage[1];
         }
 
         private void SetHat()
         {
-            HatImage.Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/MusketeerHat.png")));
+            HatImage.Source = GlobalHelper.CatSkin.HatImage;
         }
 
         private async void HatAnimation()

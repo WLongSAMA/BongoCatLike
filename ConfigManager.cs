@@ -108,5 +108,7 @@ namespace BongoCat_Like
         public int WindowLeft { get; set; } = 0;
         public int WindowTop { get; set; } = 0;
         public string Language { get; set; } = Localization.GetSystemLang();
+        public int SkinId { get; set; } = GlobalHelper.CatSkin.SkinId;
+        public int HatId { get; set; } = GlobalHelper.CatSkin.HatId;
     }
 }
