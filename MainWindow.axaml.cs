@@ -48,6 +48,8 @@ namespace BongoCat_Like
         {
             _config.WindowLeft = Position.X;
             _config.WindowTop = Position.Y;
+            _config.SkinId = GlobalHelper.CatSkin.SkinId;
+            _config.HatId = GlobalHelper.CatSkin.HatId;
             ConfigManager.SaveConfig(_config);
         }
 
@@ -138,7 +140,6 @@ namespace BongoCat_Like
                 _config.WindowLeft = (int)Math.Max(workingArea.X, Math.Min(left, workingArea.X + workingArea.Width - pixelSize.Width));
                 _config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
             }
-            WindowStartupLocation = WindowStartupLocation.Manual;
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
         }
 
@@ -159,6 +160,14 @@ namespace BongoCat_Like
             });
         }
 
+        private void ChangeSkin(object sender, RoutedEventArgs e)
+        {
+            _config.SkinId = 236;
+            _config.HatId = 432;
+            SetSkin();
+            SetHat();
+        }
+
         private void PlayAnimation(object sender, RoutedEventArgs e)
         {
             HatAnimation();
@@ -166,12 +175,14 @@ namespace BongoCat_Like
 
         private void SetSkin()
         {
+            GlobalHelper.CatSkin.SkinId = _config.SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
-            HandImage.Source = GlobalHelper.CatSkin.SkinImage[1];
+            HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
         }
 
         private void SetHat()
         {
+            GlobalHelper.CatSkin.HatId = _config.HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
         }
 

@@ -12,7 +12,12 @@ namespace BongoCat_Like
 
         private int _skinId = 0;
         private int _hatId = 0;
-        private List<Bitmap>? _skinImage;
+        private List<Bitmap> _skinImage = [
+            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeft.png"))),
+            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeftPunch.png"))),
+            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRight.png"))),
+            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRightPunch.png")))
+        ];
         private Bitmap? _hatImage;
 
         private SkinManager() { }
@@ -35,12 +40,12 @@ namespace BongoCat_Like
             set
             {
                 _skinId = ValidateItem(value, GlobalHelper.Items?.Skin);
-                _skinImage = [];
+                _skinImage.Clear();
                 if (_skinId == 0)
                 {
                     _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeft.png"))));
-                    _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRight.png"))));
                     _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeftPunch.png"))));
+                    _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRight.png"))));
                     _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRightPunch.png"))));
                 }
                 else
@@ -77,19 +82,12 @@ namespace BongoCat_Like
 
         public Bitmap[] SkinImage
         {
-            get
-            {
-                if (_skinImage == null)
-                {
-                    SkinId = 0;
-                }
-                return [.. _skinImage!];
-            }
+            get => [.. _skinImage];
         }
 
-        public Bitmap HatImage
+        public Bitmap? HatImage
         {
-            get => _hatImage!;
+            get => _hatImage;
         }
     }
 }

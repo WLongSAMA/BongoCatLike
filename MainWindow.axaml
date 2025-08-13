@@ -9,7 +9,7 @@
         Height="{Binding Source={x:Static local:GlobalHelper.WindowHeight}}"
         SystemDecorations="None"
         Background="Transparent"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="Manual">
 
 
     <Grid Width="256" Height="256" Margin="-30,50,0,0">
@@ -60,6 +60,9 @@
             <Button Content="测试动画"
                    Margin="0,0,0,20"
                    Click="PlayAnimation"/>
+            <Button Content="换肤"
+                   Margin="0,0,0,20"
+                   Click="ChangeSkin"/>
             <Button Content="退出"
                    Margin="0,0,0,20"
                    Click="Exit"/>
