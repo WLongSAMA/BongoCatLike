@@ -196,7 +196,7 @@ namespace BongoCat_Like
 
             animationLock = true;
 
-            await Dispatcher.UIThread.InvokeAsync(() =>
+            await Dispatcher.UIThread.InvokeAsync(async () =>
             {
                 if (Hand)
                 {
@@ -208,16 +208,13 @@ namespace BongoCat_Like
                     SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
                     HandImage.Source = GlobalHelper.CatSkin.SkinImage[3];
                 }
+
+                await Task.Delay(200);
+
+                SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
+                HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
+                Hand = !Hand;
             });
-
-            await Task.Delay(100);
-
-            await Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
-                    HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
-                    Hand = !Hand;
-                });
 
             animationLock = false;
         }
