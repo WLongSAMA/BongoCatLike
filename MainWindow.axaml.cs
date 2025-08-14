@@ -1,5 +1,5 @@
 using System;
-using System.Diagnostics;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,7 +13,10 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
+using Avalonia.Threading;
 using SharpHook;
+using SharpHook.Data;
+using MouseButton = SharpHook.Data.MouseButton;
 
 namespace BongoCat_Like
 {
@@ -23,6 +26,11 @@ namespace BongoCat_Like
         private TrayIcon _trayIcon = null!;
         private NativeMenuItem? _showItem;
         private NativeMenuItem? _exitItem;
+        private bool Hand = false;
+        private bool animationLock = false;
+
+        private ConcurrentDictionary<KeyCode, bool> _activeKeys = new();
+        private ConcurrentDictionary<MouseButton, bool> _activeMouseButtons = new();
 
         public MainWindow()
         {
@@ -39,9 +47,9 @@ namespace BongoCat_Like
             SetLocalization();
             SetTrayIcon();
             SetPosition();
-            //ListeningPress();
             SetSkin();
             SetHat();
+            ListeningPress();
         }
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
@@ -143,21 +151,75 @@ namespace BongoCat_Like
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
         }
 
-        private static void ListeningPress()
+        private void ListeningPress()
         {
             Task task = Task.Run(() =>
             {
                 TaskPoolGlobalHook hook = new();
-                hook.KeyPressed += (sender, e) =>
+
+                hook.KeyPressed += async (sender, e) =>
                 {
-                    Trace.WriteLine($"检测到键盘按下：{e.Data.KeyCode}");
+                    if (!_activeKeys.ContainsKey(e.Data.KeyCode))
+                    {
+                        _activeKeys[e.Data.KeyCode] = true;
+                        await Hit();
+                    }
                 };
-                hook.MousePressed += (sender, e) =>
+
+                hook.KeyReleased += (sender, e) =>
                 {
-                    Trace.WriteLine($"检测到鼠标点击：{e.Data.X}, {e.Data.Y}");
+                    _activeKeys.TryRemove(e.Data.KeyCode, out _);
                 };
+
+                hook.MousePressed += async (sender, e) =>
+                {
+                    if (!_activeMouseButtons.ContainsKey(e.Data.Button))
+                    {
+                        _activeMouseButtons[e.Data.Button] = true;
+                        await Hit();
+                    }
+                };
+
+                hook.MouseReleased += (sender, e) =>
+                {
+                    _activeMouseButtons.TryRemove(e.Data.Button, out _);
+                };
+
                 hook.Run();
             });
+        }
+
+        private async Task Hit()
+        {
+            if (animationLock)
+                return;
+
+            animationLock = true;
+
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                if (Hand)
+                {
+                    SkinImage.Source = GlobalHelper.CatSkin.SkinImage[1];
+                    HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
+                }
+                else
+                {
+                    SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
+                    HandImage.Source = GlobalHelper.CatSkin.SkinImage[3];
+                }
+            });
+
+            await Task.Delay(100);
+
+            await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
+                    HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
+                    Hand = !Hand;
+                });
+
+            animationLock = false;
         }
 
         private void ChangeSkin(object sender, RoutedEventArgs e)
@@ -188,16 +250,13 @@ namespace BongoCat_Like
 
         private async void HatAnimation()
         {
-            // 重置变换确保动画从头开始
             TransformGroup transformGroup = new();
             transformGroup.Children.Add(new ScaleTransform(1, 1));
             transformGroup.Children.Add(new TranslateTransform(32, -70));
             HatImage.RenderTransform = transformGroup;
 
-            // 强制重绘
             await Task.Delay(10);
 
-            // 手动启动动画
             Animation animation = new()
             {
                 Duration = TimeSpan.FromSeconds(0.5),
