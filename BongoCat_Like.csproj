@@ -43,4 +43,10 @@
     <ItemGroup>
         <Compile Remove="Decompile/**" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="SettingWindow.axaml.cs">
+        <DependentUpon>SettingWindow.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

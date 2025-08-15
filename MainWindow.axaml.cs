@@ -110,10 +110,10 @@ namespace BongoCat_Like
             _trayIcon.ToolTipText = GlobalHelper.Name;
 
             _skinItem = new(Localization.GetString("Menu.Skin"));
-            _skinItem.Click += (sender, e) => { };
+            _skinItem.Click += (sender, e) => { SettingWindow.ShowOrActivate(this, "Page1"); };
 
             _settingItem = new(Localization.GetString("Menu.Setting"));
-            _settingItem.Click += (sender, e) => { };
+            _settingItem.Click += (sender, e) => { SettingWindow.ShowOrActivate(this, "Setting"); };
 
             _exitItem = new(Localization.GetString("Menu.Exit"));
             _exitItem.Click += (sender, e) =>
