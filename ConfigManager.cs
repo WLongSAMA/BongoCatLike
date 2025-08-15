@@ -113,6 +113,7 @@ namespace BongoCat_Like
         public int MainOffsetY { get; set; } = 50;
         public double Scale { get; set; } = 1;
         public bool TaskbarIcon { get; set; } = false;
+        public bool Topmost {  get; set; } = false;
         public int SkinId { get; set; } = 0;
         public int HatId { get; set; } = 0;
     }

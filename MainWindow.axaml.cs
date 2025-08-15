@@ -156,8 +156,9 @@ namespace BongoCat_Like
             }
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
 
-            ShowInTaskbar = _config.TaskbarIcon;
             MainGrid.Margin = new Thickness(_config.MainOffsetX, _config.MainOffsetY);
+            ShowInTaskbar = _config.TaskbarIcon;
+            Topmost = _config.Topmost;
 
             SetScale(_config.Scale);
         }
