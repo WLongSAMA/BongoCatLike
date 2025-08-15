@@ -12,15 +12,13 @@ namespace BongoCat_Like
 
         private int _skinId = 0;
         private int _hatId = 0;
-        private List<Bitmap> _skinImage = [
-            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeft.png"))),
-            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatLeftPunch.png"))),
-            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRight.png"))),
-            new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/default/CatRightPunch.png")))
-        ];
+        private List<Bitmap> _skinImage = [];
         private Bitmap? _hatImage;
 
-        private SkinManager() { }
+        private SkinManager()
+        {
+            SkinId = 0;
+        }
 
         public static SkinManager Instance
         {

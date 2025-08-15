@@ -149,6 +149,8 @@ namespace BongoCat_Like
                 _config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
             }
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
+
+            MainGrid.Margin = new Thickness(_config.MainOffsetX, _config.MainOffsetY);
         }
 
         private void ListeningPress()
@@ -230,6 +232,28 @@ namespace BongoCat_Like
         private void PlayAnimation(object sender, RoutedEventArgs e)
         {
             HatAnimation();
+        }
+
+        private void Scale(object sender, RoutedEventArgs e)
+        {
+            /*
+             * Like    Cat
+             * 0.25    0.5
+             * 0.375   0.75
+             * 0.5     1
+             * 0.625   1.25
+             * 0.75    1.5
+             * 1       2
+             * 1.11    2.22
+             */
+            SetScale(0.625);
+        }
+
+        private void SetScale(double scale)
+        {
+            TransformGroup transformGroup = new();
+            transformGroup.Children.Add(new ScaleTransform(scale, scale));
+            MainGrid.RenderTransform = transformGroup;
         }
 
         private void SetSkin()

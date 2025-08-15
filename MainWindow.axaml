@@ -11,8 +11,7 @@
         Background="Transparent"
         WindowStartupLocation="Manual">
 
-
-    <Grid Width="256" Height="256" Margin="-30,50,0,0">
+    <Grid x:Name="MainGrid" Width="256" Height="256" Margin="-30,50,0,0">
         <Grid.RenderTransform>
             <ScaleTransform ScaleX="1" ScaleY="1"/>
         </Grid.RenderTransform>
@@ -57,12 +56,15 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom">
-            <Button Content="测试动画"
+            <Button Content="动画"
                    Margin="0,0,0,20"
                    Click="PlayAnimation"/>
             <Button Content="换肤"
                    Margin="0,0,0,20"
                    Click="ChangeSkin"/>
+            <Button Content="缩放"
+                   Margin="0,0,0,20"
+                   Click="Scale"/>
             <Button Content="退出"
                    Margin="0,0,0,20"
                    Click="Exit"/>
