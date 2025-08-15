@@ -2,6 +2,7 @@
     "Name": "简体中文",
     "Language": "zh-CN",
     "Menu": {
+        "Skin": "换肤",
         "Setting": "设置",
         "Exit": "退出"
     }

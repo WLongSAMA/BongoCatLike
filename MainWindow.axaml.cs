@@ -24,7 +24,8 @@ namespace BongoCat_Like
     {
         private AppConfig _config = new();
         private TrayIcon _trayIcon = null!;
-        private NativeMenuItem? _showItem;
+        private NativeMenuItem? _skinItem;
+        private NativeMenuItem? _settingItem;
         private NativeMenuItem? _exitItem;
         private bool Hand = false;
         private bool animationLock = false;
@@ -93,8 +94,10 @@ namespace BongoCat_Like
             Localization.LoadLanguage(_config.Language);
             Localization.LanguageChanged += () =>
             {
-                if (_showItem != null)
-                    _showItem.Header = Localization.GetString("Menu.Setting");
+                if (_skinItem != null)
+                    _skinItem.Header = Localization.GetString("Menu.Skin");
+                if (_settingItem != null)
+                    _settingItem.Header = Localization.GetString("Menu.Setting");
                 if (_exitItem != null)
                     _exitItem.Header = Localization.GetString("Menu.Exit");
             };
@@ -107,8 +110,11 @@ namespace BongoCat_Like
             _trayIcon.Icon = new WindowIcon(icon);
             _trayIcon.ToolTipText = GlobalHelper.Name;
 
-            _showItem = new(Localization.GetString("Menu.Setting"));
-            _showItem.Click += (sender, e) => { };
+            _skinItem = new(Localization.GetString("Menu.Skin"));
+            _skinItem.Click += (sender, e) => { };
+
+            _settingItem = new(Localization.GetString("Menu.Setting"));
+            _settingItem.Click += (sender, e) => { };
 
             _exitItem = new(Localization.GetString("Menu.Exit"));
             _exitItem.Click += (sender, e) =>
@@ -118,7 +124,8 @@ namespace BongoCat_Like
             };
 
             NativeMenu menu = [];
-            menu.Add(_showItem);
+            menu.Add(_skinItem);
+            menu.Add(_settingItem);
             menu.Add(new NativeMenuItemSeparator());
             menu.Add(_exitItem);
 

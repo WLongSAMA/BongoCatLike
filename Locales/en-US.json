@@ -2,6 +2,7 @@
     "Name": "English",
     "Language": "en-US",
     "Menu": {
+        "Skin": "ChangeSkin",
         "Setting": "Setting",
         "Exit": "Exit"
     }

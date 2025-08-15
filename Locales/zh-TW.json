@@ -2,6 +2,7 @@
     "Name": "繁體中文",
     "Language": "zh-TW",
     "Menu": {
+        "Skin": "換膚",
         "Setting": "設置",
         "Exit": "退出"
     }
