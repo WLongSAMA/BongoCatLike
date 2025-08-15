@@ -106,7 +106,7 @@ namespace BongoCat_Like
         private void SetTrayIcon()
         {
             _trayIcon = new TrayIcon();
-            Bitmap icon = new(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/tray.ico")));
+            Bitmap icon = new(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/Icon.ico")));
             _trayIcon.Icon = new WindowIcon(icon);
             _trayIcon.ToolTipText = GlobalHelper.Name;
 
