@@ -23,7 +23,6 @@
                Source="/Assets/default/CatRight.png"
                Stretch="UniformToFill"/>
         <Image x:Name="HatImage"
-               Classes="jelly"
                Source=""
                Stretch="UniformToFill">
             <Image.RenderTransform>
