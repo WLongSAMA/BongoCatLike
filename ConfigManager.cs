@@ -110,7 +110,7 @@ namespace BongoCat_Like
         public string Language { get; set; } = Localization.GetSystemLang();
         public int MainOffsetX { get; set; } = -30;
         public int MainOffsetY { get; set; } = 50;
-        public int Scale { get; set; } = 1;
+        public double Scale { get; set; } = 1;
         public int SkinId { get; set; } = 0;
         public int HatId { get; set; } = 0;
     }

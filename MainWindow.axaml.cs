@@ -151,6 +151,8 @@ namespace BongoCat_Like
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
 
             MainGrid.Margin = new Thickness(_config.MainOffsetX, _config.MainOffsetY);
+
+            SetScale(_config.Scale);
         }
 
         private void ListeningPress()
@@ -254,6 +256,7 @@ namespace BongoCat_Like
             TransformGroup transformGroup = new();
             transformGroup.Children.Add(new ScaleTransform(scale, scale));
             MainGrid.RenderTransform = transformGroup;
+            _config.Scale = scale;
         }
 
         private void SetSkin()
