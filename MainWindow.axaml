@@ -11,30 +11,11 @@
         Background="Transparent"
         WindowStartupLocation="Manual">
 
-    <Grid x:Name="MainGrid" Width="256" Height="256" Margin="-30,50,0,0">
-        <Grid.RenderTransform>
-            <ScaleTransform ScaleX="1" ScaleY="1"/>
-        </Grid.RenderTransform>
-        <Grid.Styles>
-            <Style Selector="Grid">
-                <Style.Animations>
-                    <Animation Duration="0:0:1"
-                               IterationCount="Infinite"
-                               Easing="QuadraticEaseIn">
-                        <KeyFrame Cue="0%">
-                            <Setter Property="ScaleTransform.ScaleY" Value="1.0"/>
-                        </KeyFrame>
-                        <KeyFrame Cue="50%">
-                            <Setter Property="ScaleTransform.ScaleY" Value="1.05"/>
-                        </KeyFrame>
-                        <KeyFrame Cue="100%">
-                            <Setter Property="ScaleTransform.ScaleY" Value="1.0"/>
-                        </KeyFrame>
-                    </Animation>
-                </Style.Animations>
-            </Style>
-        </Grid.Styles>
-
+    <Grid x:Name="MainGrid"
+          Width="256"
+          Height="256"
+          Margin="-30,50,0,0"
+          PointerPressed="OnPointerPressed">
         <Image x:Name="SkinImage"
                Source="/Assets/default/CatLeft.png"
                Stretch="UniformToFill"/>

@@ -38,7 +38,6 @@ namespace BongoCat_Like
             InitializeComponent();
             Opened += MainWindow_Opened;
             Closing += MainWindow_Closing;
-            PointerPressed += MainWindow_PointerPressed;
         }
 
         private void MainWindow_Opened(object? sender, EventArgs e)
@@ -62,7 +61,7 @@ namespace BongoCat_Like
             ConfigManager.SaveConfig(_config);
         }
 
-        private void MainWindow_PointerPressed(object? sender, PointerPressedEventArgs e)
+        private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
@@ -264,6 +263,33 @@ namespace BongoCat_Like
             transformGroup.Children.Add(new ScaleTransform(scale, scale));
             MainGrid.RenderTransform = transformGroup;
             _config.Scale = scale;
+
+            Animation animation = new()
+            {
+                Duration = TimeSpan.FromSeconds(1),
+                IterationCount = IterationCount.Infinite,
+                Easing = new Avalonia.Animation.Easings.QuadraticEaseIn(),
+                FillMode = FillMode.Forward,
+                Children =
+                {
+                    new KeyFrame
+                    {
+                        Cue = new Cue(0),
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scale) }
+                    },
+                    new KeyFrame
+                    {
+                        Cue = new Cue(0.5),
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.05 * scale) }
+                    },
+                    new KeyFrame
+                    {
+                        Cue = new Cue(1),
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scale) }
+                    }
+                }
+            };
+            animation.RunAsync(MainGrid);
         }
 
         private void SetSkin()
