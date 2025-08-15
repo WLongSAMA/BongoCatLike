@@ -60,4 +60,9 @@ namespace BongoCat_Like
         [JsonPropertyName("image")]
         public string? Image { get; set; }
     }
+
+    [JsonSerializable(typeof(ItemsJson))]
+    public partial class ItemsJsonContext : JsonSerializerContext
+    {
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace BongoCat_Like
@@ -38,7 +39,7 @@ namespace BongoCat_Like
                     Directory.CreateDirectory(dir);
 
                 string json = File.ReadAllText(ConfigPath);
-                return JsonSerializer.Deserialize<AppConfig>(json) ?? new AppConfig();
+                return JsonSerializer.Deserialize(json, AppConfigContext.Default.AppConfig) ?? new AppConfig();
             }
             catch
             {
@@ -113,5 +114,10 @@ namespace BongoCat_Like
         public double Scale { get; set; } = 1;
         public int SkinId { get; set; } = 0;
         public int HatId { get; set; } = 0;
+    }
+
+    [JsonSerializable(typeof(AppConfig))]
+    public partial class AppConfigContext : JsonSerializerContext
+    {
     }
 }

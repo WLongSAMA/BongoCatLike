@@ -80,7 +80,7 @@ namespace BongoCat_Like
         {
             Stream json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json"));
             using StreamReader streamReader = new(json);
-            GlobalHelper.Items = JsonSerializer.Deserialize<ItemsJson>(streamReader.ReadToEnd());
+            GlobalHelper.Items = JsonSerializer.Deserialize(streamReader.ReadToEnd(), ItemsJsonContext.Default.ItemsJson);
         }
 
         private void ReadConfig()
@@ -368,7 +368,6 @@ namespace BongoCat_Like
                     }
                 }
             };
-
             await animation.RunAsync(HatImage);
         }
     }
