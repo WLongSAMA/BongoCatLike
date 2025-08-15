@@ -46,7 +46,7 @@ namespace BongoCat_Like
             ReadConfig();
             SetLocalization();
             SetTrayIcon();
-            SetPosition();
+            SetWindow();
             SetSkin();
             SetHat();
             ListeningPress();
@@ -133,7 +133,7 @@ namespace BongoCat_Like
             TrayIcon.SetIcons(Application.Current!, [_trayIcon]);
         }
 
-        private void SetPosition()
+        private void SetWindow()
         {
             if (_config.WindowLeft == 0 && _config.WindowTop == 0)
             {
@@ -156,6 +156,7 @@ namespace BongoCat_Like
             }
             Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
 
+            ShowInTaskbar = _config.TaskbarIcon;
             MainGrid.Margin = new Thickness(_config.MainOffsetX, _config.MainOffsetY);
 
             SetScale(_config.Scale);
