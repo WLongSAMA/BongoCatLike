@@ -22,8 +22,7 @@ namespace BongoCat_Like
 {
     public partial class MainWindow : Window
     {
-        private AppConfig _config = new();
-        private TrayIcon _trayIcon = null!;
+        private TrayIcon _trayIcon = new();
         private NativeMenuItem? _skinItem;
         private NativeMenuItem? _settingItem;
         private NativeMenuItem? _exitItem;
@@ -43,7 +42,6 @@ namespace BongoCat_Like
         private void MainWindow_Opened(object? sender, EventArgs e)
         {
             ReadAssets();
-            ReadConfig();
             SetLocalization();
             SetTrayIcon();
             SetWindow();
@@ -54,11 +52,11 @@ namespace BongoCat_Like
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
         {
-            _config.WindowLeft = Position.X;
-            _config.WindowTop = Position.Y;
-            _config.SkinId = GlobalHelper.CatSkin.SkinId;
-            _config.HatId = GlobalHelper.CatSkin.HatId;
-            ConfigManager.SaveConfig(_config);
+            GlobalHelper._config.WindowLeft = Position.X;
+            GlobalHelper._config.WindowTop = Position.Y;
+            GlobalHelper._config.SkinId = GlobalHelper.CatSkin.SkinId;
+            GlobalHelper._config.HatId = GlobalHelper.CatSkin.HatId;
+            ConfigManager.SaveConfig(GlobalHelper._config);
         }
 
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -83,14 +81,9 @@ namespace BongoCat_Like
             GlobalHelper.Items = JsonSerializer.Deserialize(streamReader.ReadToEnd(), ItemsJsonContext.Default.ItemsJson);
         }
 
-        private void ReadConfig()
-        {
-            _config = ConfigManager.LoadConfig();
-        }
-
         private void SetLocalization()
         {
-            Localization.LoadLanguage(_config.Language);
+            Localization.LoadLanguage(GlobalHelper._config.Language);
             Localization.LanguageChanged += () =>
             {
                 if (_skinItem != null)
@@ -104,7 +97,6 @@ namespace BongoCat_Like
 
         private void SetTrayIcon()
         {
-            _trayIcon = new TrayIcon();
             Bitmap icon = new(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/Icon.ico")));
             _trayIcon.Icon = new WindowIcon(icon);
             _trayIcon.ToolTipText = GlobalHelper.Name;
@@ -135,7 +127,7 @@ namespace BongoCat_Like
 
         private void SetWindow()
         {
-            if (_config.WindowLeft == 0 && _config.WindowTop == 0)
+            if (GlobalHelper._config.WindowLeft == 0 && GlobalHelper._config.WindowTop == 0)
             {
                 Screen screen = Screens.Primary!;
                 if (screen == null)
@@ -151,16 +143,16 @@ namespace BongoCat_Like
                 double top = workingArea.Y + (workingArea.Height - pixelSize.Height) / 2;
 
                 // 确保位置在屏幕范围内
-                _config.WindowLeft = (int)Math.Max(workingArea.X, Math.Min(left, workingArea.X + workingArea.Width - pixelSize.Width));
-                _config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
+                GlobalHelper._config.WindowLeft = (int)Math.Max(workingArea.X, Math.Min(left, workingArea.X + workingArea.Width - pixelSize.Width));
+                GlobalHelper._config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
             }
-            Position = new PixelPoint(_config.WindowLeft, _config.WindowTop);
+            Position = new PixelPoint(GlobalHelper._config.WindowLeft, GlobalHelper._config.WindowTop);
 
-            MainGrid.Margin = new Thickness(_config.MainOffsetX, _config.MainOffsetY);
-            ShowInTaskbar = _config.TaskbarIcon;
-            Topmost = _config.Topmost;
+            MainGrid.Margin = new Thickness(GlobalHelper._config.MainOffsetX, GlobalHelper._config.MainOffsetY);
+            ShowInTaskbar = GlobalHelper._config.TaskbarIcon;
+            Topmost = GlobalHelper._config.Topmost;
 
-            SetScale(_config.Scale);
+            SetScale(GlobalHelper._config.Scale);
         }
 
         private void ListeningPress()
@@ -233,8 +225,8 @@ namespace BongoCat_Like
 
         private void ChangeSkin(object sender, RoutedEventArgs e)
         {
-            _config.SkinId = 236;
-            _config.HatId = 432;
+            GlobalHelper._config.SkinId = 236;
+            GlobalHelper._config.HatId = 432;
             SetSkin();
             SetHat();
         }
@@ -264,7 +256,7 @@ namespace BongoCat_Like
             TransformGroup transformGroup = new();
             transformGroup.Children.Add(new ScaleTransform(scale, scale));
             MainGrid.RenderTransform = transformGroup;
-            _config.Scale = scale;
+            GlobalHelper._config.Scale = scale;
 
             Animation animation = new()
             {
@@ -296,14 +288,14 @@ namespace BongoCat_Like
 
         private void SetSkin()
         {
-            GlobalHelper.CatSkin.SkinId = _config.SkinId;
+            GlobalHelper.CatSkin.SkinId = GlobalHelper._config.SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
             HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
         }
 
         private void SetHat()
         {
-            GlobalHelper.CatSkin.HatId = _config.HatId;
+            GlobalHelper.CatSkin.HatId = GlobalHelper._config.HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
         }
 
