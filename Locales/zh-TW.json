@@ -3,38 +3,38 @@
     "Language": "zh-TW",
     "Menu": {
         "Skin": "換膚",
-        "Setting": "設置",
+        "Setting": "設定",
         "Exit": "退出"
     },
     "SettingWindow": {
         "DefaultSkin": {
-            "Header": "默認皮膚"
+            "Header": "預設皮膚"
         },
         "CustomSkin": {
-            "Header": "自定義皮膚"
+            "Header": "自訂皮膚"
         },
         "Setting": {
-            "Header": "設置",
-            "Setting": "係統設置",
+            "Header": "設定",
+            "Setting": "系統設定",
             "Language": "語言",
-            "Topmost": "始終置頂",
-            "Autorun": "開機自啟",
-            "TaskBar": "任務欄圖標",
+            "Topmost": "視窗置頂",
+            "Autorun": "開機自動啟動",
+            "TaskBar": "工作列圖示",
             "Visuals": "視覺效果",
             "Flip": "水平翻轉",
             "Zoom": "縮放比例",
-            "Interaction": "用戶交互",
+            "Interaction": "交互",
             "DisableDrag": "禁用拖動",
-            "Adsorption": "任務欄吸附",
+            "Adsorption": "工作列吸附",
             "Random": "隨機效果",
-            "RandomSkin": "隨機搭配",
-            "Never": "從不",
+            "RandomSkin": "隨機組合",
+            "Never": "永不",
             "OneMinute": "1 分鐘",
             "ThreeMinutes": "3 分鐘",
             "FiveMinutes": "5 分鐘",
             "FifteenMinutes": "15 分鐘",
             "ThirtyMinutes": "30 分鐘",
-            "ExitApp": "退出程序",
+            "ExitApp": "退出程式",
             "Exit": "退出"
         }
     }

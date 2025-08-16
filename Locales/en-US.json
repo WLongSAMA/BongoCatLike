@@ -2,39 +2,39 @@
     "Name": "English",
     "Language": "en-US",
     "Menu": {
-        "Skin": "ChangeSkin",
-        "Setting": "Setting",
+        "Skin": "Change Skin",
+        "Setting": "Settings",
         "Exit": "Exit"
     },
     "SettingWindow": {
         "DefaultSkin": {
-            "Header": "DefaultSkin"
+            "Header": "Default Skin"
         },
         "CustomSkin": {
-            "Header": "CustomSkin"
+            "Header": "Custom Skin"
         },
         "Setting": {
-            "Header": "Setting",
-            "Setting": "System Setting",
+            "Header": "Settings",
+            "Setting": "System Settings",
             "Language": "Language",
-            "Topmost": "Always on Top",
-            "Autorun": "Auto Start",
-            "TaskBar": "TaskBar Icon",
-            "Visuals": "Visuals",
+            "Topmost": "Always On Top",
+            "Autorun": "Run at Startup",
+            "TaskBar": "Taskbar Icon",
+            "Visuals": "Visual Effects",
             "Flip": "Flip Cat",
-            "Zoom": "Zoom",
+            "Zoom": "Zoom Level",
             "Interaction": "Interaction",
-            "DisableDrag": "Disable Drag",
-            "Adsorption": "Adsorption",
-            "Random": "Random",
+            "DisableDrag": "Disable Dragging",
+            "Adsorption": "Taskbar Docking",
+            "Random": "Random Effects",
             "RandomSkin": "Random Skin",
             "Never": "Never",
-            "OneMinute": "1 Minute",
-            "ThreeMinutes": "3 Minutes",
-            "FiveMinutes": "5 Minutes",
-            "FifteenMinutes": "15 Minutes",
-            "ThirtyMinutes": "30 Minutes",
-            "ExitApp": "Exit App",
+            "OneMinute": "1 minute",
+            "ThreeMinutes": "3 minutes",
+            "FiveMinutes": "5 minutes",
+            "FifteenMinutes": "15 minutes",
+            "ThirtyMinutes": "30 minutes",
+            "ExitApp": "Exit Application",
             "Exit": "Exit"
         }
     }
