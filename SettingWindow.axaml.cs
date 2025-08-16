@@ -22,21 +22,13 @@ public partial class SettingWindow : Window
         if (NavigationTabs == null)
             return;
 
-        switch (pageName.ToLower())
+        NavigationTabs.SelectedIndex = pageName switch
         {
-            case "Page1":
-                NavigationTabs.SelectedIndex = 0;
-                break;
-            case "Page2":
-                NavigationTabs.SelectedIndex = 1;
-                break;
-            case "Setting":
-                NavigationTabs.SelectedIndex = 2;
-                break;
-            default:
-                NavigationTabs.SelectedIndex = 0;
-                break;
-        }
+            "Page1" => 0,
+            "Page2" => 1,
+            "Setting" => 2,
+            _ => 0,
+        };
     }
 
     public static void ShowOrActivate(Window owner, string? navigateTo = null)

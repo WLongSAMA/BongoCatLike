@@ -45,6 +45,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AvaloniaResource Remove="Assets\Icon.psd" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Icon.psd" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Compile Update="SettingWindow.axaml.cs">
         <DependentUpon>SettingWindow.axaml</DependentUpon>
       </Compile>
