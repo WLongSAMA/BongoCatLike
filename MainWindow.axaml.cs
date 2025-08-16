@@ -8,7 +8,6 @@ using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -52,26 +51,20 @@ namespace BongoCat_Like
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
         {
-            GlobalHelper._config.WindowLeft = Position.X;
-            GlobalHelper._config.WindowTop = Position.Y;
-            GlobalHelper._config.SkinId = GlobalHelper.CatSkin.SkinId;
-            GlobalHelper._config.HatId = GlobalHelper.CatSkin.HatId;
-            ConfigManager.SaveConfig(GlobalHelper._config);
+            GlobalHelper.Config.WindowLeft = Position.X;
+            GlobalHelper.Config.WindowTop = Position.Y;
+            GlobalHelper.Config.SkinId = GlobalHelper.CatSkin.SkinId;
+            GlobalHelper.Config.HatId = GlobalHelper.CatSkin.HatId;
+            ConfigManager.SaveConfig(GlobalHelper.Config);
         }
 
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            if (!GlobalHelper.Config.DisableDrag && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
                 BeginMoveDrag(e);
             }
             base.OnPointerPressed(e);
-        }
-
-        private void Exit(object? sender, RoutedEventArgs e)
-        {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                desktop.Shutdown();
         }
 
         private static void ReadAssets()
@@ -83,7 +76,7 @@ namespace BongoCat_Like
 
         private void SetLocalization()
         {
-            Localization.LoadLanguage(GlobalHelper._config.Language);
+            Localization.LoadLanguage(GlobalHelper.Config.Language);
             Localization.LanguageChanged += () =>
             {
                 if (_skinItem != null)
@@ -121,13 +114,18 @@ namespace BongoCat_Like
             menu.Add(_exitItem);
 
             _trayIcon.Menu = menu;
+            _trayIcon.Clicked += (sender, e) =>
+            {
+                Show();
+                Activate();
+            };
 
             TrayIcon.SetIcons(Application.Current!, [_trayIcon]);
         }
 
         private void SetWindow()
         {
-            if (GlobalHelper._config.WindowLeft == 0 && GlobalHelper._config.WindowTop == 0)
+            if (GlobalHelper.Config.WindowLeft == 0 && GlobalHelper.Config.WindowTop == 0)
             {
                 Screen screen = Screens.Primary!;
                 if (screen == null)
@@ -143,16 +141,16 @@ namespace BongoCat_Like
                 double top = workingArea.Y + (workingArea.Height - pixelSize.Height) / 2;
 
                 // 确保位置在屏幕范围内
-                GlobalHelper._config.WindowLeft = (int)Math.Max(workingArea.X, Math.Min(left, workingArea.X + workingArea.Width - pixelSize.Width));
-                GlobalHelper._config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
+                GlobalHelper.Config.WindowLeft = (int)Math.Max(workingArea.X, Math.Min(left, workingArea.X + workingArea.Width - pixelSize.Width));
+                GlobalHelper.Config.WindowTop = (int)Math.Max(workingArea.Y, Math.Min(top, workingArea.Y + workingArea.Height - pixelSize.Height));
             }
-            Position = new PixelPoint(GlobalHelper._config.WindowLeft, GlobalHelper._config.WindowTop);
+            Position = new PixelPoint(GlobalHelper.Config.WindowLeft, GlobalHelper.Config.WindowTop);
 
-            MainGrid.Margin = new Thickness(GlobalHelper._config.MainOffsetX, GlobalHelper._config.MainOffsetY);
-            ShowInTaskbar = GlobalHelper._config.TaskbarIcon;
-            Topmost = GlobalHelper._config.Topmost;
+            MainGrid.Margin = new Thickness(GlobalHelper.Config.MainOffsetX, GlobalHelper.Config.MainOffsetY);
+            ShowInTaskbar = GlobalHelper.Config.TaskbarIcon;
+            Topmost = GlobalHelper.Config.Topmost;
 
-            SetScale(GlobalHelper._config.Scale);
+            SetZoom(GlobalHelper.Config.Zoom);
         }
 
         private void ListeningPress()
@@ -193,7 +191,7 @@ namespace BongoCat_Like
             });
         }
 
-        private async Task Hit()
+        public async Task Hit()
         {
             if (animationLock)
                 return;
@@ -213,7 +211,7 @@ namespace BongoCat_Like
                     HandImage.Source = GlobalHelper.CatSkin.SkinImage[3];
                 }
 
-                await Task.Delay(200);
+                await Task.Delay(100);
 
                 SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
                 HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
@@ -223,40 +221,18 @@ namespace BongoCat_Like
             animationLock = false;
         }
 
-        private void ChangeSkin(object sender, RoutedEventArgs e)
+        public void SetFlip(bool isFlip)
         {
-            GlobalHelper._config.SkinId = 236;
-            GlobalHelper._config.HatId = 432;
-            SetSkin();
-            SetHat();
+
         }
 
-        private void PlayAnimation(object sender, RoutedEventArgs e)
+        public void SetZoom(int index)
         {
-            HatAnimation();
-        }
-
-        private void Scale(object sender, RoutedEventArgs e)
-        {
-            /*
-             * Like    Cat
-             * 0.25    0.5
-             * 0.375   0.75
-             * 0.5     1
-             * 0.625   1.25
-             * 0.75    1.5
-             * 1       2
-             * 1.11    2.22
-             */
-            SetScale(0.625);
-        }
-
-        private void SetScale(double scale)
-        {
+            double scaling = GlobalHelper.GetScaling(index);
             TransformGroup transformGroup = new();
-            transformGroup.Children.Add(new ScaleTransform(scale, scale));
+            transformGroup.Children.Add(new ScaleTransform(scaling, scaling));
             MainGrid.RenderTransform = transformGroup;
-            GlobalHelper._config.Scale = scale;
+            GlobalHelper.Config.Zoom = index;
 
             Animation animation = new()
             {
@@ -269,37 +245,37 @@ namespace BongoCat_Like
                     new KeyFrame
                     {
                         Cue = new Cue(0),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scale) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scaling) }
                     },
                     new KeyFrame
                     {
                         Cue = new Cue(0.5),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.05 * scale) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.05 * scaling) }
                     },
                     new KeyFrame
                     {
                         Cue = new Cue(1),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scale) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scaling) }
                     }
                 }
             };
             animation.RunAsync(MainGrid);
         }
 
-        private void SetSkin()
+        public void SetSkin()
         {
-            GlobalHelper.CatSkin.SkinId = GlobalHelper._config.SkinId;
+            GlobalHelper.CatSkin.SkinId = GlobalHelper.Config.SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
             HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
         }
 
-        private void SetHat()
+        public void SetHat()
         {
-            GlobalHelper.CatSkin.HatId = GlobalHelper._config.HatId;
+            GlobalHelper.CatSkin.HatId = GlobalHelper.Config.HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
         }
 
-        private async void HatAnimation()
+        public async void HatAnimation()
         {
             TransformGroup transformGroup = new();
             transformGroup.Children.Add(new ScaleTransform(1, 1));
@@ -363,6 +339,11 @@ namespace BongoCat_Like
                 }
             };
             await animation.RunAsync(HatImage);
+        }
+
+        public void RandomSkin(int timeIndex)
+        {
+
         }
     }
 }

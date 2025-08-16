@@ -13,7 +13,7 @@ namespace BongoCat_Like
         public static string LanguageText => Localization.Instance["SettingWindow.Setting.Language"];
         public static string TopmostText => Localization.Instance["SettingWindow.Setting.Topmost"];
         public static string AutorunText => Localization.Instance["SettingWindow.Setting.Autorun"];
-        public static string TaskBarText => Localization.Instance["SettingWindow.Setting.TaskBar"];
+        public static string TaskbarIconText => Localization.Instance["SettingWindow.Setting.TaskbarIcon"];
         public static string VisualsText => Localization.Instance["SettingWindow.Setting.Visuals"];
         public static string FlipText => Localization.Instance["SettingWindow.Setting.Flip"];
         public static string ZoomText => Localization.Instance["SettingWindow.Setting.Zoom"];
@@ -31,35 +31,50 @@ namespace BongoCat_Like
         public static string ExitAppText => Localization.Instance["SettingWindow.Setting.ExitApp"];
         public static string ExitText => Localization.Instance["SettingWindow.Setting.Exit"];
 
+        public static bool TopmostValue => GlobalHelper.Config.Topmost;
+        public static bool AutorunValue => GlobalHelper.Config.Autorun;
+        public static bool TaskbarIconValue => GlobalHelper.Config.TaskbarIcon;
+        public static bool FlipValue => GlobalHelper.Config.Flip;
+        public static int ZoomValue => GlobalHelper.Config.Zoom;
+        public static bool DisableDragValue => GlobalHelper.Config.DisableDrag;
+        public static bool AdsorptionValue => GlobalHelper.Config.Adsorption;
+
+        public static int RandomSkinValue => GlobalHelper.Config.RandomSkin;
+
         public SettingViewModel()
         {
             Localization.LanguageChanged += () =>
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DefaultSkinText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CustomSkinText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SettingText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SystemSettingText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LanguageText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TopmostText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AutorunText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TaskBarText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(VisualsText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FlipText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ZoomText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InteractionText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisableDragText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AdsorptionText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RandomText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RandomSkinText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NeverText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OneMinuteText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ThreeMinutesText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FiveMinutesText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FifteenMinutesText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ThirtyMinutesText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExitAppText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExitText)));
+                OnPropertyChanged(nameof(DefaultSkinText));
+                OnPropertyChanged(nameof(CustomSkinText));
+                OnPropertyChanged(nameof(SettingText));
+                OnPropertyChanged(nameof(SystemSettingText));
+                OnPropertyChanged(nameof(LanguageText));
+                OnPropertyChanged(nameof(TopmostText));
+                OnPropertyChanged(nameof(AutorunText));
+                OnPropertyChanged(nameof(TaskbarIconText));
+                OnPropertyChanged(nameof(VisualsText));
+                OnPropertyChanged(nameof(FlipText));
+                OnPropertyChanged(nameof(ZoomText));
+                OnPropertyChanged(nameof(InteractionText));
+                OnPropertyChanged(nameof(DisableDragText));
+                OnPropertyChanged(nameof(AdsorptionText));
+                OnPropertyChanged(nameof(RandomText));
+                OnPropertyChanged(nameof(RandomSkinText));
+                OnPropertyChanged(nameof(NeverText));
+                OnPropertyChanged(nameof(OneMinuteText));
+                OnPropertyChanged(nameof(ThreeMinutesText));
+                OnPropertyChanged(nameof(FiveMinutesText));
+                OnPropertyChanged(nameof(FifteenMinutesText));
+                OnPropertyChanged(nameof(ThirtyMinutesText));
+                OnPropertyChanged(nameof(ExitAppText));
+                OnPropertyChanged(nameof(ExitText));
             };
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

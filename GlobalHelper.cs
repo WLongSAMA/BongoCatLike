@@ -11,7 +11,22 @@ namespace BongoCat_Like
         public static int WindowHeight { get; } = 350;
         public static ItemsJson? Items { get; set; }
         public static SkinManager CatSkin { get; set; } = SkinManager.Instance;
-        public static AppConfig _config = ConfigManager.LoadConfig();
+        public static AppConfig Config = ConfigManager.LoadConfig();
+
+        public static double GetScaling(int index)
+        {
+            return index switch
+            {
+                0 => 0.25,
+                1 => 0.375,
+                2 => 0.5,
+                3 => 0.625,
+                4 => 0.75,
+                5 => 1,
+                6 => 1.1,
+                _ => 1
+            };
+        }
     }
 
     public class ItemsJson
@@ -63,7 +78,5 @@ namespace BongoCat_Like
     }
 
     [JsonSerializable(typeof(ItemsJson))]
-    public partial class ItemsJsonContext : JsonSerializerContext
-    {
-    }
+    public partial class ItemsJsonContext : JsonSerializerContext { }
 }

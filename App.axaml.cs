@@ -6,6 +6,8 @@ namespace BongoCat_Like
 {
     public partial class App : Application
     {
+        public static MainWindow? MainWindow { get; private set; }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -15,7 +17,8 @@ namespace BongoCat_Like
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow();
+                MainWindow = new MainWindow();
+                desktop.MainWindow = MainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();

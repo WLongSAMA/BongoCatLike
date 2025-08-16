@@ -7,8 +7,8 @@
         Title="BongoCat_Like"
         Width="{Binding Source={x:Static local:GlobalHelper.WindowWidth}}"
         Height="{Binding Source={x:Static local:GlobalHelper.WindowHeight}}"
-        SystemDecorations="None"
         Background="Transparent"
+        SystemDecorations="None"
         WindowStartupLocation="Manual">
 
     <Grid x:Name="MainGrid"
@@ -32,22 +32,5 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom">
-            <Button Content="动画"
-                   Margin="0,0,0,20"
-                   Click="PlayAnimation"/>
-            <Button Content="换肤"
-                   Margin="0,0,0,20"
-                   Click="ChangeSkin"/>
-            <Button Content="缩放"
-                   Margin="0,0,0,20"
-                   Click="Scale"/>
-            <Button Content="退出"
-                   Margin="0,0,0,20"
-                   Click="Exit"/>
-        </StackPanel>
     </Grid>
 </Window>

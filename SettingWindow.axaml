@@ -37,24 +37,24 @@
                 <StackPanel Margin="0,10,0,20">
                     <TextBlock Text="{Binding SystemSettingText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <DockPanel>
-                        <Label Content="{Binding LanguageText}"
-                               VerticalAlignment="Center"/>
-                        <ComboBox x:Name="LangList"
+                        <Label Content="{Binding LanguageText}" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="LangListComboBox"
                                   Margin="10,0,25,0"
-                                  HorizontalAlignment="Stretch"/>
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="OnLangListSelectionChanged"/>
                     </DockPanel>
-                    <CheckBox Content="{Binding TopmostText}"/>
-                    <CheckBox Content="{Binding AutorunText}"/>
-                    <CheckBox Content="{Binding TaskBarText}"/>
+                    <CheckBox Content="{Binding TopmostText}" IsChecked="{Binding TopmostValue}" Click="OnTopmostClicked"/>
+                    <CheckBox Content="{Binding AutorunText}" IsChecked="{Binding AutorunValue}" Click="OnAutorunClicked"/>
+                    <CheckBox Content="{Binding TaskbarIconText}" IsChecked="{Binding TaskbarIconValue}" Click="OnTaskbarIconClicked"/>
 
                     <TextBlock Text="{Binding VisualsText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="{Binding FlipText}"/>
+                    <CheckBox Content="{Binding FlipText}" IsChecked="{Binding FlipValue}" Click="OnFlipClicked"/>
                     <DockPanel>
-                        <Label Content="{Binding ZoomText}"
-                               VerticalAlignment="Center"/>
-                        <ComboBox SelectedIndex="2"
+                        <Label Content="{Binding ZoomText}" VerticalAlignment="Center"/>
+                        <ComboBox SelectedIndex="{Binding ZoomValue}"
                                   Margin="10,0,25,0"
-                                  HorizontalAlignment="Stretch">
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="OnZoomSelectionChanged">
                             <ComboBoxItem Content="25%"></ComboBoxItem>
                             <ComboBoxItem Content="37.5%"></ComboBoxItem>
                             <ComboBoxItem Content="50%"></ComboBoxItem>
@@ -66,16 +66,17 @@
                     </DockPanel>
 
                     <TextBlock Text="{Binding InteractionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="{Binding DisableDragText}"/>
-                    <CheckBox Content="{Binding AdsorptionText}"/>
+                    <CheckBox Content="{Binding DisableDragText}" IsChecked="{Binding DisableDragValue}" Click="OnDisableDragClicked"/>
+                    <CheckBox Content="{Binding AdsorptionText}" IsChecked="{Binding AdsorptionValue}" Click="OnAdsorptionClicked"/>
 
                     <TextBlock Text="{Binding RandomText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <DockPanel>
-                        <Label Content="{Binding RandomSkinText}"
-                               VerticalAlignment="Center"/>
-                        <ComboBox SelectedIndex="0"
+                        <Label Content="{Binding RandomSkinText}" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="RandomSkinComboBox"
+                                  SelectedIndex="{Binding RandomSkinValue}"
                                   Margin="10,0,25,0"
-                                  HorizontalAlignment="Stretch">
+                                  HorizontalAlignment="Stretch"
+                                  SelectionChanged="OnRandomSkinSelectionChanged">
                             <ComboBoxItem Content="{Binding NeverText}"></ComboBoxItem>
                             <ComboBoxItem Content="{Binding OneMinuteText}"></ComboBoxItem>
                             <ComboBoxItem Content="{Binding ThreeMinutesText}"></ComboBoxItem>
@@ -86,7 +87,7 @@
                     </DockPanel>
 
                     <TextBlock Text="{Binding ExitAppText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <Button Content="{Binding ExitText}"/>
+                    <Button Content="{Binding ExitText}" Click="OnExitClicked"/>
                 </StackPanel>
             </ScrollViewer>
         </TabItem>

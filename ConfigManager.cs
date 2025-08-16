@@ -108,18 +108,21 @@ namespace BongoCat_Like
     {
         public int WindowLeft { get; set; } = 0;
         public int WindowTop { get; set; } = 0;
-        public string Language { get; set; } = Localization.GetSystemLang();
         public int MainOffsetX { get; set; } = -30;
         public int MainOffsetY { get; set; } = 50;
-        public double Scale { get; set; } = 1;
-        public bool TaskbarIcon { get; set; } = false;
-        public bool Topmost {  get; set; } = false;
         public int SkinId { get; set; } = 0;
         public int HatId { get; set; } = 0;
+        public string Language { get; set; } = Localization.GetSystemLang();
+        public int RandomSkin { get; set; } = 0;
+        public bool Autorun { get; set; } = false;
+        public bool TaskbarIcon { get; set; } = false;
+        public bool Flip { get; set; } = false;
+        public int Zoom { get; set; } = 5;
+        public bool DisableDrag { get; set; } = false;
+        public bool Adsorption { get; set; } = false;
+        public bool Topmost { get; set; } = false;
     }
 
     [JsonSerializable(typeof(AppConfig))]
-    public partial class AppConfigContext : JsonSerializerContext
-    {
-    }
+    public partial class AppConfigContext : JsonSerializerContext { }
 }
