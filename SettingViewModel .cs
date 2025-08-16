@@ -23,8 +23,11 @@ namespace BongoCat_Like
         public static string RandomText => Localization.Instance["SettingWindow.Setting.Random"];
         public static string RandomSkinText => Localization.Instance["SettingWindow.Setting.RandomSkin"];
         public static string NeverText => Localization.Instance["SettingWindow.Setting.Never"];
-        public static string MinuteText => Localization.Instance["SettingWindow.Setting.Minute"];
-        public static string MinutesText => Localization.Instance["SettingWindow.Setting.Minutes"];
+        public static string OneMinuteText => Localization.Instance["SettingWindow.Setting.OneMinute"];
+        public static string ThreeMinutesText => Localization.Instance["SettingWindow.Setting.ThreeMinutes"];
+        public static string FiveMinutesText => Localization.Instance["SettingWindow.Setting.FiveMinutes"];
+        public static string FifteenMinutesText => Localization.Instance["SettingWindow.Setting.FifteenMinutes"];
+        public static string ThirtyMinutesText => Localization.Instance["SettingWindow.Setting.ThirtyMinutes"];
         public static string ExitAppText => Localization.Instance["SettingWindow.Setting.ExitApp"];
         public static string ExitText => Localization.Instance["SettingWindow.Setting.Exit"];
 
@@ -49,8 +52,11 @@ namespace BongoCat_Like
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RandomText)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RandomSkinText)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NeverText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinuteText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MinutesText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OneMinuteText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ThreeMinutesText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FiveMinutesText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FifteenMinutesText)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ThirtyMinutesText)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExitAppText)));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ExitText)));
             };

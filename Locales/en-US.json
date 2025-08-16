@@ -29,8 +29,11 @@
             "Random": "Random",
             "RandomSkin": "Random Skin",
             "Never": "Never",
-            "Minute": "Minute",
-            "Minutes": "Minutes",
+            "OneMinute": "1 Minute",
+            "ThreeMinutes": "3 Minutes",
+            "FiveMinutes": "5 Minutes",
+            "FifteenMinutes": "15 Minutes",
+            "ThirtyMinutes": "30 Minutes",
             "ExitApp": "Exit App",
             "Exit": "Exit"
         }

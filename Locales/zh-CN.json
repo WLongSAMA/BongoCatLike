@@ -29,8 +29,11 @@
             "Random": "随机效果",
             "RandomSkin": "随机搭配",
             "Never": "从不",
-            "Minute": "分钟",
-            "Minutes": "分钟",
+            "OneMinute": "1 分钟",
+            "ThreeMinutes": "3 分钟",
+            "FiveMinutes": "5 分钟",
+            "FifteenMinutes": "15 分钟",
+            "ThirtyMinutes": "30 分钟",
             "ExitApp": "退出程序",
             "Exit": "退出"
         }

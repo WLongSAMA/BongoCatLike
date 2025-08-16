@@ -77,11 +77,11 @@
                                   Margin="10,0,25,0"
                                   HorizontalAlignment="Stretch">
                             <ComboBoxItem Content="{Binding NeverText}"></ComboBoxItem>
-                            <ComboBoxItem Content="1 {Binding MinuteText}"></ComboBoxItem>
-                            <ComboBoxItem Content="3 {Binding MinutesText}"></ComboBoxItem>
-                            <ComboBoxItem Content="5 {Binding MinutesText}"></ComboBoxItem>
-                            <ComboBoxItem Content="15 {Binding MinutesText}"></ComboBoxItem>
-                            <ComboBoxItem Content="30 {Binding MinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="{Binding OneMinuteText}"></ComboBoxItem>
+                            <ComboBoxItem Content="{Binding ThreeMinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="{Binding FiveMinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="{Binding FifteenMinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="{Binding ThirtyMinutesText}"></ComboBoxItem>
                         </ComboBox>
                     </DockPanel>
 
