@@ -5,5 +5,34 @@
         "Skin": "換膚",
         "Setting": "設置",
         "Exit": "退出"
+    },
+    "SettingWindow": {
+        "DefaultSkin": {
+            "Header": "默認皮膚"
+        },
+        "CustomSkin": {
+            "Header": "自定義皮膚"
+        },
+        "Setting": {
+            "Header": "設置",
+            "Setting": "係統設置",
+            "Language": "語言",
+            "Topmost": "始終置頂",
+            "Autorun": "開機自啟",
+            "TaskBar": "任務欄圖標",
+            "Visuals": "視覺效果",
+            "Flip": "水平翻轉",
+            "Zoom": "縮放比例",
+            "Interaction": "用戶交互",
+            "DisableDrag": "禁用拖動",
+            "Adsorption": "任務欄吸附",
+            "Random": "隨機效果",
+            "RandomSkin": "隨機搭配",
+            "Never": "從不",
+            "Minute": "分鐘",
+            "Minutes": "分鐘",
+            "ExitApp": "退出程序",
+            "Exit": "退出"
+        }
     }
 }

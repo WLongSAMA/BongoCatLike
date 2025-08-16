@@ -3,6 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BongoCat_Like"
+        xmlns:vm="using:BongoCat_Like"
+        x:DataType="vm:SettingViewModel"
         x:Class="BongoCat_Like.SettingWindow"
         Title="{Binding Source={x:Static local:GlobalHelper.Name}}"
         Width="350" Height="500"
@@ -22,29 +24,37 @@
             </Style>
         </TabControl.Styles>
 
-        <TabItem Header="默认皮肤">
+        <TabItem Header="{Binding DefaultSkinText}">
             <StackPanel x:Name="DefaultSkinList" Margin="0,10"></StackPanel>
         </TabItem>
 
-        <TabItem Header="自定义皮肤">
+        <TabItem Header="{Binding CustomSkinText}">
             <StackPanel x:Name="CustomSkinList" Margin="0,10"></StackPanel>
         </TabItem>
 
-        <TabItem Header="设置">
+        <TabItem Header="{Binding SettingText}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0,10,0,20">
-                    <TextBlock Text="系统" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="始终置顶"/>
-                    <CheckBox Content="开机自启"/>
-                    <CheckBox Content="任务栏图标"/>
+                    <TextBlock Text="{Binding SystemSettingText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <DockPanel>
+                        <Label Content="{Binding LanguageText}"
+                               VerticalAlignment="Center"/>
+                        <ComboBox x:Name="LangList"
+                                  Margin="10,0,25,0"
+                                  HorizontalAlignment="Stretch"/>
+                    </DockPanel>
+                    <CheckBox Content="{Binding TopmostText}"/>
+                    <CheckBox Content="{Binding AutorunText}"/>
+                    <CheckBox Content="{Binding TaskBarText}"/>
 
-                    <TextBlock Text="视觉效果" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="水平翻转"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="缩放比例"
-                               VerticalAlignment="Center"
-                               VerticalContentAlignment="Center"/>
-                        <ComboBox SelectedIndex="2" Margin="10,0">
+                    <TextBlock Text="{Binding VisualsText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <CheckBox Content="{Binding FlipText}"/>
+                    <DockPanel>
+                        <Label Content="{Binding ZoomText}"
+                               VerticalAlignment="Center"/>
+                        <ComboBox SelectedIndex="2"
+                                  Margin="10,0,25,0"
+                                  HorizontalAlignment="Stretch">
                             <ComboBoxItem Content="25%"></ComboBoxItem>
                             <ComboBoxItem Content="37.5%"></ComboBoxItem>
                             <ComboBoxItem Content="50%"></ComboBoxItem>
@@ -53,29 +63,30 @@
                             <ComboBoxItem Content="100%"></ComboBoxItem>
                             <ComboBoxItem Content="111%"></ComboBoxItem>
                         </ComboBox>
-                    </StackPanel>
+                    </DockPanel>
 
-                    <TextBlock Text="相互作用" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="禁用拖动"/>
-                    <CheckBox Content="任务栏吸附"/>
+                    <TextBlock Text="{Binding InteractionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <CheckBox Content="{Binding DisableDragText}"/>
+                    <CheckBox Content="{Binding AdsorptionText}"/>
 
-                    <TextBlock Text="随机效果" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="随机搭配"
-                               VerticalAlignment="Center"
-                               VerticalContentAlignment="Center"/>
-                        <ComboBox SelectedIndex="0" Margin="10,0">
-                            <ComboBoxItem Content="从不"></ComboBoxItem>
-                            <ComboBoxItem Content="1分钟"></ComboBoxItem>
-                            <ComboBoxItem Content="3分钟"></ComboBoxItem>
-                            <ComboBoxItem Content="5分钟"></ComboBoxItem>
-                            <ComboBoxItem Content="15分钟"></ComboBoxItem>
-                            <ComboBoxItem Content="30分钟"></ComboBoxItem>
+                    <TextBlock Text="{Binding RandomText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <DockPanel>
+                        <Label Content="{Binding RandomSkinText}"
+                               VerticalAlignment="Center"/>
+                        <ComboBox SelectedIndex="0"
+                                  Margin="10,0,25,0"
+                                  HorizontalAlignment="Stretch">
+                            <ComboBoxItem Content="{Binding NeverText}"></ComboBoxItem>
+                            <ComboBoxItem Content="1 {Binding MinuteText}"></ComboBoxItem>
+                            <ComboBoxItem Content="3 {Binding MinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="5 {Binding MinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="15 {Binding MinutesText}"></ComboBoxItem>
+                            <ComboBoxItem Content="30 {Binding MinutesText}"></ComboBoxItem>
                         </ComboBox>
-                    </StackPanel>
+                    </DockPanel>
 
-                    <TextBlock Text="退出程序" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <Button Content="退出"/>
+                    <TextBlock Text="{Binding ExitAppText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <Button Content="{Binding ExitText}"/>
                 </StackPanel>
             </ScrollViewer>
         </TabItem>

@@ -5,5 +5,34 @@
         "Skin": "ChangeSkin",
         "Setting": "Setting",
         "Exit": "Exit"
+    },
+    "SettingWindow": {
+        "DefaultSkin": {
+            "Header": "DefaultSkin"
+        },
+        "CustomSkin": {
+            "Header": "CustomSkin"
+        },
+        "Setting": {
+            "Header": "Setting",
+            "Setting": "System Setting",
+            "Language": "Language",
+            "Topmost": "Always on Top",
+            "Autorun": "Auto Start",
+            "TaskBar": "TaskBar Icon",
+            "Visuals": "Visuals",
+            "Flip": "Flip Cat",
+            "Zoom": "Zoom",
+            "Interaction": "Interaction",
+            "DisableDrag": "Disable Drag",
+            "Adsorption": "Adsorption",
+            "Random": "Random",
+            "RandomSkin": "Random Skin",
+            "Never": "Never",
+            "Minute": "Minute",
+            "Minutes": "Minutes",
+            "ExitApp": "Exit App",
+            "Exit": "Exit"
+        }
     }
 }

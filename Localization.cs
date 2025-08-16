@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace BongoCat_Like
@@ -11,6 +13,12 @@ namespace BongoCat_Like
         private static string langDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Locales");
         private static JsonDocument _currentStrings = null!;
         public static event Action? LanguageChanged;
+
+        public static Localization Instance { get; } = new Localization();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public string this[string key] => GetString(key);
 
         public static void Initialize()
         {
@@ -51,6 +59,7 @@ namespace BongoCat_Like
                 string json = File.ReadAllText(filePath);
                 _currentStrings = JsonDocument.Parse(json);
                 LanguageChanged?.Invoke();
+                Instance.NotifyPropertyChanged(nameof(Instance));
             }
             catch (Exception ex)
             {

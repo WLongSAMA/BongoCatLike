@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 
 namespace BongoCat_Like;
@@ -10,11 +11,18 @@ public partial class SettingWindow : Window
     public SettingWindow()
     {
         InitializeComponent();
-
+        DataContext = new SettingViewModel();
         Closed += (s, e) =>
         {
             CurrentInstance = null;
         };
+
+        foreach (KeyValuePair<string, string> lang in Localization.GetLangList())
+        {
+            LangList.Items.Add(lang.Value);
+            if (Localization.GetSystemLang() == lang.Key)
+                LangList.SelectedIndex = LangList.Items.Count - 1;
+        }
     }
 
     public void NavigateToPage(string pageName)
