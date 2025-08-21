@@ -9,7 +9,6 @@ namespace BongoCat_Like
         public static string Name { get; set; } = "BongoCat-Like";
         public static int WindowWidth { get; } = 350;
         public static int WindowHeight { get; } = 350;
-        public static ItemsJson? Items { get; set; }
         public static SkinManager CatSkin { get; set; } = SkinManager.Instance;
         public static AppConfig Config = ConfigManager.LoadConfig();
 

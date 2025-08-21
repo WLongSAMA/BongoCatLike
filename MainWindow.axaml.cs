@@ -40,7 +40,6 @@ namespace BongoCat_Like
 
         private void MainWindow_Opened(object? sender, EventArgs e)
         {
-            ReadAssets();
             SetLocalization();
             SetTrayIcon();
             SetWindow();
@@ -65,13 +64,6 @@ namespace BongoCat_Like
                 BeginMoveDrag(e);
             }
             base.OnPointerPressed(e);
-        }
-
-        private static void ReadAssets()
-        {
-            Stream json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json"));
-            using StreamReader streamReader = new(json);
-            GlobalHelper.Items = JsonSerializer.Deserialize(streamReader.ReadToEnd(), ItemsJsonContext.Default.ItemsJson);
         }
 
         private void SetLocalization()
