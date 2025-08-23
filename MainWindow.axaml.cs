@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
-using System.IO;
-using System.Text.Json;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -42,9 +41,9 @@ namespace BongoCat_Like
         {
             SetLocalization();
             SetTrayIcon();
-            SetWindow();
             SetSkin();
             SetHat();
+            SetWindow();
             ListeningPress();
         }
 
@@ -117,6 +116,10 @@ namespace BongoCat_Like
 
         private void SetWindow()
         {
+            Rect WindowRect = SkinImage.Bounds.Union(HatImage.Bounds);
+            Width = WindowRect.Width;
+            Height = WindowRect.Height;
+
             if (GlobalHelper.Config.WindowLeft == 0 && GlobalHelper.Config.WindowTop == 0)
             {
                 Screen screen = Screens.Primary!;
@@ -138,7 +141,6 @@ namespace BongoCat_Like
             }
             Position = new PixelPoint(GlobalHelper.Config.WindowLeft, GlobalHelper.Config.WindowTop);
 
-            MainGrid.Margin = new Thickness(GlobalHelper.Config.MainOffsetX, GlobalHelper.Config.MainOffsetY);
             ShowInTaskbar = GlobalHelper.Config.TaskbarIcon;
             Topmost = GlobalHelper.Config.Topmost;
 

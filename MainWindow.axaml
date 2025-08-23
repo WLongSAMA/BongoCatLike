@@ -14,7 +14,6 @@
     <Grid x:Name="MainGrid"
           Width="256"
           Height="256"
-          Margin="-30,50,0,0"
           PointerPressed="OnPointerPressed">
         <Image x:Name="SkinImage"
                Source="/Assets/default/CatLeft.png"

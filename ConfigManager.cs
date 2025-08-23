@@ -108,8 +108,6 @@ namespace BongoCat_Like
     {
         public int WindowLeft { get; set; } = 0;
         public int WindowTop { get; set; } = 0;
-        public int MainOffsetX { get; set; } = -30;
-        public int MainOffsetY { get; set; } = 50;
         public string SkinId { get; set; } = "0";
         public string HatId { get; set; } = "0";
         public string Language { get; set; } = Localization.GetSystemLang();
