@@ -25,11 +25,15 @@
         </TabControl.Styles>
 
         <TabItem Header="{Binding DefaultSkinText}">
-            <StackPanel x:Name="DefaultSkinList" Margin="0,10"></StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="DefaultSkinList" Margin="0,10" Orientation="Horizontal"></WrapPanel>
+            </ScrollViewer>
         </TabItem>
 
         <TabItem Header="{Binding CustomSkinText}">
-            <StackPanel x:Name="CustomSkinList" Margin="0,10"></StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="CustomSkinList" Margin="0,10" Orientation="Horizontal"></WrapPanel>
+            </ScrollViewer>
         </TabItem>
 
         <TabItem Header="{Binding SettingText}">

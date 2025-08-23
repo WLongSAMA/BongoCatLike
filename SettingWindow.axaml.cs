@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace BongoCat_Like;
 
@@ -22,12 +25,85 @@ public partial class SettingWindow : Window
             CurrentInstance = null;
         };
 
+        foreach (KeyValuePair<string, SkinItem> skinItem in GlobalHelper.CatSkin.Items.Skin!)
+        {
+            Image image = new()
+            {
+                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/{skinItem.Value.Icon}"))),
+                Width = 50,
+                Height = 50
+            };
+
+            Border border = new()
+            {
+                Tag = new
+                {
+                    Id = skinItem.Key,
+                    skinItem.Value.Name,
+                    Type = "skin"
+                },
+                Child = image,
+                BorderBrush = GlobalHelper.CatSkin.GetQuality(skinItem.Value.Tags!),
+                BorderThickness = new Thickness(5),
+                Margin = new Thickness(0, 0, 5, 5)
+            };
+
+            border.PointerPressed += Border_PointerPressed;
+            DefaultSkinList.Children.Add(border);
+        }
+
+        foreach (KeyValuePair<string, HatItem> hatItem in GlobalHelper.CatSkin.Items.Hat!)
+        {
+            Image image = new()
+            {
+                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/{hatItem.Value.Icon}"))),
+                Width = 50,
+                Height = 50
+            };
+
+            Border border = new()
+            {
+                Tag = new
+                {
+                    Id = hatItem.Key,
+                    hatItem.Value.Name,
+                    Type = "hat"
+                },
+                Child = image,
+                BorderBrush = GlobalHelper.CatSkin.GetQuality(hatItem.Value.Tags!),
+                BorderThickness = new Thickness(5),
+                Margin = new Thickness(0, 0, 5, 5)
+            };
+
+            border.PointerPressed += Border_PointerPressed;
+            DefaultSkinList.Children.Add(border);
+        }
+
         LangList = Localization.GetLangList();
         foreach (KeyValuePair<string, string> lang in LangList)
         {
             LangListComboBox.Items.Add(lang.Value);
             if (Localization.GetSystemLang() == lang.Key)
                 LangListComboBox.SelectedIndex = LangListComboBox.Items.Count - 1;
+        }
+    }
+
+    private void Border_PointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not Border border)
+            return;
+
+        if (border.Tag != null)
+        {
+            var tagType = border.Tag.GetType();
+            var typeProperty = tagType.GetProperty("Type");
+            var type = typeProperty!.GetValue(border.Tag) as string;
+            var idProperty = tagType.GetProperty("Id");
+            var id = idProperty!.GetValue(border.Tag) as string;
+            if (type!.Equals("skin"))
+                App.MainWindow!.SetSkin(id!);
+            else if (type!.Equals("hat"))
+                App.MainWindow!.SetHat(id!);
         }
     }
 

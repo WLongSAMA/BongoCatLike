@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -41,10 +40,10 @@ namespace BongoCat_Like
         {
             SetLocalization();
             SetTrayIcon();
-            SetSkin();
-            SetHat();
+            SetSkin(GlobalHelper.Config.SkinId);
+            SetHat(GlobalHelper.Config.HatId);
             SetWindow();
-            ListeningPress();
+            //ListeningPress();
         }
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
@@ -256,16 +255,16 @@ namespace BongoCat_Like
             animation.RunAsync(MainGrid);
         }
 
-        public void SetSkin()
+        public void SetSkin(string SkinId)
         {
-            GlobalHelper.CatSkin.SkinId = GlobalHelper.Config.SkinId;
+            GlobalHelper.CatSkin.SkinId = SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
             HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
         }
 
-        public void SetHat()
+        public void SetHat(string HatId)
         {
-            GlobalHelper.CatSkin.HatId = GlobalHelper.Config.HatId;
+            GlobalHelper.CatSkin.HatId = HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
         }
 
