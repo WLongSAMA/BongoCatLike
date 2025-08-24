@@ -2,6 +2,9 @@
 BongoCat 复刻版
 
 ### 简介
+
+[截图预览](screenshots/demo.gif)
+
 [BongoCat-Like](https://github.com/WLongSAMA/BongoCatLike) 基于 Steam 版 [BongoCat](https://store.steampowered.com/app/3419430/Bongo_Cat) 一比一重做，部分图像资源提取自原版程序，相关版权归原作者所有。  
 这个复刻版本不打算添加 **挂机掉落机制** 和 **物品合成功能** ，并且它 **不需要** 依赖 Steam 客户端即可正常运行。  
 可以把它看做是一个轻量简洁不联网的桌面美化挂件，用来给你枯糙乏味的系统桌面添加一丝活气。
@@ -35,3 +38,10 @@ BongoCat 复刻版
 这个复刻版本不打算作为 BongoCat 的竞争者，应该把它看做是原版功能的补充，开发这个程序只是为了弥补它不能在我 Macbook 上启动的遗憾。  
 
 **祝愿 BongoCat 的发展越来越好，感谢开发组的奇妙创意，世界如果没有小猫真的不行。**
+
+### 捐助
+
+如果你也喜欢这个项目，欢迎与作者分享你喜欢的零食或饮料。
+
+[Wechat](screenshots/wechat.png)
+[Alipay](screenshots/alipay.png)
