@@ -34,6 +34,9 @@
             "FiveMinutes": "5 分鐘",
             "FifteenMinutes": "15 分鐘",
             "ThirtyMinutes": "30 分鐘",
+            "Version": "版本",
+            "Home": "項目主頁",
+            "Update": "檢查更新",
             "ExitApp": "退出程式",
             "Exit": "退出"
         }

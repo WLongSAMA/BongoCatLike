@@ -262,6 +262,16 @@ public partial class SettingWindow : Window
         }
     }
 
+    private void OnHomeClicked(object? sender, RoutedEventArgs e)
+    {
+        Launcher.LaunchUriAsync(new Uri(GlobalHelper.Url));
+    }
+
+    private void OnUpdateClicked(object? sender, RoutedEventArgs e)
+    {
+        Launcher.LaunchUriAsync(new Uri(GlobalHelper.Url + "/releases/latest"));
+    }
+
     private void OnExitClicked(object? sender, RoutedEventArgs e)
     {
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

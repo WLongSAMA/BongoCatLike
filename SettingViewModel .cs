@@ -28,6 +28,9 @@ namespace BongoCat_Like
         public static string FiveMinutesText => Localization.Instance["SettingWindow.Setting.FiveMinutes"];
         public static string FifteenMinutesText => Localization.Instance["SettingWindow.Setting.FifteenMinutes"];
         public static string ThirtyMinutesText => Localization.Instance["SettingWindow.Setting.ThirtyMinutes"];
+        public static string VersionText => Localization.Instance["SettingWindow.Setting.Version"];
+        public static string HomeText => Localization.Instance["SettingWindow.Setting.Home"];
+        public static string UpdateText => Localization.Instance["SettingWindow.Setting.Update"];
         public static string ExitAppText => Localization.Instance["SettingWindow.Setting.ExitApp"];
         public static string ExitText => Localization.Instance["SettingWindow.Setting.Exit"];
 
@@ -67,6 +70,9 @@ namespace BongoCat_Like
                 OnPropertyChanged(nameof(FiveMinutesText));
                 OnPropertyChanged(nameof(FifteenMinutesText));
                 OnPropertyChanged(nameof(ThirtyMinutesText));
+                OnPropertyChanged(nameof(VersionText));
+                OnPropertyChanged(nameof(HomeText));
+                OnPropertyChanged(nameof(UpdateText));
                 OnPropertyChanged(nameof(ExitAppText));
                 OnPropertyChanged(nameof(ExitText));
             };

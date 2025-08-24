@@ -34,6 +34,9 @@
             "FiveMinutes": "5 Minutes",
             "FifteenMinutes": "15 Minutes",
             "ThirtyMinutes": "30 Minutes",
+            "Version": "Version",
+            "Home": "Project Home",
+            "Update": "Check Update",
             "ExitApp": "Exit Application",
             "Exit": "Exit"
         }

@@ -5,8 +5,10 @@ namespace BongoCat_Like
 {
     public class GlobalHelper
     {
-        public static string ProjectName { get; set; } = "BongoCat_Like";
-        public static string Name { get; set; } = "BongoCat-Like";
+        public static string ProjectName { get; } = "BongoCat_Like";
+        public static string Name { get; } = "BongoCat-Like";
+        public static string Version { get; } = "0.1.20250824";
+        public static string Url { get; } = "https://github.com/WLongSAMA/BongoCatLike";
         public static int WindowWidth { get; } = 350;
         public static int WindowHeight { get; } = 350;
         public static SkinManager CatSkin { get; set; } = SkinManager.Instance;
