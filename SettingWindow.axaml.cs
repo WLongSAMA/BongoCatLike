@@ -85,7 +85,7 @@ public partial class SettingWindow : Window
         foreach (KeyValuePair<string, string> lang in LangList)
         {
             LangListComboBox.Items.Add(lang.Value);
-            if (Localization.GetSystemLang() == lang.Key)
+            if (GlobalHelper.Config.Language == lang.Key)
                 LangListComboBox.SelectedIndex = LangListComboBox.Items.Count - 1;
         }
     }
@@ -96,16 +96,20 @@ public partial class SettingWindow : Window
         {
             PointerPoint point = e.GetCurrentPoint(sender as Control);
             if (point.Properties.IsLeftButtonPressed && border.Tag != null)
-        {
-            var tagType = border.Tag.GetType();
-            var typeProperty = tagType.GetProperty("Type");
-            var type = typeProperty!.GetValue(border.Tag) as string;
-            var idProperty = tagType.GetProperty("Id");
-            var id = idProperty!.GetValue(border.Tag) as string;
-            if (type!.Equals("skin"))
-                App.MainWindow!.SetSkin(id!);
-            else if (type!.Equals("hat"))
-                App.MainWindow!.SetHat(id!);
+            {
+                var tagType = border.Tag.GetType();
+                var typeProperty = tagType.GetProperty("Type");
+                var type = typeProperty!.GetValue(border.Tag) as string;
+                var idProperty = tagType.GetProperty("Id");
+                var id = idProperty!.GetValue(border.Tag) as string;
+                if (type!.Equals("skin"))
+                    App.MainWindow.SetSkin(id!);
+                else if (type!.Equals("hat"))
+                {
+                    App.MainWindow.SetHat(id!);
+                    App.MainWindow.HatAnimation();
+                }
+            }
         }
     }
 
@@ -132,9 +136,7 @@ public partial class SettingWindow : Window
             CurrentInstance.Topmost = false;
 
             if (!string.IsNullOrEmpty(navigateTo))
-            {
                 CurrentInstance.NavigateToPage(navigateTo);
-            }
             return;
         }
 
@@ -145,9 +147,7 @@ public partial class SettingWindow : Window
         };
 
         if (!string.IsNullOrEmpty(navigateTo))
-        {
             CurrentInstance.NavigateToPage(navigateTo);
-        }
 
         CurrentInstance.Show();
     }
@@ -176,8 +176,9 @@ public partial class SettingWindow : Window
                         GlobalHelper.Config.Language = lang.Key;
 
                         //解决切换语言后，组合框显示内容不变的问题
-                        //RandomSkinComboBox.SelectedIndex = -1;
-                        //RandomSkinComboBox.SelectedIndex = GlobalHelper.Config.RandomSkin;
+                        int value = RandomSkinComboBox.SelectedIndex;
+                        RandomSkinComboBox.SelectedIndex = -1;
+                        RandomSkinComboBox.SelectedIndex = value;
                     }
                 }
             }
@@ -187,9 +188,7 @@ public partial class SettingWindow : Window
     private void OnTopmostClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
-        {
-            App.MainWindow!.Topmost = GlobalHelper.Config.Topmost = checkBox.IsChecked.GetValueOrDefault();
-        }
+            App.MainWindow.Topmost = GlobalHelper.Config.Topmost = checkBox.IsChecked.GetValueOrDefault();
     }
 
     private void OnAutorunClicked(object? sender, RoutedEventArgs e)
@@ -216,9 +215,7 @@ public partial class SettingWindow : Window
     private void OnTaskbarIconClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
-        {
-            App.MainWindow!.ShowInTaskbar = GlobalHelper.Config.TaskbarIcon = checkBox.IsChecked.GetValueOrDefault();
-        }
+            App.MainWindow.ShowInTaskbar = GlobalHelper.Config.TaskbarIcon = checkBox.IsChecked.GetValueOrDefault();
     }
 
     private void OnFlipClicked(object? sender, RoutedEventArgs e)
@@ -226,7 +223,7 @@ public partial class SettingWindow : Window
         if (sender is CheckBox checkBox)
         {
             GlobalHelper.Config.Flip = checkBox.IsChecked.GetValueOrDefault();
-            App.MainWindow!.SetFlip(GlobalHelper.Config.Flip);
+            App.MainWindow.SetFlip(GlobalHelper.Config.Flip);
         }
     }
 
@@ -235,24 +232,20 @@ public partial class SettingWindow : Window
         if (sender is ComboBox comboBox)
         {
             GlobalHelper.Config.Zoom = comboBox.SelectedIndex;
-            App.MainWindow!.SetZoom(comboBox.SelectedIndex);
+            App.MainWindow.SetZoom(comboBox.SelectedIndex);
         }
     }
 
     private void OnDisableDragClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
-        {
             GlobalHelper.Config.DisableDrag = checkBox.IsChecked.GetValueOrDefault();
-        }
     }
 
     private void OnAdsorptionClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
-        {
             GlobalHelper.Config.Adsorption = checkBox.IsChecked.GetValueOrDefault();
-        }
     }
 
     private void OnRandomSkinSelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -260,7 +253,7 @@ public partial class SettingWindow : Window
         if (sender is ComboBox comboBox)
         {
             GlobalHelper.Config.RandomSkin = comboBox.SelectedIndex;
-            App.MainWindow!.RandomSkin(comboBox.SelectedIndex);
+            App.MainWindow.RandomSkin(comboBox.SelectedIndex);
         }
     }
 

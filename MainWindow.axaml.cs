@@ -43,7 +43,7 @@ namespace BongoCat_Like
             SetSkin(GlobalHelper.Config.SkinId);
             SetHat(GlobalHelper.Config.HatId);
             SetWindow();
-            //ListeningPress();
+            ListeningPress();
         }
 
         private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
@@ -58,9 +58,7 @@ namespace BongoCat_Like
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (!GlobalHelper.Config.DisableDrag && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-            {
                 BeginMoveDrag(e);
-            }
             base.OnPointerPressed(e);
         }
 
@@ -115,9 +113,9 @@ namespace BongoCat_Like
 
         private void SetWindow()
         {
-            Rect WindowRect = SkinImage.Bounds.Union(HatImage.Bounds);
-            Width = WindowRect.Width;
-            Height = WindowRect.Height;
+            //Rect WindowRect = SkinImage.Bounds.Union(HatImage.Bounds);
+            //Width = WindowRect.Width;
+            //Height = WindowRect.Height;
 
             if (GlobalHelper.Config.WindowLeft == 0 && GlobalHelper.Config.WindowTop == 0)
             {
@@ -140,6 +138,7 @@ namespace BongoCat_Like
             }
             Position = new PixelPoint(GlobalHelper.Config.WindowLeft, GlobalHelper.Config.WindowTop);
 
+            MainGrid.Margin = new Thickness(GlobalHelper.Config.MainOffsetX, GlobalHelper.Config.MainOffsetY);
             ShowInTaskbar = GlobalHelper.Config.TaskbarIcon;
             Topmost = GlobalHelper.Config.Topmost;
 

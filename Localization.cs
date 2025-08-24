@@ -73,13 +73,9 @@ namespace BongoCat_Like
             foreach (string part in key.Split('.'))
             {
                 if (current.TryGetProperty(part, out JsonElement value))
-                {
                     current = value;
-                }
                 else
-                {
                     return $"#{key}#";
-                }
             }
 
             if (current.ValueKind == JsonValueKind.String)

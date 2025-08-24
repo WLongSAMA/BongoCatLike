@@ -49,16 +49,10 @@ namespace BongoCat_Like
                 _skinId = ValidateItem(value, Items.Skin);
                 _skinImage.Clear();
                 if (_skinId == "0")
-                {
                     DefaultImages();
-                }
                 else
-                {
                     foreach (string img in Items.Skin![_skinId.ToString()].Image!)
-                    {
                         _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/{img}"))));
-                    }
-                }
             }
         }
 
@@ -69,13 +63,9 @@ namespace BongoCat_Like
             {
                 _hatId = ValidateItem(value, Items.Hat);
                 if (_hatId == "0")
-                {
                     _hatImage = null!;
-                }
                 else
-                {
                     _hatImage = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/{Items.Hat![_hatId.ToString()].Image}")));
-                }
             }
         }
 
@@ -92,25 +82,15 @@ namespace BongoCat_Like
         public IImmutableSolidColorBrush GetQuality(string tags)
         {
             if (tags.Contains("quality:legendary"))
-            {
                 return Brushes.Orange;
-            }
             else if (tags.Contains("quality:epic"))
-            {
                 return Brushes.DarkMagenta;
-            }
             else if (tags.Contains("quality:rare"))
-            {
                 return Brushes.DeepSkyBlue;
-            }
             else if (tags.Contains("quality:uncommon"))
-            {
                 return Brushes.Lime;
-            }
             else if (tags.Contains("quality:common"))
-            {
                 return Brushes.Silver;
-            }
 
             return Brushes.Transparent;
         }

@@ -6,7 +6,7 @@ namespace BongoCat_Like
 {
     public partial class App : Application
     {
-        public static MainWindow? MainWindow { get; private set; }
+        public static MainWindow MainWindow { get; private set; } = new MainWindow();
 
         public override void Initialize()
         {
@@ -17,7 +17,6 @@ namespace BongoCat_Like
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                MainWindow = new MainWindow();
                 desktop.MainWindow = MainWindow;
             }
 

@@ -14,7 +14,8 @@
     <Grid x:Name="MainGrid"
           Width="256"
           Height="256"
-          PointerPressed="OnPointerPressed">
+          PointerPressed="OnPointerPressed"
+          RenderOptions.BitmapInterpolationMode="HighQuality">
         <Image x:Name="SkinImage"
                Source="/Assets/default/CatLeft.png"
                Stretch="UniformToFill"/>

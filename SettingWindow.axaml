@@ -51,7 +51,7 @@
 
         <TabItem Header="{Binding SettingText}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin="0,10,0,20">
+                <StackPanel Margin="0,10,0,20" RenderOptions.BitmapInterpolationMode="HighQuality">
                     <TextBlock Text="{Binding SystemSettingText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <DockPanel>
                         <Label Content="{Binding LanguageText}" VerticalAlignment="Center"/>
