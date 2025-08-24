@@ -3,7 +3,7 @@ BongoCat 复刻版
 
 ### 简介
 
-[截图预览](screenshots/demo.gif)
+![截图预览](screenshots/demo.gif)
 
 [BongoCat-Like](https://github.com/WLongSAMA/BongoCatLike) 基于 Steam 版 [BongoCat](https://store.steampowered.com/app/3419430/Bongo_Cat) 一比一重做，部分图像资源提取自原版程序，相关版权归原作者所有。  
 这个复刻版本不打算添加 **挂机掉落机制** 和 **物品合成功能** ，并且它 **不需要** 依赖 Steam 客户端即可正常运行。  
@@ -43,5 +43,5 @@ BongoCat 复刻版
 
 如果你也喜欢这个项目，欢迎与作者分享你喜欢的零食或饮料。
 
-[Wechat](screenshots/wechat.png)
-[Alipay](screenshots/alipay.png)
+![Wechat](screenshots/wechat.png)
+![Alipay](screenshots/alipay.png)
