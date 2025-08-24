@@ -11,6 +11,19 @@
         WindowStartupLocation="CenterScreen"
         CanResize="False">
 
+    <Window.Styles>
+        <Style Selector="Border.Animation:pointerover">
+            <Setter Property="RenderTransform">
+                <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+            </Setter>
+        </Style>
+        <Style Selector="Border.Animation:pointerover Image">
+            <Setter Property="RenderTransform">
+                <RotateTransform Angle="10"/>
+            </Setter>
+        </Style>
+    </Window.Styles>
+
     <TabControl x:Name="NavigationTabs">
         <TabControl.Background>
             <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">

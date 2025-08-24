@@ -48,6 +48,7 @@ public partial class SettingWindow : Window
                 Margin = new Thickness(0, 0, 5, 5)
             };
 
+            border.Classes.Add("Animation");
             border.PointerPressed += Border_PointerPressed;
             DefaultSkinList.Children.Add(border);
         }
@@ -75,6 +76,7 @@ public partial class SettingWindow : Window
                 Margin = new Thickness(0, 0, 5, 5)
             };
 
+            border.Classes.Add("Animation");
             border.PointerPressed += Border_PointerPressed;
             DefaultSkinList.Children.Add(border);
         }
@@ -90,10 +92,10 @@ public partial class SettingWindow : Window
 
     private void Border_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is not Border border)
-            return;
-
-        if (border.Tag != null)
+        if (sender is Border border)
+        {
+            PointerPoint point = e.GetCurrentPoint(sender as Control);
+            if (point.Properties.IsLeftButtonPressed && border.Tag != null)
         {
             var tagType = border.Tag.GetType();
             var typeProperty = tagType.GetProperty("Type");
