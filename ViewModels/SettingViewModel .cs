@@ -8,6 +8,7 @@ namespace BongoCat_Like
 
         public static string DefaultSkinText => Localization.Instance["SettingWindow.DefaultSkin.Header"];
         public static string CustomSkinText => Localization.Instance["SettingWindow.CustomSkin.Header"];
+        public static string EmptySkinText => Localization.Instance["SettingWindow.CustomSkin.EmptySkin"];
         public static string SettingText => Localization.Instance["SettingWindow.Setting.Header"];
         public static string SystemSettingText => Localization.Instance["SettingWindow.Setting.Setting"];
         public static string LanguageText => Localization.Instance["SettingWindow.Setting.Language"];
@@ -50,6 +51,7 @@ namespace BongoCat_Like
             {
                 OnPropertyChanged(nameof(DefaultSkinText));
                 OnPropertyChanged(nameof(CustomSkinText));
+                OnPropertyChanged(nameof(EmptySkinText));
                 OnPropertyChanged(nameof(SettingText));
                 OnPropertyChanged(nameof(SystemSettingText));
                 OnPropertyChanged(nameof(LanguageText));

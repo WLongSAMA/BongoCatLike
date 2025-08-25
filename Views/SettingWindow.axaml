@@ -45,7 +45,11 @@
 
         <TabItem Header="{Binding CustomSkinText}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <WrapPanel x:Name="CustomSkinList" Margin="0,10" Orientation="Horizontal"></WrapPanel>
+                <WrapPanel x:Name="CustomSkinList" Margin="0,10" Orientation="Horizontal">
+                    <TextBlock Text="{Binding EmptySkinText}"
+                       FontSize="12"
+                       Foreground="Gray"/>
+                </WrapPanel>
             </ScrollViewer>
         </TabItem>
 

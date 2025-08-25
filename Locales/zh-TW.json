@@ -11,7 +11,8 @@
             "Header": "預設皮膚"
         },
         "CustomSkin": {
-            "Header": "自訂皮膚"
+            "Header": "自訂皮膚",
+            "EmptySkin": "暫無自定皮膚，請添加後再查看"
         },
         "Setting": {
             "Header": "設定",

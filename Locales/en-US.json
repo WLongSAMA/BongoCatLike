@@ -11,7 +11,8 @@
             "Header": "Default Skin"
         },
         "CustomSkin": {
-            "Header": "Custom Skin"
+            "Header": "Custom Skin",
+            "EmptySkin": "No custom skin yet, please add one to view."
         },
         "Setting": {
             "Header": "Settings",

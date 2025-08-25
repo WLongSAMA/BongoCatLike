@@ -11,7 +11,8 @@
             "Header": "默认皮肤"
         },
         "CustomSkin": {
-            "Header": "自定义皮肤"
+            "Header": "自定义皮肤",
+            "EmptySkin": "暂无自定义皮肤，请添加后再查看"
         },
         "Setting": {
             "Header": "设置",
