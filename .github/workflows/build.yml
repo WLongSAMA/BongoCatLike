@@ -1,0 +1,64 @@
+name: Build BongoCat-Like
+
+on: [push]
+
+jobs:
+  build:
+    name: Build ${{ matrix.rid }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            avalonia_target: Desktop
+          - os: ubuntu-latest
+            rid: linux-x64
+            avalonia_target: Desktop
+          - os: macos-latest
+            rid: osx-x64
+            avalonia_target: Desktop
+          - os: macos-latest
+            rid: osx-arm64
+            avalonia_target: Desktop
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+
+      - name: Build Project
+        run: |
+          dotnet publish ./BongoCat_Like.csproj -c Release -r ${{ matrix.rid }} -p:DebugSymbols=false -p:OutputPath=./publish/${{ matrix.rid }}
+
+      - name: Remove output folder(Unix)
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd ./publish
+          rm -rf ${{ matrix.rid }}
+          rm -rf ${{ matrix.rid }}native
+          mv ${{ matrix.rid }}publish BongoCat-Like
+
+      - name: Remove output folder(Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd ./publish
+          Remove-Item -Path ${{ matrix.rid }} -Recurse -Force -ErrorAction Ignore
+          Remove-Item -Path ${{ matrix.rid }}native -Recurse -Force -ErrorAction Ignore
+          Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: BongoCat-Like.${{ matrix.rid }}
+          path: ./publish

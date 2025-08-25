@@ -9,11 +9,6 @@ namespace BongoCat_Like
     public static class ConfigManager
     {
         private static string ConfigPath;
-        private static JsonSerializerOptions JsonOptions = new()
-        {
-            WriteIndented = true,
-            PropertyNameCaseInsensitive = true
-        };
 
         static ConfigManager()
         {
@@ -55,7 +50,7 @@ namespace BongoCat_Like
                 if (!Directory.Exists(configDir) && !string.IsNullOrWhiteSpace(configDir))
                     Directory.CreateDirectory(configDir);
 
-                string json = JsonSerializer.Serialize(config, JsonOptions);
+                string json = JsonSerializer.Serialize(config, AppConfigContext.Default.AppConfig);
                 File.WriteAllText(ConfigPath, RemoveUnicodeEscapes(json));
             }
             catch (Exception ex)
@@ -124,5 +119,8 @@ namespace BongoCat_Like
     }
 
     [JsonSerializable(typeof(AppConfig))]
+    [JsonSourceGenerationOptions(
+        WriteIndented = true,
+        PropertyNameCaseInsensitive = true)]
     public partial class AppConfigContext : JsonSerializerContext { }
 }

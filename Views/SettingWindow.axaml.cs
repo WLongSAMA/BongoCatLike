@@ -36,11 +36,10 @@ public partial class SettingWindow : Window
 
             Border border = new()
             {
-                Tag = new
+                Tag = new Dictionary<string, string>
                 {
-                    Id = skinItem.Key,
-                    skinItem.Value.Name,
-                    Type = "skin"
+                    ["Id"] = skinItem.Key,
+                    ["Type"] = "skin"
                 },
                 Child = image,
                 BorderBrush = GlobalHelper.CatSkin.GetQuality(skinItem.Value.Tags!),
@@ -64,11 +63,10 @@ public partial class SettingWindow : Window
 
             Border border = new()
             {
-                Tag = new
+                Tag = new Dictionary<string, string>
                 {
-                    Id = hatItem.Key,
-                    hatItem.Value.Name,
-                    Type = "hat"
+                    ["Id"] = hatItem.Key,
+                    ["Type"] = "hat"
                 },
                 Child = image,
                 BorderBrush = GlobalHelper.CatSkin.GetQuality(hatItem.Value.Tags!),
@@ -92,21 +90,18 @@ public partial class SettingWindow : Window
 
     private void Border_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (sender is Border border)
+        if (sender is Border border && border.Tag is Dictionary<string, string> tagData)
         {
-            PointerPoint point = e.GetCurrentPoint(sender as Control);
-            if (point.Properties.IsLeftButtonPressed && border.Tag != null)
+            PointerPoint point = e.GetCurrentPoint(border);
+            if (point.Properties.IsLeftButtonPressed &&
+                tagData.TryGetValue("Type", out var type) &&
+                tagData.TryGetValue("Id", out var id))
             {
-                var tagType = border.Tag.GetType();
-                var typeProperty = tagType.GetProperty("Type");
-                var type = typeProperty!.GetValue(border.Tag) as string;
-                var idProperty = tagType.GetProperty("Id");
-                var id = idProperty!.GetValue(border.Tag) as string;
-                if (type!.Equals("skin"))
-                    App.MainWindow.SetSkin(id!);
-                else if (type!.Equals("hat"))
+                if (type.Equals("skin"))
+                    App.MainWindow.SetSkin(id);
+                else if (type.Equals("hat"))
                 {
-                    App.MainWindow.SetHat(id!);
+                    App.MainWindow.SetHat(id);
                     App.MainWindow.HatAnimation();
                 }
             }
