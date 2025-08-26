@@ -142,7 +142,9 @@ namespace BongoCat_Like
             ShowInTaskbar = GlobalHelper.Config.TaskbarIcon;
             Topmost = GlobalHelper.Config.Topmost;
 
+            SetFlip(GlobalHelper.Config.Flip);
             SetZoom(GlobalHelper.Config.Zoom);
+            SetJiggle();
         }
 
         private void ListeningPress()
@@ -215,18 +217,22 @@ namespace BongoCat_Like
 
         public void SetFlip(bool isFlip)
         {
-
+            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
+            MainGrid.RenderTransform = new ScaleTransform(isFlip ? -1 * scaling : scaling, scaling);
+            GlobalHelper.Config.Flip = isFlip;
         }
 
         public void SetZoom(int index)
         {
             double scaling = GlobalHelper.GetScaling(index);
-            TransformGroup transformGroup = new();
-            transformGroup.Children.Add(new ScaleTransform(scaling, scaling));
-            MainGrid.RenderTransform = transformGroup;
+            MainGrid.RenderTransform = new ScaleTransform(GlobalHelper.Config.Flip ? -1 * scaling : scaling, scaling);
             GlobalHelper.Config.Zoom = index;
+        }
 
-            Animation animation = new()
+        public void SetJiggle()
+        {
+            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
+            Animation JiggleAnimation = new()
             {
                 Duration = TimeSpan.FromSeconds(1),
                 IterationCount = IterationCount.Infinite,
@@ -251,7 +257,7 @@ namespace BongoCat_Like
                     }
                 }
             };
-            animation.RunAsync(MainGrid);
+            JiggleAnimation.RunAsync(MainGrid);
         }
 
         public void SetSkin(string SkinId)
@@ -335,7 +341,12 @@ namespace BongoCat_Like
 
         public void RandomSkin(int timeIndex)
         {
+            GlobalHelper.Config.RandomSkin = timeIndex;
+        }
 
+        public void TaskbarAdsorption(bool isAdsorption)
+        {
+            GlobalHelper.Config.Adsorption = isAdsorption;
         }
     }
 }

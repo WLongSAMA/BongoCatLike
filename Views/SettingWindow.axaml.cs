@@ -190,10 +190,9 @@ public partial class SettingWindow : Window
     {
         if (sender is CheckBox checkBox)
         {
-            GlobalHelper.Config.Autorun = checkBox.IsChecked.GetValueOrDefault();
             try
             {
-                if (GlobalHelper.Config.Autorun)
+                if (checkBox.IsChecked.GetValueOrDefault())
                 {
                     if (Environment.ProcessPath is string file)
                         AutorunManager.Add(GlobalHelper.Name, file);
@@ -217,8 +216,7 @@ public partial class SettingWindow : Window
     {
         if (sender is CheckBox checkBox)
         {
-            GlobalHelper.Config.Flip = checkBox.IsChecked.GetValueOrDefault();
-            App.MainWindow.SetFlip(GlobalHelper.Config.Flip);
+            App.MainWindow.SetFlip(checkBox.IsChecked.GetValueOrDefault());
         }
     }
 
@@ -226,7 +224,6 @@ public partial class SettingWindow : Window
     {
         if (sender is ComboBox comboBox)
         {
-            GlobalHelper.Config.Zoom = comboBox.SelectedIndex;
             App.MainWindow.SetZoom(comboBox.SelectedIndex);
         }
     }
@@ -247,7 +244,6 @@ public partial class SettingWindow : Window
     {
         if (sender is ComboBox comboBox)
         {
-            GlobalHelper.Config.RandomSkin = comboBox.SelectedIndex;
             App.MainWindow.RandomSkin(comboBox.SelectedIndex);
         }
     }
