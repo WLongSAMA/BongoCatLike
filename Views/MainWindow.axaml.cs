@@ -11,11 +11,12 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using BongoCat_Like.Utilities;
 using SharpHook;
 using SharpHook.Data;
 using MouseButton = SharpHook.Data.MouseButton;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Views
 {
     public partial class MainWindow : Window
     {

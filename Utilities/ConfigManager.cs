@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Utilities
 {
     public static class ConfigManager
     {

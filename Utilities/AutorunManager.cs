@@ -1,4 +1,4 @@
-namespace BongoCat_Like
+namespace BongoCat_Like.Utilities
 {
     public static class AutorunManager
     {

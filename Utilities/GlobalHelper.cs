@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Utilities
 {
     public class GlobalHelper
     {

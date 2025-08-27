@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Utilities
 {
     public class Localization
     {

@@ -1,6 +1,7 @@
 using System.ComponentModel;
+using BongoCat_Like.Utilities;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.ViewModels
 {
     public class SettingViewModel : INotifyPropertyChanged
     {

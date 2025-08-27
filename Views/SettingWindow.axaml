@@ -4,9 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BongoCat_Like"
         xmlns:vm="using:BongoCat_Like"
-        x:DataType="vm:SettingViewModel"
-        x:Class="BongoCat_Like.SettingWindow"
-        Title="{Binding Source={x:Static local:GlobalHelper.Name}}"
+        xmlns:viewModels="clr-namespace:BongoCat_Like.ViewModels"
+        xmlns:utilities="clr-namespace:BongoCat_Like.Utilities"
+        x:DataType="viewModels:SettingViewModel"
+        x:Class="BongoCat_Like.Views.SettingWindow"
+        Title="{Binding Source={x:Static utilities:GlobalHelper.Name}}"
         Width="350" Height="500"
         WindowStartupLocation="CenterScreen"
         CanResize="False">
@@ -108,7 +110,7 @@
                     </DockPanel>
 
                     <TextBlock Text="{Binding VersionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <TextBlock Text="{Binding Source={x:Static local:GlobalHelper.Version}}" Margin="0,0,0,10"/>
+                    <TextBlock Text="{Binding Source={x:Static utilities:GlobalHelper.Version}}" Margin="0,0,0,10"/>
                     <DockPanel>
                         <Button Content="{Binding HomeText}" Click="OnHomeClicked"/>
                         <Button Content="{Binding UpdateText}" Click="OnUpdateClicked"/>

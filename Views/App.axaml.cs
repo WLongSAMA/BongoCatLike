@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Views
 {
     public partial class App : Application
     {

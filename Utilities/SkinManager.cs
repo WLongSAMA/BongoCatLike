@@ -6,7 +6,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
-namespace BongoCat_Like
+namespace BongoCat_Like.Utilities
 {
     public class SkinManager
     {

@@ -7,8 +7,10 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using BongoCat_Like.Utilities;
+using BongoCat_Like.ViewModels;
 
-namespace BongoCat_Like;
+namespace BongoCat_Like.Views;
 
 public partial class SettingWindow : Window
 {
