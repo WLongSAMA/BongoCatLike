@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Views/App.axaml" value="BongoCat_Like.csproj" />
+        <entry key="Views/MainWindow.axaml" value="BongoCat_Like.csproj" />
+        <entry key="Views/SettingWindow.axaml" value="BongoCat_Like.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
