@@ -1,9 +1,27 @@
-# 🐱 BongoCat 复刻版
-一个轻量简洁不联网的桌面美化挂件，用来给你枯糙乏味的系统桌面添加一丝活气。
+<div align="center">
+<h1>🐱 BongoCat 复刻版</h1>
+<p>一个轻量简洁不联网的桌面美化挂件，用来给你枯糙乏味的系统桌面添加一丝活气。<p>
+</div>
 
-[![GitHub License](https://img.shields.io/badge/license-GPL2.0-blue.svg)](https://github.com/WLongSAMA/BongoCatLike/blob/main/LICENSE.txt)
+<div align="center">
+<img src="https://img.shields.io/badge/.net-8.0-blue.svg" alt=".Net8.0" />
+<img src="https://img.shields.io/badge/C%23-latest-blue.svg" alt="C#" />
+<img src="https://img.shields.io/badge/IDE-VS2022-purple.svg" alt="VS2022" />
+<img src="https://img.shields.io/badge/IDE-Rider-black.svg" alt="Rider" />
+</div>
+
+<div align="center">
+<img src="https://img.shields.io/badge/Windows-Supported-brightgreen.svg?logo=data:image/svg+xml;charset=utf-8;base64,PHN2ZyBmaWxsPSIjMDA3OEQ3IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjciIGhlaWdodD0iNyIgLz48cmVjdCB4PSI5IiB5PSIwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiAvPjxyZWN0IHg9IjAiIHk9IjkiIHdpZHRoPSI3IiBoZWlnaHQ9IjciIC8+PHJlY3QgeD0iOSIgeT0iOSIgd2lkdGg9IjciIGhlaWdodD0iNyIgLz48L3N2Zz4=" alt="Windows" />
+<img src="https://img.shields.io/badge/Linux-Supported-brightgreen.svg?logo=linux" alt="Linux" />
+<img src="https://img.shields.io/badge/MacOS-Supported-brightgreen.svg?logo=apple" alt="MacOS" />
+</div>
+
+<div align="center">
+
+[![GitHub License](https://img.shields.io/github/license/WLongSAMA/BongoCatLike)](https://github.com/WLongSAMA/BongoCatLike/blob/main/LICENSE.txt)
 [![Build and Release](https://github.com/WLongSAMA/BongoCatLike/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/WLongSAMA/BongoCatLike/actions/workflows/build-and-release.yml)
-[![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/WLongSAMA/BongoCatLike/latest/total)](https://github.com/WLongSAMA/BongoCatLike/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/WLongSAMA/BongoCatLike)](https://github.com/WLongSAMA/BongoCatLike/releases/latest)
+</div>
 
 ### 📑 简介
 
