@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -13,17 +14,22 @@ namespace BongoCat_Like.Utilities
         private static SkinManager instance = null!;
         private static readonly object obj = new();
 
-        private ItemsJson items = new();
+        private ItemsJson items;
+        private HatOffsetJson[] offset;
         private string _skinId = "0";
         private string _hatId = "0";
         private List<Bitmap> _skinImage = [];
         private Bitmap? _hatImage;
+        private Position? _hatOffset = new() { X = 30, Y = -70 };
 
         private SkinManager()
         {
-            Stream json = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json"));
-            using StreamReader streamReader = new(json);
-            items = JsonSerializer.Deserialize(streamReader.ReadToEnd(), ItemsJsonContext.Default.ItemsJson)!;
+            Stream itemsJson = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/items.json"));
+            items = JsonSerializer.Deserialize(itemsJson, ItemsJsonContext.Default.ItemsJson)!;
+
+            Stream offsetJson = AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/offset.json"));
+            offset = JsonSerializer.Deserialize(offsetJson, HatOffsetJsonContext.Default.HatOffsetJsonArray)!;
+
             DefaultImages();
         }
 
@@ -51,7 +57,7 @@ namespace BongoCat_Like.Utilities
                 if (_skinId == "0")
                     DefaultImages();
                 else
-                    foreach (string img in Items.Skin![_skinId.ToString()].Image!)
+                    foreach (string img in Items.Skin[_skinId.ToString()].Image)
                         _skinImage.Add(new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/{img}"))));
             }
         }
@@ -63,9 +69,16 @@ namespace BongoCat_Like.Utilities
             {
                 _hatId = ValidateItem(value, Items.Hat);
                 if (_hatId == "0")
-                    _hatImage = null!;
+                {
+                    _hatImage = null;
+                    _hatOffset = new() { X = 30, Y = -70 };
+                }
                 else
-                    _hatImage = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/{Items.Hat![_hatId.ToString()].Image}")));
+                {
+                    HatItem hat = Items.Hat[_hatId.ToString()];
+                    _hatImage = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/{hat.Image}")));
+                    _hatOffset = GetHatOffsetByName(hat.Name);
+                }
             }
         }
 
@@ -77,6 +90,16 @@ namespace BongoCat_Like.Utilities
         public Bitmap? HatImage
         {
             get => _hatImage;
+        }
+
+        public Position? HatOffset
+        {
+            get => _hatOffset;
+        }
+
+        private Position? GetHatOffsetByName(string name)
+        {
+            return offset.FirstOrDefault(hat => hat.Name == name)?.Position;
         }
 
         public IImmutableSolidColorBrush GetQuality(string tags)

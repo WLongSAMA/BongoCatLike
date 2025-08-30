@@ -27,7 +27,7 @@ public partial class SettingWindow : Window
             CurrentInstance = null;
         };
 
-        foreach (KeyValuePair<string, SkinItem> skinItem in GlobalHelper.CatSkin.Items.Skin!)
+        foreach (KeyValuePair<string, SkinItem> skinItem in GlobalHelper.CatSkin.Items.Skin)
         {
             Image image = new()
             {
@@ -44,7 +44,7 @@ public partial class SettingWindow : Window
                     ["Type"] = "skin"
                 },
                 Child = image,
-                BorderBrush = GlobalHelper.CatSkin.GetQuality(skinItem.Value.Tags!),
+                BorderBrush = GlobalHelper.CatSkin.GetQuality(skinItem.Value.Tags),
                 BorderThickness = new Thickness(5),
                 Margin = new Thickness(0, 0, 5, 5)
             };
@@ -54,7 +54,7 @@ public partial class SettingWindow : Window
             DefaultSkinList.Children.Add(border);
         }
 
-        foreach (KeyValuePair<string, HatItem> hatItem in GlobalHelper.CatSkin.Items.Hat!)
+        foreach (KeyValuePair<string, HatItem> hatItem in GlobalHelper.CatSkin.Items.Hat)
         {
             Image image = new()
             {
@@ -71,7 +71,7 @@ public partial class SettingWindow : Window
                     ["Type"] = "hat"
                 },
                 Child = image,
-                BorderBrush = GlobalHelper.CatSkin.GetQuality(hatItem.Value.Tags!),
+                BorderBrush = GlobalHelper.CatSkin.GetQuality(hatItem.Value.Tags),
                 BorderThickness = new Thickness(5),
                 Margin = new Thickness(0, 0, 5, 5)
             };

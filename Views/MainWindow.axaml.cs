@@ -272,15 +272,15 @@ namespace BongoCat_Like.Views
         {
             GlobalHelper.CatSkin.HatId = HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
+
+            TransformGroup transformGroup = new();
+            transformGroup.Children.Add(new ScaleTransform(1, 1));
+            transformGroup.Children.Add(new TranslateTransform(GlobalHelper.CatSkin.HatOffset!.X, GlobalHelper.CatSkin.HatOffset.Y));
+            HatImage.RenderTransform = transformGroup;
         }
 
         public async void HatAnimation()
         {
-            TransformGroup transformGroup = new();
-            transformGroup.Children.Add(new ScaleTransform(1, 1));
-            transformGroup.Children.Add(new TranslateTransform(32, -70));
-            HatImage.RenderTransform = transformGroup;
-
             await Task.Delay(10);
 
             Animation animation = new()

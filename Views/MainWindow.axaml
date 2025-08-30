@@ -26,12 +26,6 @@
         <Image x:Name="HatImage"
                Source=""
                Stretch="UniformToFill">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                    <TranslateTransform X="32" Y="-70" />
-                </TransformGroup>
-            </Image.RenderTransform>
         </Image>
     </Grid>
 </Window>
