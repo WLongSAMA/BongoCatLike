@@ -61,12 +61,13 @@ jobs:
           rm -rf ${{ matrix.rid }} || true
           rm -rf ${{ matrix.rid }}native || true
           if [ -d "${{ matrix.rid }}publish" ]; then
-            mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }}
+            mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }} || true
             if [ "${{ matrix.os }}" = "macos-latest" ]; then
-              strip -S BongoCat-Like.${{ matrix.rid }}/BongoCat_Like
+              strip -S BongoCat-Like.${{ matrix.rid }}/BongoCat_Like || true
             else
-              strip --strip-debug BongoCat-Like.${{ matrix.rid }}/BongoCat_Like
+              strip --strip-debug BongoCat-Like.${{ matrix.rid }}/BongoCat_Like || true
             fi
+            chmod 755 ../Tools/upx/${{ matrix.rid }}/upx
             ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like.${{ matrix.rid }}/BongoCat_Like BongoCat-Like.${{ matrix.rid }}/*.so BongoCat-Like.${{ matrix.rid }}/*.dylib || true
           fi
 
@@ -78,14 +79,16 @@ jobs:
           Remove-Item -Path ${{ matrix.rid }}native -Recurse -Force -ErrorAction Ignore
           if (Test-Path -Path "${{ matrix.rid }}publish") {
             Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like.${{ matrix.rid }}
-            ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like.${{ matrix.rid }}/*.exe", "./BongoCat-Like.${{ matrix.rid }}/*.dll")
+            try {
+              ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like.${{ matrix.rid }}/*.exe", "./BongoCat-Like.${{ matrix.rid }}/*.dll")
+            } catch {}
           }
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: BongoCat-Like.${{ matrix.rid }}
-          path: publish/BongoCat-Like.${{ matrix.rid }}
+          path: publish
 
   release:
     name: Create Release
