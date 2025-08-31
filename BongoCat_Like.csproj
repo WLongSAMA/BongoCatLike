@@ -15,6 +15,7 @@
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
         <TrimMode>link</TrimMode>
+        <SelfContained>true</SelfContained>
     </PropertyGroup>
 
     <ItemGroup>
