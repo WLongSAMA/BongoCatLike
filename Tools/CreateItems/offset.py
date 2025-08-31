@@ -1,6 +1,6 @@
 import json
 
-destination_path = "..\\Assets\\"
+destination_path = "..\\..\\Assets\\"
 
 with open("inventory.json", "r") as file:
     json_data = json.load(file)

@@ -2,7 +2,7 @@ import os
 import json
 import requests
 
-destination_path = "..\\Assets\\"
+destination_path = "..\\..\\Assets\\"
 
 # url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=CEAA2C94E932B799E7B7498D18EB450004622927"
 url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=D93DA1D3EDE56235556DA16C5C2A5DC9303B0EC8"
