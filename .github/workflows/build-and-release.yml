@@ -21,9 +21,9 @@ jobs:
           - os: windows-latest
             rid: win-arm64
 
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
             rid: linux-x64
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-22.04-arm
             rid: linux-arm64
 
           - os: macos-latest
@@ -50,16 +50,24 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish ./BongoCat_Like.csproj -c Release -r ${{ matrix.rid }} -p:DebugSymbols=false -p:OutputPath=./publish/${{ matrix.rid }}
+          dotnet publish ./BongoCat_Like.csproj -c Release -r ${{ matrix.rid }} -p:OutputPath=./publish/${{ matrix.rid }}
 
       - name: Prepare Artifacts (Unix)
         if: matrix.os != 'windows-latest'
         run: |
           cd ./publish
-          rm -rf ${{ matrix.rid }}
-          rm -rf ${{ matrix.rid }}native
-          mv ${{ matrix.rid }}publish BongoCat-Like
-          zip -r ../BongoCat-Like.${{ matrix.rid }}.zip BongoCat-Like/
+          rm -rf ${{ matrix.rid }} || true
+          rm -rf ${{ matrix.rid }}native || true
+          if [ -d "${{ matrix.rid }}publish" ]; then
+            mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }} || true
+            if [ "${{ matrix.os }}" = "macos-latest" ]; then
+              strip -S BongoCat-Like.${{ matrix.rid }}/BongoCat_Like || true
+            else
+              strip --strip-debug BongoCat-Like.${{ matrix.rid }}/BongoCat_Like || true
+              chmod 755 ../Tools/upx/${{ matrix.rid }}/upx
+              ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like.${{ matrix.rid }}/BongoCat_Like BongoCat-Like.${{ matrix.rid }}/*.so || true
+            fi
+          fi
 
       - name: Prepare Artifacts (Windows)
         if: matrix.os == 'windows-latest'
@@ -67,14 +75,18 @@ jobs:
           cd ./publish
           Remove-Item -Path ${{ matrix.rid }} -Recurse -Force -ErrorAction Ignore
           Remove-Item -Path ${{ matrix.rid }}native -Recurse -Force -ErrorAction Ignore
-          Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like
-          Compress-Archive -Path "./BongoCat-Like" -DestinationPath "../BongoCat-Like.${{ matrix.rid }}.zip"
+          if (Test-Path -Path "${{ matrix.rid }}publish") {
+            Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like.${{ matrix.rid }}
+            if ("${{ matrix.rid }}" -eq "win-x64") {
+              ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like.${{ matrix.rid }}/*.exe", "./BongoCat-Like.${{ matrix.rid }}/*.dll"); exit 0
+            }
+          }
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: BongoCat-Like.${{ matrix.rid }}
-          path: BongoCat-Like.${{ matrix.rid }}.zip
+          path: publish
 
   release:
     name: Create Release
