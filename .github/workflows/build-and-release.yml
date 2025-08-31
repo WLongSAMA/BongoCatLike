@@ -80,7 +80,7 @@ jobs:
           if (Test-Path -Path "${{ matrix.rid }}publish") {
             Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like.${{ matrix.rid }}
             if ("${{ matrix.rid }}" -eq "win-x64") {
-              ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like.${{ matrix.rid }}/*.exe", "./BongoCat-Like.${{ matrix.rid }}/*.dll")
+              ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like.${{ matrix.rid }}/*.exe", "./BongoCat-Like.${{ matrix.rid }}/*.dll"); exit 0
             }
           }
 
