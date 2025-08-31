@@ -62,7 +62,11 @@ jobs:
           rm -rf ${{ matrix.rid }}native || true
           if [ -d "${{ matrix.rid }}publish" ]; then
             mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }}
-            strip --strip-debug BongoCat-Like/BongoCat-Like
+            if [ "${{ matrix.os }}" = "macos-latest" ]; then
+              strip -S BongoCat-Like/BongoCat-Like
+            else
+              strip --strip-debug BongoCat-Like/BongoCat-Like
+            fi
             ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like/BongoCat-Like BongoCat-Like/*.so || true
           fi
 
@@ -74,7 +78,7 @@ jobs:
           Remove-Item -Path ${{ matrix.rid }}native -Recurse -Force -ErrorAction Ignore
           if (Test-Path -Path "${{ matrix.rid }}publish") {
             Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like.${{ matrix.rid }}
-            ../Tools/upx/win-x64/upx.exe --best -q ./BongoCat-Like/*.exe ./BongoCat-Like/*.dll
+            ../Tools/upx/win-x64/upx.exe --best -q (Get-Item "./BongoCat-Like/*.exe", "./BongoCat-Like/*.dll")
           }
 
       - name: Upload Build Artifact
