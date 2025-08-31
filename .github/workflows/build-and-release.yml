@@ -61,10 +61,10 @@ jobs:
           rm -rf ${{ matrix.rid }} || true
           rm -rf ${{ matrix.rid }}native || true
           if [ -d "${{ matrix.rid }}publish" ]; then
-            mv ${{ matrix.rid }}publish BongoCat-Like
+            mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }}
+            strip --strip-debug BongoCat-Like/BongoCat-Like
+            ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like/BongoCat-Like BongoCat-Like/*.so || true
           fi
-          ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like/* || true
-          zip -r ../BongoCat-Like.${{ matrix.rid }}.zip BongoCat-Like/
 
       - name: Prepare Artifacts (Windows)
         if: matrix.os == 'windows-latest'
@@ -73,18 +73,15 @@ jobs:
           Remove-Item -Path ${{ matrix.rid }} -Recurse -Force -ErrorAction Ignore
           Remove-Item -Path ${{ matrix.rid }}native -Recurse -Force -ErrorAction Ignore
           if (Test-Path -Path "${{ matrix.rid }}publish") {
-            Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like
+            Rename-Item -Path ${{ matrix.rid }}publish -NewName BongoCat-Like.${{ matrix.rid }}
+            ../Tools/upx/win-x64/upx.exe --best -q ./BongoCat-Like/*.exe ./BongoCat-Like/*.dll
           }
-          Get-ChildItem -Path "./BongoCat-Like" -Include "*.exe", "*.dll" | ForEach-Object {
-            "../Tools/upx/${{ matrix.rid }}/upx.exe" --best -q $_.FullName
-          }
-          Compress-Archive -Path "./BongoCat-Like" -DestinationPath "../BongoCat-Like.${{ matrix.rid }}.zip"
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: BongoCat-Like.${{ matrix.rid }}
-          path: BongoCat-Like.${{ matrix.rid }}.zip
+          path: publish/BongoCat-Like.${{ matrix.rid }}
 
   release:
     name: Create Release
