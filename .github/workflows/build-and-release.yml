@@ -63,11 +63,11 @@ jobs:
           if [ -d "${{ matrix.rid }}publish" ]; then
             mv ${{ matrix.rid }}publish BongoCat-Like.${{ matrix.rid }}
             if [ "${{ matrix.os }}" = "macos-latest" ]; then
-              strip -S BongoCat-Like.${{ matrix.rid }}/BongoCat-Like
+              strip -S BongoCat-Like.${{ matrix.rid }}/BongoCat_Like
             else
-              strip --strip-debug BongoCat-Like.${{ matrix.rid }}/BongoCat-Like
+              strip --strip-debug BongoCat-Like.${{ matrix.rid }}/BongoCat_Like
             fi
-            ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like.${{ matrix.rid }}/BongoCat-Like BongoCat-Like.${{ matrix.rid }}/*.so || true
+            ../Tools/upx/${{ matrix.rid }}/upx --best -q BongoCat-Like.${{ matrix.rid }}/BongoCat_Like BongoCat-Like.${{ matrix.rid }}/*.so BongoCat-Like.${{ matrix.rid }}/*.dylib || true
           fi
 
       - name: Prepare Artifacts (Windows)
