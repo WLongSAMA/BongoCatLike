@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using BongoCat_Like.Utilities;
 
@@ -6,6 +7,8 @@ namespace BongoCat_Like.ViewModels
     public class SettingViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public bool IsWindows => OperatingSystem.IsWindows();
 
         public static string DefaultSkinText => Localization.Instance["SettingWindow.DefaultSkin.Header"];
         public static string CustomSkinText => Localization.Instance["SettingWindow.CustomSkin.Header"];

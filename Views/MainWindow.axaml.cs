@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -218,9 +219,20 @@ namespace BongoCat_Like.Views
 
         public void EnableMousePenetration(bool isEnable)
         {
+            if (!OperatingSystem.IsWindows())
+                return;
+
+            IPlatformHandle platformHandle = TopLevel.GetTopLevel(this)?.TryGetPlatformHandle()!;
+            if (platformHandle != null)
+            {
+                if (isEnable)
+                    MousePenetration.Enable(platformHandle.Handle);
+                else
+                    MousePenetration.Disable(platformHandle.Handle);
+            }
             GlobalHelper.Config.MousePenetration = isEnable;
         }
-        
+
         public void SetFlip(bool isFlip)
         {
             double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);

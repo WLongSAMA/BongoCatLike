@@ -68,7 +68,7 @@
                                   SelectionChanged="OnLangListSelectionChanged"/>
                     </DockPanel>
                     <CheckBox Content="{Binding TopmostText}" IsChecked="{Binding TopmostValue}" Click="OnTopmostClicked"/>
-                    <CheckBox Content="{Binding MousePenetrationText}" IsChecked="{Binding MousePenetrationValue}" Click="OnMousePenetrationClicked"/>
+                    <CheckBox Content="{Binding MousePenetrationText}" IsEnabled="{Binding IsWindows}" IsChecked="{Binding MousePenetrationValue}" Click="OnMousePenetrationClicked"/>
                     <CheckBox Content="{Binding AutorunText}" IsChecked="{Binding AutorunValue}" Click="OnAutorunClicked"/>
                     <CheckBox Content="{Binding TaskbarIconText}" IsChecked="{Binding TaskbarIconValue}" Click="OnTaskbarIconClicked"/>
 
