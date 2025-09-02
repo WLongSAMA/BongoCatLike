@@ -116,6 +116,7 @@ namespace BongoCat_Like.Utilities
         public bool DisableDrag { get; set; } = false;
         public bool Adsorption { get; set; } = false;
         public bool Topmost { get; set; } = false;
+        public bool MousePenetration { get; set; } = false;
     }
 
     [JsonSerializable(typeof(AppConfig))]

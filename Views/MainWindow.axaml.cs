@@ -216,6 +216,11 @@ namespace BongoCat_Like.Views
             animationLock = false;
         }
 
+        public void EnableMousePenetration(bool isEnable)
+        {
+            GlobalHelper.Config.MousePenetration = isEnable;
+        }
+        
         public void SetFlip(bool isFlip)
         {
             double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);

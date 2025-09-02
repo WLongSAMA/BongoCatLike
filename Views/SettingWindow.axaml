@@ -2,8 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BongoCat_Like"
-        xmlns:vm="using:BongoCat_Like"
         xmlns:viewModels="clr-namespace:BongoCat_Like.ViewModels"
         xmlns:utilities="clr-namespace:BongoCat_Like.Utilities"
         x:DataType="viewModels:SettingViewModel"
@@ -39,13 +37,15 @@
             </Style>
         </TabControl.Styles>
 
-        <TabItem Header="{Binding DefaultSkinText}">
+        <TabItem Header="{Binding DefaultSkinText}"
+                 FontSize="12">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <WrapPanel x:Name="DefaultSkinList" Margin="0,10" Orientation="Horizontal"></WrapPanel>
             </ScrollViewer>
         </TabItem>
 
-        <TabItem Header="{Binding CustomSkinText}">
+        <TabItem Header="{Binding CustomSkinText}"
+                 FontSize="12">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <WrapPanel x:Name="CustomSkinList" Margin="0,10" Orientation="Horizontal">
                     <TextBlock Text="{Binding EmptySkinText}"
@@ -55,7 +55,8 @@
             </ScrollViewer>
         </TabItem>
 
-        <TabItem Header="{Binding SettingText}">
+        <TabItem Header="{Binding SettingText}"
+                 FontSize="12">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0,10,0,20" RenderOptions.BitmapInterpolationMode="HighQuality">
                     <TextBlock Text="{Binding SystemSettingText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
@@ -67,6 +68,7 @@
                                   SelectionChanged="OnLangListSelectionChanged"/>
                     </DockPanel>
                     <CheckBox Content="{Binding TopmostText}" IsChecked="{Binding TopmostValue}" Click="OnTopmostClicked"/>
+                    <CheckBox Content="{Binding MousePenetrationText}" IsChecked="{Binding MousePenetrationValue}" Click="OnMousePenetrationClicked"/>
                     <CheckBox Content="{Binding AutorunText}" IsChecked="{Binding AutorunValue}" Click="OnAutorunClicked"/>
                     <CheckBox Content="{Binding TaskbarIconText}" IsChecked="{Binding TaskbarIconValue}" Click="OnTaskbarIconClicked"/>
 

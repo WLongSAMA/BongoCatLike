@@ -14,6 +14,7 @@ namespace BongoCat_Like.ViewModels
         public static string SystemSettingText => Localization.Instance["SettingWindow.Setting.Setting"];
         public static string LanguageText => Localization.Instance["SettingWindow.Setting.Language"];
         public static string TopmostText => Localization.Instance["SettingWindow.Setting.Topmost"];
+        public static string MousePenetrationText => Localization.Instance["SettingWindow.Setting.MousePenetration"];
         public static string AutorunText => Localization.Instance["SettingWindow.Setting.Autorun"];
         public static string TaskbarIconText => Localization.Instance["SettingWindow.Setting.TaskbarIcon"];
         public static string VisualsText => Localization.Instance["SettingWindow.Setting.Visuals"];
@@ -37,6 +38,7 @@ namespace BongoCat_Like.ViewModels
         public static string ExitText => Localization.Instance["SettingWindow.Setting.Exit"];
 
         public static bool TopmostValue => GlobalHelper.Config.Topmost;
+        public static bool MousePenetrationValue => GlobalHelper.Config.MousePenetration;
         public static bool AutorunValue => GlobalHelper.Config.Autorun;
         public static bool TaskbarIconValue => GlobalHelper.Config.TaskbarIcon;
         public static bool FlipValue => GlobalHelper.Config.Flip;
@@ -57,6 +59,7 @@ namespace BongoCat_Like.ViewModels
                 OnPropertyChanged(nameof(SystemSettingText));
                 OnPropertyChanged(nameof(LanguageText));
                 OnPropertyChanged(nameof(TopmostText));
+                OnPropertyChanged(nameof(MousePenetrationText));
                 OnPropertyChanged(nameof(AutorunText));
                 OnPropertyChanged(nameof(TaskbarIconText));
                 OnPropertyChanged(nameof(VisualsText));

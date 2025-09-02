@@ -188,6 +188,12 @@ public partial class SettingWindow : Window
             App.MainWindow.Topmost = GlobalHelper.Config.Topmost = checkBox.IsChecked.GetValueOrDefault();
     }
 
+    private void OnMousePenetrationClicked(object? sender, RoutedEventArgs e)
+    {
+        if (sender is CheckBox checkBox)
+            App.MainWindow.EnableMousePenetration(checkBox.IsChecked.GetValueOrDefault());
+    }
+    
     private void OnAutorunClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
@@ -217,17 +223,13 @@ public partial class SettingWindow : Window
     private void OnFlipClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
-        {
             App.MainWindow.SetFlip(checkBox.IsChecked.GetValueOrDefault());
-        }
     }
 
     private void OnZoomSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (sender is ComboBox comboBox)
-        {
             App.MainWindow.SetZoom(comboBox.SelectedIndex);
-        }
     }
 
     private void OnDisableDragClicked(object? sender, RoutedEventArgs e)
@@ -245,9 +247,7 @@ public partial class SettingWindow : Window
     private void OnRandomSkinSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (sender is ComboBox comboBox)
-        {
             App.MainWindow.RandomSkin(comboBox.SelectedIndex);
-        }
     }
 
     private void OnHomeClicked(object? sender, RoutedEventArgs e)

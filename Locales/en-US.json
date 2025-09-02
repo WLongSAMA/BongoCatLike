@@ -19,6 +19,7 @@
             "Setting": "System Settings",
             "Language": "Language",
             "Topmost": "Always On Top",
+            "MousePenetration": "Mouse Penetration",
             "Autorun": "Run at Startup",
             "TaskbarIcon": "Taskbar Icon",
             "Visuals": "Visual Effects",
