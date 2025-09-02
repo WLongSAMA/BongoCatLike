@@ -1,8 +1,8 @@
 import shutil
 import json
 
-images_path = "..\\Decompile\\20250811\\ExportedProject\\Assets\\Texture2D\\"
-destination_path = "..\\Assets\\"
+images_path = "..\\..\\Decompile\\20250811\\ExportedProject\\Assets\\Texture2D\\"
+destination_path = "..\\..\\Assets\\"
 
 with open(destination_path + "items.json", "r") as file:
     json_data = json.load(file)
