@@ -20,7 +20,7 @@ namespace BongoCat_Like.Utilities
         private string _hatId = "0";
         private List<Bitmap> _skinImage = [];
         private Bitmap? _hatImage;
-        private Position? _hatOffset = new() { X = 30, Y = -70 };
+        private Position _hatOffset = new() { X = 30, Y = -70 };
 
         private SkinManager()
         {
@@ -92,14 +92,15 @@ namespace BongoCat_Like.Utilities
             get => _hatImage;
         }
 
-        public Position? HatOffset
+        public Position HatOffset
         {
             get => _hatOffset;
         }
 
-        private Position? GetHatOffsetByName(string name)
+        private Position GetHatOffsetByName(string name)
         {
-            return offset.FirstOrDefault(hat => hat.Name == name)?.Position;
+            HatOffsetJson hat = offset.FirstOrDefault(hat => hat.Name == name)!;
+            return hat != null ? hat.Position : new Position { X = 30, Y = -70 };
         }
 
         public IImmutableSolidColorBrush GetQuality(string tags)
