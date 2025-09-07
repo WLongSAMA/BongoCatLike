@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'v*' # 推送以v开头的标签时触发，例如 v1.0.0, v2.1-alpha
-    branches: [ "main" ]
+    branches: [ "test" ]
 
 permissions:
   contents: write
@@ -34,6 +34,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.0
+        with:
+          ref: test
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -97,6 +99,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5.0.0
+        with:
+          ref: test
 
       - name: Download all build artifacts
         uses: actions/download-artifact@v5
@@ -120,7 +124,7 @@ jobs:
           name: ${{ github.ref_name }}
           body: |
             ${{ steps.get_desc.outputs.release_body }}
-              - [更多更新内容](https://github.com/WLongSAMA/BongoCatLike/blob/main/changelog.md)
+              - [更多更新内容](https://github.com/WLongSAMA/BongoCatLike/blob/test/changelog.md)
           draft: false
           prerelease: ${{ contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') }}
           files: |
