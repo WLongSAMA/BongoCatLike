@@ -240,6 +240,7 @@ namespace BongoCat_Like.Views
         {
             double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
             MainGrid.RenderTransform = new ScaleTransform(isFlip ? -1 * scaling : scaling, scaling);
+            MainGrid.HorizontalAlignment = isFlip ? Avalonia.Layout.HorizontalAlignment.Right : Avalonia.Layout.HorizontalAlignment.Left;
             GlobalHelper.Config.Flip = isFlip;
         }
 
@@ -247,6 +248,7 @@ namespace BongoCat_Like.Views
         {
             double scaling = GlobalHelper.GetScaling(index);
             MainGrid.RenderTransform = new ScaleTransform(GlobalHelper.Config.Flip ? -1 * scaling : scaling, scaling);
+            MainGrid.HorizontalAlignment = GlobalHelper.Config.Flip ? Avalonia.Layout.HorizontalAlignment.Right : Avalonia.Layout.HorizontalAlignment.Left;
             GlobalHelper.Config.Zoom = index;
             SetWindowSize();
         }
