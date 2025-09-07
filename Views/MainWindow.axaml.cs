@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -115,10 +114,6 @@ namespace BongoCat_Like.Views
 
         private void SetWindow()
         {
-            //Rect WindowRect = SkinImage.Bounds.Union(HatImage.Bounds);
-            //Width = WindowRect.Width;
-            //Height = WindowRect.Height;
-
             if (GlobalHelper.Config.WindowLeft == 0 && GlobalHelper.Config.WindowTop == 0)
             {
                 Screen screen = Screens.Primary!;
@@ -140,13 +135,21 @@ namespace BongoCat_Like.Views
             }
             Position = new PixelPoint(GlobalHelper.Config.WindowLeft, GlobalHelper.Config.WindowTop);
 
-            MainGrid.Margin = new Thickness(GlobalHelper.Config.MainOffsetX, GlobalHelper.Config.MainOffsetY);
             ShowInTaskbar = GlobalHelper.Config.TaskbarIcon;
             Topmost = GlobalHelper.Config.Topmost;
 
             SetFlip(GlobalHelper.Config.Flip);
             SetZoom(GlobalHelper.Config.Zoom);
             SetJiggle();
+        }
+
+        private void SetWindowSize()
+        {
+            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
+            RectArea imageArea = GlobalHelper.CatSkin.GetImageArea();
+            Width = imageArea.Width * scaling;
+            Height = imageArea.Height * scaling;
+            MainGrid.Margin = new Thickness(-imageArea.X, -imageArea.Y);
         }
 
         private void ListeningPress()
@@ -245,6 +248,7 @@ namespace BongoCat_Like.Views
             double scaling = GlobalHelper.GetScaling(index);
             MainGrid.RenderTransform = new ScaleTransform(GlobalHelper.Config.Flip ? -1 * scaling : scaling, scaling);
             GlobalHelper.Config.Zoom = index;
+            SetWindowSize();
         }
 
         public void SetJiggle()
@@ -283,6 +287,7 @@ namespace BongoCat_Like.Views
             GlobalHelper.CatSkin.SkinId = SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
             HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
+            SetWindowSize();
         }
 
         public void SetHat(string HatId)
@@ -290,10 +295,35 @@ namespace BongoCat_Like.Views
             GlobalHelper.CatSkin.HatId = HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
 
-            TransformGroup transformGroup = new();
-            transformGroup.Children.Add(new ScaleTransform(1, 1));
-            transformGroup.Children.Add(new TranslateTransform(GlobalHelper.CatSkin.HatOffset!.X, GlobalHelper.CatSkin.HatOffset.Y));
-            HatImage.RenderTransform = transformGroup;
+            RectArea rectArea = new(0, 0, 0, 0);
+            Position hatOffset = GlobalHelper.CatSkin.HatOffset;
+            Bitmap skinBitmap = GlobalHelper.CatSkin.SkinImage[0];
+            Bitmap? hatBitmap = GlobalHelper.CatSkin.HatImage;
+            if (hatBitmap != null)
+            {
+                rectArea.X = Math.Min(0, hatOffset.X);
+                rectArea.Y = Math.Min(0, hatOffset.Y);
+                rectArea.Right = Math.Max(skinBitmap.PixelSize.Width, hatOffset.X + hatBitmap.PixelSize.Width);
+                rectArea.Bottom = Math.Max(skinBitmap.PixelSize.Height, hatOffset.Y + hatBitmap.PixelSize.Height);
+                rectArea.Width = rectArea.Right - rectArea.Left;
+                rectArea.Height = rectArea.Bottom - rectArea.Top;
+            }
+            else
+            {
+                rectArea.X = 0;
+                rectArea.Y = 0;
+                rectArea.Width = (int)SkinImage.Width;
+                rectArea.Height = (int)SkinImage.Height;
+            }
+
+            int offsetX = -rectArea.X;
+            int offsetY = -rectArea.Y;
+
+            HatImage.RenderTransform = new TranslateTransform(offsetX + hatOffset.X, offsetY + hatOffset.Y);
+            SkinImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
+            HandImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
+
+            SetWindowSize();
         }
 
         public async void HatAnimation()

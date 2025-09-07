@@ -13,19 +13,20 @@
         WindowStartupLocation="Manual">
 
     <Grid x:Name="MainGrid"
-          Width="256"
-          Height="256"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
           PointerPressed="OnPointerPressed"
           RenderOptions.BitmapInterpolationMode="HighQuality">
-        <Image x:Name="SkinImage"
-               Source="/Assets/default/CatLeft.png"
-               Stretch="UniformToFill"/>
-        <Image x:Name="HandImage"
-               Source="/Assets/default/CatRight.png"
-               Stretch="UniformToFill"/>
-        <Image x:Name="HatImage"
-               Source=""
-               Stretch="UniformToFill">
-        </Image>
+        <Canvas>
+            <Image x:Name="SkinImage"
+                   Source="/Assets/default/CatLeft.png"
+                   Stretch="None"/>
+            <Image x:Name="HatImage"
+                   Source=""
+                   Stretch="None"/>
+            <Image x:Name="HandImage"
+                   Source="/Assets/default/CatRight.png"
+                   Stretch="None"/>
+        </Canvas>
     </Grid>
 </Window>
