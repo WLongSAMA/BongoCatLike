@@ -232,6 +232,12 @@ public partial class SettingWindow : Window
             App.MainWindow.SetZoom(comboBox.SelectedIndex);
     }
 
+    private void OnBobbingClicked(object? sender, RoutedEventArgs e)
+    {
+        if (sender is CheckBox checkBox)
+            App.MainWindow.SetBobbing(checkBox.IsChecked.GetValueOrDefault());
+    }
+
     private void OnDisableDragClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)

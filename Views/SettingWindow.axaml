@@ -89,6 +89,7 @@
                             <ComboBoxItem Content="111%"></ComboBoxItem>
                         </ComboBox>
                     </DockPanel>
+                    <CheckBox Content="{Binding BobbingText}" IsChecked="{Binding BobbingValue}" Click="OnBobbingClicked"/>
 
                     <TextBlock Text="{Binding InteractionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <CheckBox Content="{Binding DisableDragText}" IsChecked="{Binding DisableDragValue}" Click="OnDisableDragClicked"/>

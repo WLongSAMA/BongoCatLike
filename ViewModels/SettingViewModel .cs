@@ -23,6 +23,7 @@ namespace BongoCat_Like.ViewModels
         public static string VisualsText => Localization.Instance["SettingWindow.Setting.Visuals"];
         public static string FlipText => Localization.Instance["SettingWindow.Setting.Flip"];
         public static string ZoomText => Localization.Instance["SettingWindow.Setting.Zoom"];
+        public static string BobbingText => Localization.Instance["SettingWindow.Setting.Bobbing"];
         public static string InteractionText => Localization.Instance["SettingWindow.Setting.Interaction"];
         public static string DisableDragText => Localization.Instance["SettingWindow.Setting.DisableDrag"];
         public static string AdsorptionText => Localization.Instance["SettingWindow.Setting.Adsorption"];
@@ -46,6 +47,7 @@ namespace BongoCat_Like.ViewModels
         public static bool TaskbarIconValue => GlobalHelper.Config.TaskbarIcon;
         public static bool FlipValue => GlobalHelper.Config.Flip;
         public static int ZoomValue => GlobalHelper.Config.Zoom;
+        public static bool BobbingValue => GlobalHelper.Config.Bobbing;
         public static bool DisableDragValue => GlobalHelper.Config.DisableDrag;
         public static bool AdsorptionValue => GlobalHelper.Config.Adsorption;
 
@@ -68,6 +70,7 @@ namespace BongoCat_Like.ViewModels
                 OnPropertyChanged(nameof(VisualsText));
                 OnPropertyChanged(nameof(FlipText));
                 OnPropertyChanged(nameof(ZoomText));
+                OnPropertyChanged(nameof(BobbingText));
                 OnPropertyChanged(nameof(InteractionText));
                 OnPropertyChanged(nameof(DisableDragText));
                 OnPropertyChanged(nameof(AdsorptionText));

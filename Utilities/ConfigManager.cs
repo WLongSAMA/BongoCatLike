@@ -106,15 +106,16 @@ namespace BongoCat_Like.Utilities
         public string SkinId { get; set; } = "0";
         public string HatId { get; set; } = "0";
         public string Language { get; set; } = Localization.GetSystemLang();
-        public int RandomSkin { get; set; } = 0;
-        public bool Autorun { get; set; } = false;
-        public bool TaskbarIcon { get; set; } = false;
-        public bool Flip { get; set; } = false;
-        public int Zoom { get; set; } = 5;
-        public bool DisableDrag { get; set; } = false;
-        public bool Adsorption { get; set; } = false;
         public bool Topmost { get; set; } = false;
         public bool MousePenetration { get; set; } = false;
+        public bool Autorun { get; set; } = false;
+        public bool TaskbarIcon { get; set; } = false;
+        public int RandomSkin { get; set; } = 0;
+        public bool Flip { get; set; } = false;
+        public int Zoom { get; set; } = 5;
+        public bool Bobbing { get; set; } = true;
+        public bool DisableDrag { get; set; } = false;
+        public bool Adsorption { get; set; } = false;
     }
 
     [JsonSerializable(typeof(AppConfig))]

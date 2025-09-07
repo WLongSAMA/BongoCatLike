@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
@@ -26,6 +27,7 @@ namespace BongoCat_Like.Views
         private NativeMenuItem? _exitItem;
         private bool Hand = false;
         private bool animationLock = false;
+        private Task? _bobbingAnimationInstance;
 
         private ConcurrentDictionary<KeyCode, bool> _activeKeys = new();
         private ConcurrentDictionary<MouseButton, bool> _activeMouseButtons = new();
@@ -140,7 +142,7 @@ namespace BongoCat_Like.Views
 
             SetFlip(GlobalHelper.Config.Flip);
             SetZoom(GlobalHelper.Config.Zoom);
-            SetJiggle();
+            SetBobbing(GlobalHelper.Config.Bobbing);
         }
 
         private void SetWindowSize()
@@ -253,35 +255,48 @@ namespace BongoCat_Like.Views
             SetWindowSize();
         }
 
-        public void SetJiggle()
+        public void SetBobbing(bool isEnable)
         {
-            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
-            Animation JiggleAnimation = new()
+            if (_bobbingAnimationInstance != null)
+            {
+                RenderTransform = null;
+                _bobbingAnimationInstance = null;
+            }
+
+            if (!isEnable)
+            {
+                RenderTransform = null;
+                return;
+            }
+
+            Animation animation = new()
             {
                 Duration = TimeSpan.FromSeconds(1),
                 IterationCount = IterationCount.Infinite,
-                Easing = new Avalonia.Animation.Easings.QuadraticEaseIn(),
+                Easing = new QuadraticEaseIn(),
                 FillMode = FillMode.Forward,
                 Children =
                 {
                     new KeyFrame
                     {
                         Cue = new Cue(0),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scaling) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0) }
                     },
                     new KeyFrame
                     {
                         Cue = new Cue(0.5),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.05 * scaling) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.02) }
                     },
                     new KeyFrame
                     {
                         Cue = new Cue(1),
-                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0 * scaling) }
+                        Setters = { new Setter(ScaleTransform.ScaleYProperty, 1.0) }
                     }
                 }
             };
-            JiggleAnimation.RunAsync(MainGrid);
+
+            RenderTransformOrigin = new RelativePoint(0.5, 1, RelativeUnit.Relative);
+            _bobbingAnimationInstance = animation.RunAsync(this);
         }
 
         public void SetSkin(string SkinId)
