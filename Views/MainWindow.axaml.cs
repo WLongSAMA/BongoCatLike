@@ -329,8 +329,8 @@ namespace BongoCat_Like.Views
             {
                 rectArea.X = 0;
                 rectArea.Y = 0;
-                rectArea.Width = (int)SkinImage.Width;
-                rectArea.Height = (int)SkinImage.Height;
+                rectArea.Width = (int)SkinImage.Bounds.Width;
+                rectArea.Height = (int)SkinImage.Bounds.Height;
             }
 
             int offsetX = -rectArea.X;
