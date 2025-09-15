@@ -33,6 +33,9 @@ namespace BongoCat_Like.Views
         private ConcurrentDictionary<KeyCode, bool> _activeKeys = new();
         private ConcurrentDictionary<MouseButton, bool> _activeMouseButtons = new();
 
+        DispatcherTimer RandomSkinTimer = new();
+        private bool isRandomSkinTimerRunning = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace BongoCat_Like.Views
             SetSkin(GlobalHelper.Config.SkinId);
             SetHat(GlobalHelper.Config.HatId);
             SetWindow();
+            SetRandomSkin();
             ListeningPress();
         }
 
@@ -165,6 +169,18 @@ namespace BongoCat_Like.Views
             }
             LastHeight = Height;
         }
+
+        private void SetRandomSkin()
+        {
+            RandomSkinTimer.Tick += (sender, e) =>
+            {
+                Random random = new();
+                string[] skinList = GlobalHelper.CatSkin.GetSkinIdList();
+                string[] hatList = GlobalHelper.CatSkin.GetHatIdList();
+                SetSkin(skinList[random.Next(skinList.Length)]);
+                SetHat(hatList[random.Next(hatList.Length)]);
+            };
+            RandomSkin(GlobalHelper.Config.RandomSkin);
         }
 
         private void ListeningPress()
@@ -426,6 +442,40 @@ namespace BongoCat_Like.Views
         public void RandomSkin(int timeIndex)
         {
             GlobalHelper.Config.RandomSkin = timeIndex;
+            if (timeIndex != 0)
+            {
+                if (!isRandomSkinTimerRunning)
+                {
+                    switch (timeIndex)
+                    {
+                        case 1:
+                            RandomSkinTimer.Interval = TimeSpan.FromSeconds(60);
+                            break;
+                        case 2:
+                            RandomSkinTimer.Interval = TimeSpan.FromSeconds(180);
+                            break;
+                        case 3:
+                            RandomSkinTimer.Interval = TimeSpan.FromSeconds(300);
+                            break;
+                        case 4:
+                            RandomSkinTimer.Interval = TimeSpan.FromSeconds(900);
+                            break;
+                        case 5:
+                            RandomSkinTimer.Interval = TimeSpan.FromSeconds(1800);
+                            break;
+                        default:
+                            return;
+                    }
+                    RandomSkinTimer.Start();
+                }
+                isRandomSkinTimerRunning = true;
+            }
+            else
+            {
+                if (isRandomSkinTimerRunning)
+                    RandomSkinTimer.Stop();
+                isRandomSkinTimerRunning = false;
+            }
         }
 
         public void TaskbarAdsorption(bool isAdsorption)
