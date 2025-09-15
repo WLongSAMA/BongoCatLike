@@ -28,6 +28,7 @@ namespace BongoCat_Like.Views
         private bool Hand = false;
         private bool animationLock = false;
         private Task? _bobbingAnimationInstance;
+        private double LastHeight = 0;
 
         private ConcurrentDictionary<KeyCode, bool> _activeKeys = new();
         private ConcurrentDictionary<MouseButton, bool> _activeMouseButtons = new();
@@ -145,13 +146,25 @@ namespace BongoCat_Like.Views
             SetBobbing(GlobalHelper.Config.Bobbing);
         }
 
-        private void SetWindowSize()
+        private void SetWindowSize(int type = 0)
         {
             double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
             RectArea imageArea = GlobalHelper.CatSkin.GetImageArea();
             Width = imageArea.Width * scaling;
             Height = imageArea.Height * scaling;
             MainGrid.Margin = new Thickness(-imageArea.X, -imageArea.Y);
+
+            if (type == 1)
+            {
+                // 计算小猫位置过于复杂，暂时不处理更换小猫皮肤的情况
+            }
+            else if (type == 2)
+            {
+                if (LastHeight != 0 && LastHeight != Height)
+                    Position = new PixelPoint(Position.X, Position.Y + (int)LastHeight - (int)Height);
+            }
+            LastHeight = Height;
+        }
         }
 
         private void ListeningPress()
@@ -304,7 +317,7 @@ namespace BongoCat_Like.Views
             GlobalHelper.CatSkin.SkinId = SkinId;
             SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
             HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
-            SetWindowSize();
+            SetWindowSize(1);
         }
 
         public void SetHat(string HatId)
@@ -346,7 +359,7 @@ namespace BongoCat_Like.Views
             SkinImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
             HandImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
 
-            SetWindowSize();
+            SetWindowSize(2);
         }
 
         public async void HatAnimation()
