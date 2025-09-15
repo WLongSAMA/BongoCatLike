@@ -336,7 +336,13 @@ namespace BongoCat_Like.Views
             int offsetX = -rectArea.X;
             int offsetY = -rectArea.Y;
 
-            HatImage.RenderTransform = new TranslateTransform(offsetX + hatOffset.X, offsetY + hatOffset.Y);
+            HatImage.RenderTransform = new TransformGroup
+            {
+                Children = {
+                    new ScaleTransform(1, 1), //没有此属性会导致帽子动画失效
+                    new TranslateTransform(offsetX + hatOffset.X, offsetY + hatOffset.Y)
+                }
+            };
             SkinImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
             HandImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
 
@@ -350,7 +356,7 @@ namespace BongoCat_Like.Views
             Animation animation = new()
             {
                 Duration = TimeSpan.FromSeconds(0.5),
-                Easing = new Avalonia.Animation.Easings.QuadraticEaseInOut(),
+                Easing = new QuadraticEaseInOut(),
                 FillMode = FillMode.Forward,
                 Children =
                 {
