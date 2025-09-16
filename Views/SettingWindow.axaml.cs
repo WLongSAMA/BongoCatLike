@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using BongoCat_Like.Utilities;
@@ -17,6 +18,8 @@ public partial class SettingWindow : Window
     public static SettingWindow? CurrentInstance { get; private set; }
 
     private Dictionary<string, string> LangList = [];
+    private Border? LastSkin;
+    private Border? LastHat;
 
     public SettingWindow()
     {
@@ -49,6 +52,12 @@ public partial class SettingWindow : Window
                 Margin = new Thickness(0, 0, 5, 5)
             };
 
+            if (GlobalHelper.CatSkin.SkinId == skinItem.Key)
+            {
+                border.Background = Brushes.HotPink;
+                LastSkin = border;
+            }
+
             border.Classes.Add("Animation");
             border.PointerPressed += Border_PointerPressed;
             DefaultSkinList.Children.Add(border);
@@ -76,6 +85,12 @@ public partial class SettingWindow : Window
                 Margin = new Thickness(0, 0, 5, 5)
             };
 
+            if (GlobalHelper.CatSkin.HatId == hatItem.Key)
+            {
+                border.Background = Brushes.HotPink;
+                LastHat = border;
+            }
+
             border.Classes.Add("Animation");
             border.PointerPressed += Border_PointerPressed;
             DefaultSkinList.Children.Add(border);
@@ -95,16 +110,39 @@ public partial class SettingWindow : Window
         if (sender is Border border && border.Tag is Dictionary<string, string> tagData)
         {
             PointerPoint point = e.GetCurrentPoint(border);
-            if (point.Properties.IsLeftButtonPressed &&
-                tagData.TryGetValue("Type", out var type) &&
-                tagData.TryGetValue("Id", out var id))
+            if (point.Properties.IsLeftButtonPressed && tagData.TryGetValue("Type", out var type) && tagData.TryGetValue("Id", out var id))
             {
-                if (type.Equals("skin"))
-                    App.MainWindow.SetSkin(id);
-                else if (type.Equals("hat"))
+                switch (type)
                 {
-                    App.MainWindow.SetHat(id);
-                    App.MainWindow.HatAnimation();
+                    case "skin":
+                        if (LastSkin != null)
+                            LastSkin.Background = Brushes.Transparent;
+                        if (GlobalHelper.CatSkin.SkinId == id)
+                        {
+                            App.MainWindow.SetSkin("0");
+                        }
+                        else
+                        {
+                            border.Background = Brushes.HotPink;
+                            App.MainWindow.SetSkin(id);
+                        }
+                        LastSkin = border;
+                        break;
+                    case "hat":
+                        if (LastHat != null)
+                            LastHat.Background = Brushes.Transparent;
+                        if (GlobalHelper.CatSkin.HatId == id)
+                        {
+                            App.MainWindow.SetHat("0");
+                        }
+                        else
+                        {
+                            border.Background = Brushes.HotPink;
+                            App.MainWindow.SetHat(id);
+                            App.MainWindow.HatAnimation();
+                        }
+                        LastHat = border;
+                        break;
                 }
             }
         }
@@ -193,7 +231,7 @@ public partial class SettingWindow : Window
         if (sender is CheckBox checkBox)
             App.MainWindow.EnableMousePenetration(checkBox.IsChecked.GetValueOrDefault());
     }
-    
+
     private void OnAutorunClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is CheckBox checkBox)
