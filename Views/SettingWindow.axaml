@@ -22,6 +22,9 @@
                 <RotateTransform Angle="10"/>
             </Setter>
         </Style>
+        <Style Selector="ToolTip">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
     </Window.Styles>
 
     <TabControl x:Name="NavigationTabs">

@@ -30,78 +30,54 @@ public partial class SettingWindow : Window
             CurrentInstance = null;
         };
 
-        foreach (KeyValuePair<string, SkinItem> skinItem in GlobalHelper.CatSkin.Items.Skin)
-        {
-            Image image = new()
-            {
-                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/skin/{skinItem.Value.Icon}"))),
-                Width = 50,
-                Height = 50
-            };
-
-            Border border = new()
-            {
-                Tag = new Dictionary<string, string>
-                {
-                    ["Id"] = skinItem.Key,
-                    ["Type"] = "skin"
-                },
-                Child = image,
-                BorderBrush = GlobalHelper.CatSkin.GetQuality(skinItem.Value.Tags),
-                BorderThickness = new Thickness(5),
-                Margin = new Thickness(0, 0, 5, 5)
-            };
-
-            if (GlobalHelper.CatSkin.SkinId == skinItem.Key)
-            {
-                border.Background = Brushes.HotPink;
-                LastSkin = border;
-            }
-
-            border.Classes.Add("Animation");
-            border.PointerPressed += Border_PointerPressed;
-            DefaultSkinList.Children.Add(border);
-        }
-
-        foreach (KeyValuePair<string, HatItem> hatItem in GlobalHelper.CatSkin.Items.Hat)
-        {
-            Image image = new()
-            {
-                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/hat/{hatItem.Value.Icon}"))),
-                Width = 50,
-                Height = 50
-            };
-
-            Border border = new()
-            {
-                Tag = new Dictionary<string, string>
-                {
-                    ["Id"] = hatItem.Key,
-                    ["Type"] = "hat"
-                },
-                Child = image,
-                BorderBrush = GlobalHelper.CatSkin.GetQuality(hatItem.Value.Tags),
-                BorderThickness = new Thickness(5),
-                Margin = new Thickness(0, 0, 5, 5)
-            };
-
-            if (GlobalHelper.CatSkin.HatId == hatItem.Key)
-            {
-                border.Background = Brushes.HotPink;
-                LastHat = border;
-            }
-
-            border.Classes.Add("Animation");
-            border.PointerPressed += Border_PointerPressed;
-            DefaultSkinList.Children.Add(border);
-        }
+        CreateItemList(GlobalHelper.CatSkin.Items.Skin, "skin", skinItem => skinItem.Value.Icon, skinItem => skinItem.Value.Tags, skinItem => skinItem.Value.Name, GlobalHelper.CatSkin.SkinId, ref LastSkin!);
+        CreateItemList(GlobalHelper.CatSkin.Items.Hat, "hat", hatItem => hatItem.Value.Icon, hatItem => hatItem.Value.Tags, hatItem => hatItem.Value.Name, GlobalHelper.CatSkin.HatId, ref LastHat!);
 
         LangList = Localization.GetLangList();
         foreach (KeyValuePair<string, string> lang in LangList)
-        {
+            {
             LangListComboBox.Items.Add(lang.Value);
             if (GlobalHelper.Config.Language == lang.Key)
                 LangListComboBox.SelectedIndex = LangListComboBox.Items.Count - 1;
+            }
+        }
+
+    private void CreateItemList<T>(IEnumerable<KeyValuePair<string, T>> items, string type, Func<KeyValuePair<string, T>, string> getIcon, Func<KeyValuePair<string, T>, string> getTags, Func<KeyValuePair<string, T>, string> getName, string currentId, ref Border lastBorder)
+    {
+        foreach (KeyValuePair<string, T> item in items)
+        {
+            Image image = new()
+            {
+                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/{type}/{getIcon(item)}"))),
+                Width = 50,
+                Height = 50
+            };
+
+            Border border = new()
+            {
+                Tag = new Dictionary<string, string>
+                {
+                    ["Id"] = item.Key,
+                    ["Type"] = type
+                },
+                Child = image,
+                BorderBrush = GlobalHelper.CatSkin.GetQuality(getTags(item)),
+                BorderThickness = new Thickness(5),
+                Margin = new Thickness(0, 0, 5, 5)
+            };
+
+            if (currentId == item.Key)
+            {
+                border.Background = Brushes.HotPink;
+                lastBorder = border;
+            }
+
+            ToolTip.SetTip(border, getName(item));
+            ToolTip.SetPlacement(border, PlacementMode.Top);
+            ToolTip.SetVerticalOffset(border, 0);
+            border.Classes.Add("Animation");
+            border.PointerPressed += Border_PointerPressed;
+            DefaultSkinList.Children.Add(border);
         }
     }
 
