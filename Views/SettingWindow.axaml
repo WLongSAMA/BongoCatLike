@@ -25,6 +25,9 @@
         
         <Style Selector="ToolTip">
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="MaxWidth" Value="150"/>
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
             <Setter Property="Template">
                 <ControlTemplate>
                     <Grid Margin="0,0,0,8">
@@ -38,7 +41,8 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3">
+                                CornerRadius="6"
+                                MaxWidth="{TemplateBinding MaxWidth}">
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
