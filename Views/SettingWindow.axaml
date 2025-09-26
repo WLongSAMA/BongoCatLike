@@ -22,8 +22,31 @@
                 <RotateTransform Angle="10"/>
             </Setter>
         </Style>
+        
         <Style Selector="ToolTip">
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid Margin="0,0,0,8">
+                        <Path Data="M0,0 L8,8 L16,0 Z"
+                              Fill="{TemplateBinding Background}"
+                              Stroke="{TemplateBinding BorderBrush}"
+                              StrokeThickness="1"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Margin="0,0,0,-6"/>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
         </Style>
     </Window.Styles>
 
