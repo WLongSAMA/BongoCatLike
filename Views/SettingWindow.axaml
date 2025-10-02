@@ -22,7 +22,7 @@
                 <RotateTransform Angle="10"/>
             </Setter>
         </Style>
-        
+
         <Style Selector="ToolTip">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="10"/>
@@ -91,24 +91,64 @@
                 <StackPanel Margin="0,10,0,20" RenderOptions.BitmapInterpolationMode="HighQuality">
                     <TextBlock Text="{Binding SystemSettingText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <DockPanel>
-                        <Label Content="{Binding LanguageText}" VerticalAlignment="Center"/>
+                        <Label Content="{Binding LanguageText}"
+                               ToolTip.Placement="Top"
+                               ToolTip.VerticalOffset="0"
+                               ToolTip.Tip="{Binding LanguageToolTipText}"
+                               VerticalAlignment="Center"/>
                         <ComboBox x:Name="LangListComboBox"
                                   Margin="10,0,25,0"
                                   HorizontalAlignment="Stretch"
+                                  ToolTip.Placement="Top"
+                                  ToolTip.VerticalOffset="0"
+                                  ToolTip.Tip="{Binding LanguageToolTipText}"
                                   SelectionChanged="OnLangListSelectionChanged"/>
                     </DockPanel>
-                    <CheckBox Content="{Binding TopmostText}" IsChecked="{Binding TopmostValue}" Click="OnTopmostClicked"/>
-                    <CheckBox Content="{Binding MousePenetrationText}" IsEnabled="{Binding IsWindows}" IsChecked="{Binding MousePenetrationValue}" Click="OnMousePenetrationClicked"/>
-                    <CheckBox Content="{Binding AutorunText}" IsChecked="{Binding AutorunValue}" Click="OnAutorunClicked"/>
-                    <CheckBox Content="{Binding TaskbarIconText}" IsChecked="{Binding TaskbarIconValue}" Click="OnTaskbarIconClicked"/>
+                    <CheckBox Content="{Binding TopmostText}"
+                              IsChecked="{Binding TopmostValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding TopmostToolTipText}"
+                              Click="OnTopmostClicked"/>
+                    <CheckBox Content="{Binding MousePenetrationText}"
+                              IsEnabled="{Binding IsWindows}"
+                              IsChecked="{Binding MousePenetrationValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding MousePenetrationToolTipText}"
+                              Click="OnMousePenetrationClicked"/>
+                    <CheckBox Content="{Binding AutorunText}"
+                              IsChecked="{Binding AutorunValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding AutorunToolTipText}"
+                              Click="OnAutorunClicked"/>
+                    <CheckBox Content="{Binding TaskbarIconText}"
+                              IsChecked="{Binding TaskbarIconValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding TaskbarIconToolTipText}"
+                              Click="OnTaskbarIconClicked"/>
 
                     <TextBlock Text="{Binding VisualsText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="{Binding FlipText}" IsChecked="{Binding FlipValue}" Click="OnFlipClicked"/>
+                    <CheckBox Content="{Binding FlipText}"
+                              IsChecked="{Binding FlipValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding FlipToolTipText}"
+                              Click="OnFlipClicked"/>
                     <DockPanel>
-                        <Label Content="{Binding ZoomText}" VerticalAlignment="Center"/>
+                        <Label Content="{Binding ZoomText}"
+                               ToolTip.Placement="Top"
+                               ToolTip.VerticalOffset="0"
+                               ToolTip.Tip="{Binding ZoomToolTipText}"
+                               VerticalAlignment="Center"/>
                         <ComboBox SelectedIndex="{Binding ZoomValue}"
                                   Margin="10,0,25,0"
                                   HorizontalAlignment="Stretch"
+                                  ToolTip.Placement="Top"
+                                  ToolTip.VerticalOffset="0"
+                                  ToolTip.Tip="{Binding ZoomToolTipText}"
                                   SelectionChanged="OnZoomSelectionChanged">
                             <ComboBoxItem Content="25%"></ComboBoxItem>
                             <ComboBoxItem Content="37.5%"></ComboBoxItem>
@@ -119,19 +159,41 @@
                             <ComboBoxItem Content="111%"></ComboBoxItem>
                         </ComboBox>
                     </DockPanel>
-                    <CheckBox Content="{Binding BobbingText}" IsChecked="{Binding BobbingValue}" Click="OnBobbingClicked"/>
+                    <CheckBox Content="{Binding BobbingText}"
+                              IsChecked="{Binding BobbingValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding BobbingToolTipText}"
+                              Click="OnBobbingClicked"/>
 
                     <TextBlock Text="{Binding InteractionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <CheckBox Content="{Binding DisableDragText}" IsChecked="{Binding DisableDragValue}" Click="OnDisableDragClicked"/>
-                    <CheckBox Content="{Binding AdsorptionText}" IsChecked="{Binding AdsorptionValue}" Click="OnAdsorptionClicked"/>
+                    <CheckBox Content="{Binding DisableDragText}"
+                              IsChecked="{Binding DisableDragValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding DisableDragToolTipText}"
+                              Click="OnDisableDragClicked"/>
+                    <CheckBox Content="{Binding AdsorptionText}"
+                              IsChecked="{Binding AdsorptionValue}"
+                              ToolTip.Placement="Top"
+                              ToolTip.VerticalOffset="0"
+                              ToolTip.Tip="{Binding AdsorptionToolTipText}"
+                              Click="OnAdsorptionClicked"/>
 
                     <TextBlock Text="{Binding RandomText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <DockPanel>
-                        <Label Content="{Binding RandomSkinText}" VerticalAlignment="Center"/>
+                        <Label Content="{Binding RandomSkinText}"
+                               ToolTip.Placement="Top"
+                               ToolTip.VerticalOffset="0"
+                               ToolTip.Tip="{Binding RandomSkinToolTipText}"
+                               VerticalAlignment="Center"/>
                         <ComboBox x:Name="RandomSkinComboBox"
                                   SelectedIndex="{Binding RandomSkinValue}"
                                   Margin="10,0,25,0"
                                   HorizontalAlignment="Stretch"
+                                  ToolTip.Placement="Top"
+                                  ToolTip.VerticalOffset="0"
+                                  ToolTip.Tip="{Binding RandomSkinToolTipText}"
                                   SelectionChanged="OnRandomSkinSelectionChanged">
                             <ComboBoxItem Content="{Binding NeverText}"></ComboBoxItem>
                             <ComboBoxItem Content="{Binding OneMinuteText}"></ComboBoxItem>
@@ -145,8 +207,16 @@
                     <TextBlock Text="{Binding VersionText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
                     <TextBlock Text="{Binding Source={x:Static utilities:GlobalHelper.Version}}" Margin="0,0,0,10"/>
                     <DockPanel>
-                        <Button Content="{Binding HomeText}" Click="OnHomeClicked"/>
-                        <Button Content="{Binding UpdateText}" Click="OnUpdateClicked"/>
+                        <Button Content="{Binding HomeText}"
+                                  ToolTip.Placement="Top"
+                                  ToolTip.VerticalOffset="0"
+                                  ToolTip.Tip="{Binding HomeToolTipText}"
+                                Click="OnHomeClicked"/>
+                        <Button Content="{Binding UpdateText}"
+                                  ToolTip.Placement="Top"
+                                  ToolTip.VerticalOffset="0"
+                                  ToolTip.Tip="{Binding UpdateToolTipText}"
+                                Click="OnUpdateClicked"/>
                     </DockPanel>
 
                     <TextBlock Text="{Binding ExitAppText}" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>

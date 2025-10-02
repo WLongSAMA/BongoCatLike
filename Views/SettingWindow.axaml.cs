@@ -35,12 +35,12 @@ public partial class SettingWindow : Window
 
         LangList = Localization.GetLangList();
         foreach (KeyValuePair<string, string> lang in LangList)
-            {
+        {
             LangListComboBox.Items.Add(lang.Value);
             if (GlobalHelper.Config.Language == lang.Key)
                 LangListComboBox.SelectedIndex = LangListComboBox.Items.Count - 1;
-            }
         }
+    }
 
     private void CreateItemList<T>(IEnumerable<KeyValuePair<string, T>> items, string type, Func<KeyValuePair<string, T>, string> getIcon, Func<KeyValuePair<string, T>, string> getTags, Func<KeyValuePair<string, T>, string> getName, string currentId, ref Border lastBorder)
     {

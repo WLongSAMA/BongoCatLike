@@ -40,6 +40,19 @@ namespace BongoCat_Like.ViewModels
         public static string UpdateText => Localization.Instance["SettingWindow.Setting.Update"];
         public static string ExitAppText => Localization.Instance["SettingWindow.Setting.ExitApp"];
         public static string ExitText => Localization.Instance["SettingWindow.Setting.Exit"];
+        public static string LanguageToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Language"];
+        public static string TopmostToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Topmost"];
+        public static string MousePenetrationToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.MousePenetration"];
+        public static string AutorunToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Autorun"];
+        public static string TaskbarIconToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.TaskbarIcon"];
+        public static string FlipToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Flip"];
+        public static string ZoomToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Zoom"];
+        public static string BobbingToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Bobbing"];
+        public static string DisableDragToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.DisableDrag"];
+        public static string AdsorptionToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Adsorption"];
+        public static string RandomSkinToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.RandomSkin"];
+        public static string HomeToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Home"];
+        public static string UpdateToolTipText => Localization.Instance["SettingWindow.Setting.ToolTip.Update"];
 
         public static bool TopmostValue => GlobalHelper.Config.Topmost;
         public static bool MousePenetrationValue => GlobalHelper.Config.MousePenetration;

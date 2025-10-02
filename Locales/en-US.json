@@ -41,7 +41,22 @@
             "Home": "Project Home",
             "Update": "Check Update",
             "ExitApp": "Exit Application",
-            "Exit": "Exit"
+            "Exit": "Exit",
+            "ToolTip": {
+                "Language": "Which language to use for displaying text in the custom application",
+                "Topmost": "Keep the application always on top of the screen",
+                "MousePenetration": "Allow mouse clicks to penetrate through the application",
+                "Autorun": "Automatically launch at system startup",
+                "TaskbarIcon": "Show icon on the taskbar",
+                "Flip": "Flip the display horizontally",
+                "Zoom": "Custom zoom level for the application",
+                "Bobbing": "Enable or disable the window bobbing animation",
+                "DisableDrag": "Enable or disable dragging the window with the mouse",
+                "Adsorption": "Automatically snap to the edge of the taskbar when near it",
+                "RandomSkin": "Automatically switch skins at regular intervals",
+                "Home": "Open the project homepage",
+                "Update": "Open the latest version release page"
+            }
         }
     }
 }
