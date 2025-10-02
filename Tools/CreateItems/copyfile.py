@@ -1,7 +1,7 @@
 import shutil
 import json
 
-images_path = "..\\..\\Decompile\\20250811\\ExportedProject\\Assets\\Texture2D\\"
+images_path = "..\\..\\Decompile\\20251002\\ExportedProject\\Assets\\Texture2D\\"
 destination_path = "..\\..\\Assets\\"
 
 with open(destination_path + "items.json", "r") as file:
@@ -15,3 +15,8 @@ for item in json_data["skin"]:
 for item in json_data["hat"]:
     shutil.copy(images_path + json_data["hat"][item].get("icon"), destination_path + "hat\\" + json_data["hat"][item].get("icon"))
     shutil.copy(images_path + json_data["hat"][item].get("image"), destination_path + "hat\\" + json_data["hat"][item].get("image"))
+
+for item in json_data["emote"]:
+    shutil.copy(images_path + json_data["emote"][item].get("icon"), destination_path + "emote\\" + json_data["emote"][item].get("icon"))
+    shutil.copy(images_path + json_data["emote"][item].get("image"), destination_path + "emote\\" + json_data["emote"][item].get("image"))
+
