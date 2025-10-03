@@ -46,12 +46,28 @@ public partial class SettingWindow : Window
     {
         foreach (KeyValuePair<string, T> item in items)
         {
-            Image image = new()
+            Image mainImage = new()
             {
                 Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/{type}/{getIcon(item)}"))),
                 Width = 50,
                 Height = 50
             };
+
+            Image badgeImage = new()
+            {
+                Name = "Badge",
+                Source = new Bitmap(AssetLoader.Open(new Uri($"avares://{GlobalHelper.ProjectName}/Assets/EmoteEquipped.png"))),
+                IsVisible = false,
+                Width = 20,
+                Height = 20,
+                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Left,
+                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Bottom,
+                Margin = new Thickness(-5, 0, 0, -5)
+            };
+
+            Grid grid = new();
+            grid.Children.Add(mainImage);
+            grid.Children.Add(badgeImage);
 
             Border border = new()
             {
@@ -60,7 +76,7 @@ public partial class SettingWindow : Window
                     ["Id"] = item.Key,
                     ["Type"] = type
                 },
-                Child = image,
+                Child = grid,
                 BorderBrush = GlobalHelper.CatSkin.GetQuality(getTags(item)),
                 BorderThickness = new Thickness(5),
                 Margin = new Thickness(0, 0, 5, 5)
@@ -69,6 +85,7 @@ public partial class SettingWindow : Window
             if (currentId == item.Key)
             {
                 border.Background = Brushes.HotPink;
+                ShowBadge(border, true);
                 lastBorder = border;
             }
 
@@ -92,34 +109,58 @@ public partial class SettingWindow : Window
                 {
                     case "skin":
                         if (LastSkin != null)
+                        {
                             LastSkin.Background = Brushes.Transparent;
+                            ShowBadge(LastSkin, false);
+                        }
+
                         if (GlobalHelper.CatSkin.SkinId == id)
                         {
                             App.MainWindow.SetSkin("0");
+                            ShowBadge(border, false);
                         }
                         else
                         {
                             border.Background = Brushes.HotPink;
+                            ShowBadge(border, true);
                             App.MainWindow.SetSkin(id);
                         }
                         LastSkin = border;
                         break;
                     case "hat":
                         if (LastHat != null)
+                        {
                             LastHat.Background = Brushes.Transparent;
+                            ShowBadge(LastHat, false);
+                        }
+
                         if (GlobalHelper.CatSkin.HatId == id)
                         {
                             App.MainWindow.SetHat("0");
+                            ShowBadge(border, false);
                         }
                         else
                         {
                             border.Background = Brushes.HotPink;
+                            ShowBadge(border, true);
                             App.MainWindow.SetHat(id);
                             App.MainWindow.HatAnimation();
                         }
                         LastHat = border;
                         break;
                 }
+            }
+        }
+    }
+
+    private void ShowBadge(Border border, bool isShow)
+    {
+        if (border.Child is Grid grid)
+        {
+            foreach (Control child in grid.Children)
+            {
+                if (child is Image img && img.Name == "Badge")
+                    img.IsVisible = isShow;
             }
         }
     }

@@ -9,9 +9,9 @@
         Width="{Binding Source={x:Static utilities:GlobalHelper.WindowWidth}}"
         Height="{Binding Source={x:Static utilities:GlobalHelper.WindowHeight}}"
         Background="Transparent"
+        TransparencyLevelHint="Transparent"
         SystemDecorations="None"
-        WindowStartupLocation="Manual"
-        TransparencyLevelHint="Transparent">
+        WindowStartupLocation="Manual">
 
     <Grid x:Name="MainGrid"
           HorizontalAlignment="Left"
