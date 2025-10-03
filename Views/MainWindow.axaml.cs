@@ -25,8 +25,11 @@ namespace BongoCat_Like.Views
         private NativeMenuItem? _skinItem;
         private NativeMenuItem? _settingItem;
         private NativeMenuItem? _exitItem;
-        private bool Hand = false;
-        private bool animationLock = false;
+        private Point? _dragStartPoint;
+        private PointerPressedEventArgs? _pressedEventArgs;
+        private bool _wasLeft = false;
+        private bool _isAnimating = false;
+        private object _animationLock = new();
         private Task? _bobbingAnimationInstance;
         private double LastHeight = 0;
 
@@ -66,8 +69,38 @@ namespace BongoCat_Like.Views
         private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (!GlobalHelper.Config.DisableDrag && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
-                BeginMoveDrag(e);
-            base.OnPointerPressed(e);
+            {
+                _dragStartPoint = e.GetPosition(this);
+                _pressedEventArgs = e;
+                e.Handled = false;
+            }
+        }
+
+        private void OnPointerMoved(object? sender, PointerEventArgs e)
+        {
+            if (_dragStartPoint.HasValue && _pressedEventArgs != null)
+            {
+                Point currentPoint = e.GetPosition(this);
+                Point delta = currentPoint - _dragStartPoint.Value;
+                if (Math.Abs(delta.X) > 3 || Math.Abs(delta.Y) > 3)
+                {
+                    BeginMoveDrag(_pressedEventArgs);
+                    _dragStartPoint = null;
+                    _pressedEventArgs = null;
+                }
+            }
+        }
+
+        private void OnPointerReleased(object? sender, PointerReleasedEventArgs e)
+        {
+            _dragStartPoint = null;
+            _pressedEventArgs = null;
+        }
+
+        private void OnPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
+        {
+            _dragStartPoint = null;
+            _pressedEventArgs = null;
         }
 
         private void SetLocalization()
@@ -194,7 +227,7 @@ namespace BongoCat_Like.Views
                     if (!_activeKeys.ContainsKey(e.Data.KeyCode))
                     {
                         _activeKeys[e.Data.KeyCode] = true;
-                        await Hit();
+                        _ = Hit();
                     }
                 };
 
@@ -208,7 +241,7 @@ namespace BongoCat_Like.Views
                     if (!_activeMouseButtons.ContainsKey(e.Data.Button))
                     {
                         _activeMouseButtons[e.Data.Button] = true;
-                        await Hit();
+                        _ = Hit();
                     }
                 };
 
@@ -223,14 +256,16 @@ namespace BongoCat_Like.Views
 
         public async Task Hit()
         {
-            if (animationLock)
-                return;
-
-            animationLock = true;
+            lock (_animationLock)
+            {
+                if (_isAnimating)
+                    return;
+                _isAnimating = true;
+            }
 
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                if (Hand)
+                if (_wasLeft)
                 {
                     SkinImage.Source = GlobalHelper.CatSkin.SkinImage[1];
                     HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
@@ -245,10 +280,16 @@ namespace BongoCat_Like.Views
 
                 SkinImage.Source = GlobalHelper.CatSkin.SkinImage[0];
                 HandImage.Source = GlobalHelper.CatSkin.SkinImage[2];
-                Hand = !Hand;
+
+                await Task.Delay(100);
+
+                _wasLeft = !_wasLeft;
             });
 
-            animationLock = false;
+            lock (_animationLock)
+            {
+                _isAnimating = false;
+            }
         }
 
         public void EnableMousePenetration(bool isEnable)

@@ -17,6 +17,9 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top"
           PointerPressed="OnPointerPressed"
+          PointerMoved="OnPointerMoved"
+          PointerReleased="OnPointerReleased"
+          PointerCaptureLost="OnPointerCaptureLost"
           RenderOptions.BitmapInterpolationMode="HighQuality">
         <Canvas>
             <Image x:Name="SkinImage"
