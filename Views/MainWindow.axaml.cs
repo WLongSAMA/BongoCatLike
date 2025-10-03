@@ -222,7 +222,7 @@ namespace BongoCat_Like.Views
             {
                 TaskPoolGlobalHook hook = new();
 
-                hook.KeyPressed += async (sender, e) =>
+                hook.KeyPressed += (sender, e) =>
                 {
                     if (!_activeKeys.ContainsKey(e.Data.KeyCode))
                     {
@@ -236,7 +236,7 @@ namespace BongoCat_Like.Views
                     _activeKeys.TryRemove(e.Data.KeyCode, out _);
                 };
 
-                hook.MousePressed += async (sender, e) =>
+                hook.MousePressed += (sender, e) =>
                 {
                     if (!_activeMouseButtons.ContainsKey(e.Data.Button))
                     {
