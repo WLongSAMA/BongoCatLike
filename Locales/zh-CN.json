@@ -8,7 +8,7 @@
     },
     "SettingWindow": {
         "DefaultSkin": {
-            "Header": "默认皮肤"
+            "Header": "皮肤"
         },
         "CustomSkin": {
             "Header": "自定义皮肤",

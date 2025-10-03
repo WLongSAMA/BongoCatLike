@@ -8,7 +8,7 @@
     },
     "SettingWindow": {
         "DefaultSkin": {
-            "Header": "預設皮膚"
+            "Header": "皮膚"
         },
         "CustomSkin": {
             "Header": "自訂皮膚",

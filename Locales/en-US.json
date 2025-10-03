@@ -8,7 +8,7 @@
     },
     "SettingWindow": {
         "DefaultSkin": {
-            "Header": "Default Skin"
+            "Header": "Skin"
         },
         "CustomSkin": {
             "Header": "Custom Skin",
