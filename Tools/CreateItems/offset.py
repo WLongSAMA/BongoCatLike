@@ -7,7 +7,7 @@ with open("inventory.json", "r") as file:
 
 newdata = []
 for item in json_data:
-    if item.get("type") == "item" and item.get("tags") != "quality:special":
+    if item.get("type") == "item" and item.get("tags").find("quality:special") == -1 and item.get("item_slot") == "hat":
         newdata.append({
             "name": item.get("name"),
             "position": {"x": 30, "y": -70},
