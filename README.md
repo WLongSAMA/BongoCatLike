@@ -1,6 +1,6 @@
 <div align="center">
 <h1>🐱 BongoCat 复刻版</h1>
-<p>一个轻量简洁不联网的桌面美化挂件，用来给你枯糙乏味的系统桌面添加一丝活气。<p>
+<p>一个轻量简洁不联网的桌面美化挂件，给你枯糙乏味的系统桌面添加一丝活气。<p>
 </div>
 
 <div align="center">
@@ -41,6 +41,9 @@
 4. 跨平台运行，支持 Windows、Linux、MacOS
 5. 默认包含全部皮肤，还支持自定义皮肤，可以绘制自己专属的小猫皮肤
 6. ...
+
+### 💾 如何下载
+[下载方法](https://github.com/WLongSAMA/BongoCatLike/issues/4)
 
 ### 🛠️ 后续计划
 
