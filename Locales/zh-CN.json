@@ -45,14 +45,14 @@
             "ToolTip": {
                 "Language": "自定义程序使用哪种语言显示文字",
                 "Topmost": "让程序始终在屏幕最顶层",
-                "MousePenetration": "让鼠标点击可以穿透程序",
+                "MousePenetration": "让鼠标点击可以穿透程序，仅 Windows 系统可用",
                 "Autorun": "开机自动启动",
                 "TaskbarIcon": "在任务栏上显示图标",
                 "Flip": "将画面水平翻转",
                 "Zoom": "自定义程序的缩放比例",
                 "Bobbing": "启用或禁用窗口的抖动动画",
                 "DisableDrag": "启用或禁用鼠标拖动窗口",
-                "Adsorption": "靠近系统任务栏时自动吸附在任务栏的边缘",
+                "Adsorption": "靠近系统任务栏时自动吸附在任务栏的边缘，仅 Windows 系统可用",
                 "RandomSkin": "定时自动切换皮肤",
                 "Home": "打开项目主页",
                 "Update": "打开最新版本发布页面"

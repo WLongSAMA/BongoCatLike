@@ -45,14 +45,14 @@
             "ToolTip": {
                 "Language": "自訂程式使用哪種語言顯示文字",
                 "Topmost": "讓程式始終在螢幕最頂層",
-                "MousePenetration": "讓滑鼠點擊可以穿透程式",
+                "MousePenetration": "讓滑鼠點擊可以穿透程式，僅 Windows 系統可用",
                 "Autorun": "開機自動啟動",
                 "TaskbarIcon": "在工作列上顯示圖示",
                 "Flip": "將畫面水平翻轉",
                 "Zoom": "自訂程式的縮放比例",
                 "Bobbing": "啟用或禁用視窗的抖動動畫",
                 "DisableDrag": "啟用或禁用滑鼠拖曳視窗",
-                "Adsorption": "靠近系統工作列時自動吸附在工作列的邊緣",
+                "Adsorption": "靠近系統工作列時自動吸附在工作列的邊緣，僅 Windows 系統可用",
                 "RandomSkin": "定時自動切換皮膚",
                 "Home": "開啟專案首頁",
                 "Update": "開啟最新版本發佈頁面"

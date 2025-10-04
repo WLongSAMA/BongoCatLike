@@ -45,14 +45,14 @@
             "ToolTip": {
                 "Language": "Which language to use for displaying text in the custom application",
                 "Topmost": "Keep the application always on top of the screen",
-                "MousePenetration": "Allow mouse clicks to penetrate through the application",
+                "MousePenetration": "Allow mouse clicks to penetrate through the application (Windows only)",
                 "Autorun": "Automatically launch at system startup",
                 "TaskbarIcon": "Show icon on the taskbar",
                 "Flip": "Flip the display horizontally",
                 "Zoom": "Custom zoom level for the application",
                 "Bobbing": "Enable or disable the window bobbing animation",
                 "DisableDrag": "Enable or disable dragging the window with the mouse",
-                "Adsorption": "Automatically snap to the edge of the taskbar when near it",
+                "Adsorption": "Automatically snap to the edge of the taskbar when near it (Windows only)",
                 "RandomSkin": "Automatically switch skins at regular intervals",
                 "Home": "Open the project homepage",
                 "Update": "Open the latest version release page"
