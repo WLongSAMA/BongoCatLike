@@ -100,6 +100,19 @@ namespace BongoCat_Like.ViewModels
                 OnPropertyChanged(nameof(UpdateText));
                 OnPropertyChanged(nameof(ExitAppText));
                 OnPropertyChanged(nameof(ExitText));
+                OnPropertyChanged(nameof(LanguageToolTipText));
+                OnPropertyChanged(nameof(TopmostToolTipText));
+                OnPropertyChanged(nameof(MousePenetrationToolTipText));
+                OnPropertyChanged(nameof(AutorunToolTipText));
+                OnPropertyChanged(nameof(TaskbarIconToolTipText));
+                OnPropertyChanged(nameof(FlipToolTipText));
+                OnPropertyChanged(nameof(ZoomToolTipText));
+                OnPropertyChanged(nameof(BobbingToolTipText));
+                OnPropertyChanged(nameof(DisableDragToolTipText));
+                OnPropertyChanged(nameof(AdsorptionToolTipText));
+                OnPropertyChanged(nameof(RandomSkinToolTipText));
+                OnPropertyChanged(nameof(HomeToolTipText));
+                OnPropertyChanged(nameof(UpdateToolTipText));
             };
         }
 
