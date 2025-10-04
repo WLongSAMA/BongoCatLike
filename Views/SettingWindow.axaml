@@ -7,7 +7,7 @@
         x:DataType="viewModels:SettingViewModel"
         x:Class="BongoCat_Like.Views.SettingWindow"
         Title="{Binding Source={x:Static utilities:GlobalHelper.Name}}"
-        Width="350" Height="500"
+        Width="360" Height="500"
         WindowStartupLocation="CenterScreen"
         CanResize="False">
 
@@ -69,8 +69,8 @@
 
         <TabItem Header="{Binding DefaultSkinText}"
                  FontSize="12">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <WrapPanel x:Name="DefaultSkinList" Margin="0,10" Orientation="Horizontal"></WrapPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="-5,0,0,0">
+                <WrapPanel x:Name="DefaultSkinList" Margin="5,10,0,10" Orientation="Horizontal"></WrapPanel>
             </ScrollViewer>
         </TabItem>
 
