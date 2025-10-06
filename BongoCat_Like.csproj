@@ -3,9 +3,6 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
-        <TrimMode>link</TrimMode>
-        <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
@@ -13,6 +10,8 @@
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <PublishAot>true</PublishAot>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
         <TrimMode>link</TrimMode>
