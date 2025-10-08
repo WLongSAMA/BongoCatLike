@@ -5,7 +5,8 @@ destination_path = "..\\..\\Assets\\"
 
 # url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=CEAA2C94E932B799E7B7498D18EB450004622927"
 # url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=D93DA1D3EDE56235556DA16C5C2A5DC9303B0EC8"
-url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=988C208479DF444DC90D541CBBC907A2ACE9699D"
+#url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=988C208479DF444DC90D541CBBC907A2ACE9699D"
+url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=4BD478CB8836FAC7F881F83A3D2889B3002E8B1B"
 
 content = ""
 if os.path.exists("inventory.json"):
