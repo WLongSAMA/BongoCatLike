@@ -189,18 +189,18 @@ namespace BongoCat_Like.Views
             RectArea imageArea = GlobalHelper.CatSkin.GetImageArea();
             Width = imageArea.Width * scaling;
             Height = imageArea.Height * scaling;
-            MainGrid.Margin = new Thickness(-imageArea.X, -imageArea.Y);
+            SkinCanvas.Margin = new Thickness(-imageArea.X * scaling, -imageArea.Y * scaling);
 
-            if (type == 1)
-            {
-                // 计算小猫位置过于复杂，暂时不处理更换小猫皮肤的情况
-            }
-            else if (type == 2)
-            {
-                if (LastHeight != 0 && LastHeight != Height)
-                    Position = new PixelPoint(Position.X, Position.Y + (int)LastHeight - (int)Height);
-            }
-            LastHeight = Height;
+            //if (type == 1)
+            //{
+            //    // 计算小猫位置过于复杂，暂时不处理更换小猫皮肤的情况
+            //}
+            //else if (type == 2)
+            //{
+            //    if (LastHeight != 0 && LastHeight != Height)
+            //        Position = new PixelPoint(Position.X, Position.Y + (int)LastHeight - (int)Height);
+            //}
+            //LastHeight = Height;
         }
 
         private void SetRandomSkin()
@@ -318,24 +318,29 @@ namespace BongoCat_Like.Views
 
         public void SetZoom(int index)
         {
-            double scaling = GlobalHelper.GetScaling(index);
-            MainGrid.RenderTransform = new ScaleTransform(GlobalHelper.Config.Flip ? -1 * scaling : scaling, scaling);
-            MainGrid.HorizontalAlignment = GlobalHelper.Config.Flip ? Avalonia.Layout.HorizontalAlignment.Right : Avalonia.Layout.HorizontalAlignment.Left;
             GlobalHelper.Config.Zoom = index;
-            SetWindowSize();
+            double scaling = GlobalHelper.GetScaling(index);
+            SkinImage.Width = GlobalHelper.WindowWidth * scaling;
+            SkinImage.Height = GlobalHelper.WindowHeight * scaling;
+            HandImage.Width = GlobalHelper.WindowWidth * scaling;
+            HandImage.Height = GlobalHelper.WindowHeight * scaling;
+            HatImage.Width = GlobalHelper.WindowWidth * scaling;
+            HatImage.Height = GlobalHelper.WindowHeight * scaling;
+            UpdateImagePositions(scaling);
+            SetWindowSize(2);
         }
 
         public void SetBobbing(bool isEnable)
         {
             if (_bobbingAnimationInstance != null)
             {
-                RenderTransform = null;
+                SkinCanvas.RenderTransform = null;
                 _bobbingAnimationInstance = null;
             }
 
             if (!isEnable)
             {
-                RenderTransform = null;
+                SkinCanvas.RenderTransform = null;
                 return;
             }
 
@@ -365,8 +370,8 @@ namespace BongoCat_Like.Views
                 }
             };
 
-            RenderTransformOrigin = new RelativePoint(0.5, 1, RelativeUnit.Relative);
-            _bobbingAnimationInstance = animation.RunAsync(this);
+            SkinCanvas.RenderTransformOrigin = new RelativePoint(0.5, 1, RelativeUnit.Relative);
+            _bobbingAnimationInstance = animation.RunAsync(SkinCanvas);
         }
 
         public void SetSkin(string SkinId)
@@ -382,46 +387,59 @@ namespace BongoCat_Like.Views
             GlobalHelper.CatSkin.HatId = HatId;
             HatImage.Source = GlobalHelper.CatSkin.HatImage;
 
-            RectArea rectArea = new(0, 0, 0, 0);
+            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
+            UpdateImagePositions(scaling);
+            SetWindowSize(2);
+        }
+
+        private void UpdateImagePositions(double scaling)
+        {
+            RectArea combinedBounds = new(0, 0, 0, 0);
             Position hatOffset = GlobalHelper.CatSkin.HatOffset;
             Bitmap skinBitmap = GlobalHelper.CatSkin.SkinImage[0];
             Bitmap? hatBitmap = GlobalHelper.CatSkin.HatImage;
             if (hatBitmap != null)
             {
-                rectArea.X = Math.Min(0, hatOffset.X);
-                rectArea.Y = Math.Min(0, hatOffset.Y);
-                rectArea.Right = Math.Max(skinBitmap.PixelSize.Width, hatOffset.X + hatBitmap.PixelSize.Width);
-                rectArea.Bottom = Math.Max(skinBitmap.PixelSize.Height, hatOffset.Y + hatBitmap.PixelSize.Height);
-                rectArea.Width = rectArea.Right - rectArea.Left;
-                rectArea.Height = rectArea.Bottom - rectArea.Top;
+                combinedBounds.X = Math.Min(0, hatOffset.X);
+                combinedBounds.Y = Math.Min(0, hatOffset.Y);
+                combinedBounds.Right = Math.Max(skinBitmap.PixelSize.Width, hatOffset.X + hatBitmap.PixelSize.Width);
+                combinedBounds.Bottom = Math.Max(skinBitmap.PixelSize.Height, hatOffset.Y + hatBitmap.PixelSize.Height);
+                combinedBounds.Width = combinedBounds.Right - combinedBounds.Left;
+                combinedBounds.Height = combinedBounds.Bottom - combinedBounds.Top;
             }
             else
             {
-                rectArea.X = 0;
-                rectArea.Y = 0;
-                rectArea.Width = (int)SkinImage.Bounds.Width;
-                rectArea.Height = (int)SkinImage.Bounds.Height;
+                combinedBounds.X = 0;
+                combinedBounds.Y = 0;
+                combinedBounds.Width = (int)SkinImage.Bounds.Width;
+                combinedBounds.Height = (int)SkinImage.Bounds.Height;
             }
 
-            int offsetX = -rectArea.X;
-            int offsetY = -rectArea.Y;
+            int skinOffsetX = -combinedBounds.X;
+            int skinOffsetY = -combinedBounds.Y;
 
-            HatImage.RenderTransform = new TransformGroup
+            Canvas.SetLeft(SkinImage, skinOffsetX * scaling);
+            Canvas.SetTop(SkinImage, skinOffsetY * scaling);
+            Canvas.SetLeft(HandImage, skinOffsetX * scaling);
+            Canvas.SetTop(HandImage, skinOffsetY * scaling);
+
+            if (hatBitmap != null)
             {
-                Children = {
-                    new ScaleTransform(1, 1), //没有此属性会导致帽子动画失效
-                    new TranslateTransform(offsetX + hatOffset.X, offsetY + hatOffset.Y)
-                }
-            };
-            SkinImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
-            HandImage.RenderTransform = new TranslateTransform(offsetX, offsetY);
-
-            SetWindowSize(2);
+                Canvas.SetLeft(HatImage, (skinOffsetX + hatOffset.X) * scaling);
+                Canvas.SetTop(HatImage, (skinOffsetY + hatOffset.Y) * scaling);
+            }
         }
 
         public async void HatAnimation()
         {
             await Task.Delay(10);
+
+            HatImage.RenderTransform = new TransformGroup
+            {
+                Children = {
+                    new ScaleTransform(1, 1) //没有此属性会导致帽子动画失效
+                }
+            };
 
             Animation animation = new()
             {

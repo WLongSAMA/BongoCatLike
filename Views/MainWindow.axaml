@@ -21,16 +21,22 @@
           PointerReleased="OnPointerReleased"
           PointerCaptureLost="OnPointerCaptureLost"
           RenderOptions.BitmapInterpolationMode="HighQuality">
-        <Canvas>
+        <Canvas x:Name="SkinCanvas">
             <Image x:Name="SkinImage"
+                   Width="{Binding Source={x:Static utilities:GlobalHelper.WindowWidth}}"
+                   Height="{Binding Source={x:Static utilities:GlobalHelper.WindowHeight}}"
                    Source="/Assets/default/CatLeft.png"
-                   Stretch="None"/>
+                   Stretch="UniformToFill"/>
             <Image x:Name="HatImage"
+                   Width="{Binding Source={x:Static utilities:GlobalHelper.WindowWidth}}"
+                   Height="{Binding Source={x:Static utilities:GlobalHelper.WindowHeight}}"
                    Source=""
-                   Stretch="None"/>
+                   Stretch="UniformToFill"/>
             <Image x:Name="HandImage"
+                   Width="{Binding Source={x:Static utilities:GlobalHelper.WindowWidth}}"
+                   Height="{Binding Source={x:Static utilities:GlobalHelper.WindowHeight}}"
                    Source="/Assets/default/CatRight.png"
-                   Stretch="None"/>
+                   Stretch="UniformToFill"/>
         </Canvas>
     </Grid>
 </Window>

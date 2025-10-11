@@ -7,10 +7,10 @@ namespace BongoCat_Like.Utilities
     {
         public static string ProjectName { get; } = "BongoCat_Like";
         public static string Name { get; } = "BongoCat-Like";
-        public static string Version { get; } = "1.0.20251010";
+        public static string Version { get; } = "1.0.20251012";
         public static string Url { get; } = "https://github.com/WLongSAMA/BongoCatLike";
-        public static int WindowWidth { get; } = 350;
-        public static int WindowHeight { get; } = 350;
+        public static int WindowWidth { get; } = 256;
+        public static int WindowHeight { get; } = 256;
         public static SkinManager CatSkin { get; set; } = SkinManager.Instance;
         public static AppConfig Config = ConfigManager.LoadConfig();
 
