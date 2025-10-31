@@ -21,6 +21,32 @@
           PointerReleased="OnPointerReleased"
           PointerCaptureLost="OnPointerCaptureLost"
           RenderOptions.BitmapInterpolationMode="HighQuality">
+
+        <!--Popup x:Name="MessagePopup"
+               Placement="Top"
+               IsOpen="False">
+            <Grid x:Name="MessageGrid" Margin="15">
+                <Border Background="White"
+                        BorderBrush="Gray"
+                        BorderThickness="2"
+                        CornerRadius="6"
+                        Padding="70,5">
+                    <TextBlock Text="喵~喵~"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               Foreground="DimGray"/>
+                </Border>
+
+                <Path Data="M6,0 L10,18 L-3,12"
+                      Fill="White"
+                      Stroke="Gray"
+                      StrokeThickness="2"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Bottom"
+                      Margin="0,0,-3,-5"/>
+            </Grid>
+        </Popup-->
+
         <Canvas x:Name="SkinCanvas">
             <Image x:Name="SkinImage"
                    Width="{Binding Source={x:Static utilities:GlobalHelper.WindowWidth}}"

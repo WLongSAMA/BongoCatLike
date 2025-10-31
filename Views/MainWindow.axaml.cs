@@ -31,7 +31,8 @@ namespace BongoCat_Like.Views
         private bool _isAnimating = false;
         private object _animationLock = new();
         private Task? _bobbingAnimationInstance;
-        private double LastHeight = 0;
+        //private double LastHeight = 0;
+        //private CancellationTokenSource? _cancellationTokenSource;
 
         private ConcurrentDictionary<KeyCode, bool> _activeKeys = new();
         private ConcurrentDictionary<MouseButton, bool> _activeMouseButtons = new();
@@ -70,6 +71,7 @@ namespace BongoCat_Like.Views
         {
             if (!GlobalHelper.Config.DisableDrag && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
+                _ = showMessagePopup();
                 _dragStartPoint = e.GetPosition(this);
                 _pressedEventArgs = e;
                 e.Handled = false;
@@ -496,6 +498,37 @@ namespace BongoCat_Like.Views
                 }
             };
             await animation.RunAsync(HatImage);
+        }
+
+        private async Task showMessagePopup()
+        {
+            /* 暂时没有好的方案处理 MessagePopup 的弹出位置
+            if ( MessagePopup.IsOpen)
+            {
+                _cancellationTokenSource?.Cancel();
+                _cancellationTokenSource?.Dispose();
+            }
+
+            MessagePopup.IsOpen = true;
+
+            Point? skinImagePosition = SkinImage.TranslatePoint(new Point(0, 0), this);
+            Size messageGridSize = MessageGrid.DesiredSize;
+            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
+
+            MessagePopup.HorizontalOffset = ((skinImagePosition?.X ?? 0) + 100) * scaling;
+            MessagePopup.VerticalOffset = ((skinImagePosition?.Y ?? 0) + 130) * scaling;
+
+            MessageGrid.RenderTransform = new ScaleTransform(scaling, scaling);
+            MessageGrid.RenderTransformOrigin = new RelativePoint(0, 0, RelativeUnit.Relative);
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                await Task.Delay(TimeSpan.FromSeconds(2), _cancellationTokenSource.Token);
+                MessagePopup.IsOpen = false;
+            }
+            catch (OperationCanceledException) { }
+            */
         }
 
         public void RandomSkin(int timeIndex)
