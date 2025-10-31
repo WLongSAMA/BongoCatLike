@@ -2,7 +2,7 @@ import shutil
 import json
 import os
 
-images_path = "..\\..\\Decompile\\20251008\\ExportedProject\\Assets\\Texture2D\\"
+images_path = "..\\..\\Decompile\\20251030\\ExportedProject\\Assets\\Texture2D\\"
 destination_path = "..\\..\\Assets\\"
 
 skin_path = destination_path + "skin\\"
