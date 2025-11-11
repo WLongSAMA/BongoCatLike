@@ -71,7 +71,7 @@ namespace BongoCat_Like.Views
         {
             if (!GlobalHelper.Config.DisableDrag && e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
-                _ = showMessagePopup();
+                //_ = showMessagePopup();
                 _dragStartPoint = e.GetPosition(this);
                 _pressedEventArgs = e;
                 e.Handled = false;
@@ -500,9 +500,9 @@ namespace BongoCat_Like.Views
             await animation.RunAsync(HatImage);
         }
 
+        /* 暂时没有好的方案处理 MessagePopup 的弹出位置
         private async Task showMessagePopup()
         {
-            /* 暂时没有好的方案处理 MessagePopup 的弹出位置
             if ( MessagePopup.IsOpen)
             {
                 _cancellationTokenSource?.Cancel();
@@ -528,8 +528,8 @@ namespace BongoCat_Like.Views
                 MessagePopup.IsOpen = false;
             }
             catch (OperationCanceledException) { }
-            */
         }
+        */
 
         public void RandomSkin(int timeIndex)
         {
