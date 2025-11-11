@@ -1,13 +1,8 @@
 import os
 import json
 
-destination_path = "..\\..\\Assets\\"
-
-# url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=CEAA2C94E932B799E7B7498D18EB450004622927"
-# url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=D93DA1D3EDE56235556DA16C5C2A5DC9303B0EC8"
-#url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=988C208479DF444DC90D541CBBC907A2ACE9699D"
-#url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=4BD478CB8836FAC7F881F83A3D2889B3002E8B1B"
-url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=3A90AB764093B4624786D0121CB875EB0D31A37F"
+with open("config.json", "r") as config:
+    config_data = json.load(config)
 
 content = ""
 if os.path.exists("inventory.json"):
@@ -15,7 +10,7 @@ if os.path.exists("inventory.json"):
         content = file.read()
 else:
     import requests
-    response = requests.get(url)
+    response = requests.get(config_data.get("url"))
     content = response.text.rstrip(b'\x00'.decode())
     if response.status_code == 200:
         with open("inventory.json", "w") as file:
@@ -78,7 +73,7 @@ newdata = {
     "emote": emotedata
 }
 
-with open(destination_path + "items.json", "w") as json_file:
+with open(config_data.get("destination_path") + "items.json", "w") as json_file:
     json.dump(newdata, json_file)
 
 print("skin:", len(newdata["skin"]))

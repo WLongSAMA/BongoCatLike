@@ -1,6 +1,7 @@
 import json
 
-destination_path = "..\\..\\Assets\\"
+with open("config.json", "r") as config:
+    config_data = json.load(config)
 
 with open("inventory.json", "r") as file:
     json_data = json.load(file)
@@ -13,5 +14,5 @@ for item in json_data:
             "position": {"x": 30, "y": -70},
         })
 
-with open(destination_path + "offset.json", "w") as json_file:
+with open(config_data.get("destination_path") + "offset.json", "w") as json_file:
     json.dump(newdata, json_file)

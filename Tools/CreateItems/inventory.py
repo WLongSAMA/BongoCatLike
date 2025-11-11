@@ -1,3 +1,5 @@
+import os
+import json
 import requests
 
 from steam.client import SteamClient
@@ -13,6 +15,18 @@ def generate_inventory(client, game_id):
 
     url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid={}&digest={}".format(game_id, inventory.body.digest)
     print(url)
+    if os.path.exists("config.json"):
+        with open("config.json", "r+") as config_file:
+            data = json.load(config_file)
+            data["url"] = url
+            config_file.seek(0)
+            json.dump(data, config_file, ensure_ascii=False, indent=4)
+            config_file.truncate()
+    else:
+        with open("config.json", "w") as config_file:
+            data = {}
+            data["url"] = url
+            json.dump(data, config_file, indent=4, ensure_ascii=False)
 
     response = requests.get(url)
     if response.status_code == 200:
