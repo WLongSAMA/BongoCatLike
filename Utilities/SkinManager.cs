@@ -104,7 +104,7 @@ namespace BongoCat_Like.Utilities
             return hat != null ? hat.Position : new Position { X = 30, Y = -70 };
         }
 
-        public IImmutableSolidColorBrush GetQuality(string tags)
+        public static IImmutableSolidColorBrush GetQuality(string tags)
         {
             if (tags.Contains("quality:legendary"))
                 return Brushes.Orange;

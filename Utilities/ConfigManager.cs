@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace BongoCat_Like.Utilities
 {
-    public static class ConfigManager
+    public static partial class ConfigManager
     {
         private static string ConfigPath;
 
@@ -59,6 +59,9 @@ namespace BongoCat_Like.Utilities
             }
         }
 
+        [GeneratedRegex(@"\\u[0-9a-fA-F]{4}")]
+        private static partial Regex RemoveUnicodeEscapesRegex();
+
         /// <summary>
         /// 移除 Unicode 转义
         /// </summary>
@@ -66,7 +69,7 @@ namespace BongoCat_Like.Utilities
         /// <returns>移除转义后的字符串</returns>
         private static string RemoveUnicodeEscapes(string text)
         {
-            return Regex.Replace(text, @"\\u[0-9a-fA-F]{4}", m =>
+            return RemoveUnicodeEscapesRegex().Replace(text, m =>
             {
                 string hexValue = m.Value[2..];
                 char unicodeChar = (char)int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);

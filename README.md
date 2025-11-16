@@ -4,9 +4,9 @@
 </div>
 
 <div align="center">
-<img src="https://img.shields.io/badge/.net-8.0-blue.svg" alt=".Net8.0" />
 <img src="https://img.shields.io/badge/C%23-latest-blue.svg" alt="C#" />
-<img src="https://img.shields.io/badge/IDE-VS2022-purple.svg" alt="VS2022" />
+<img src="https://img.shields.io/badge/.net-10.0-blue.svg" alt=".Net10.0" />
+<img src="https://img.shields.io/badge/IDE-VS2026-purple.svg" alt="VS2026" />
 <img src="https://img.shields.io/badge/IDE-Rider-black.svg" alt="Rider" />
 </div>
 

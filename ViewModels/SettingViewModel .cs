@@ -8,7 +8,7 @@ namespace BongoCat_Like.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public bool IsWindows => OperatingSystem.IsWindows();
+        public static bool IsWindows => OperatingSystem.IsWindows();
 
         public static string DefaultSkinText => Localization.Instance["SettingWindow.DefaultSkin.Header"];
         public static string CustomSkinText => Localization.Instance["SettingWindow.CustomSkin.Header"];

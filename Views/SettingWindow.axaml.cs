@@ -77,7 +77,7 @@ public partial class SettingWindow : Window
                     ["Type"] = type
                 },
                 Child = grid,
-                BorderBrush = GlobalHelper.CatSkin.GetQuality(getTags(item)),
+                BorderBrush = SkinManager.GetQuality(getTags(item)),
                 BorderThickness = new Thickness(5),
                 Margin = new Thickness(0, 0, 5, 5)
             };
@@ -153,7 +153,7 @@ public partial class SettingWindow : Window
         }
     }
 
-    private void ShowBadge(Border border, bool isShow)
+    private static void ShowBadge(Border border, bool isShow)
     {
         if (border.Child is Grid grid)
         {

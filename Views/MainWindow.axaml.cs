@@ -110,12 +110,9 @@ namespace BongoCat_Like.Views
             Localization.LoadLanguage(GlobalHelper.Config.Language);
             Localization.LanguageChanged += () =>
             {
-                if (_skinItem != null)
-                    _skinItem.Header = Localization.GetString("Menu.Skin");
-                if (_settingItem != null)
-                    _settingItem.Header = Localization.GetString("Menu.Setting");
-                if (_exitItem != null)
-                    _exitItem.Header = Localization.GetString("Menu.Exit");
+                _skinItem?.Header = Localization.GetString("Menu.Skin");
+                _settingItem?.Header = Localization.GetString("Menu.Setting");
+                _exitItem?.Header = Localization.GetString("Menu.Exit");
             };
         }
 

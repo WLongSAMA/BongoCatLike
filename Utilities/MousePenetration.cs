@@ -30,7 +30,7 @@ namespace BongoCat_Like.Utilities
             int extendedStyle = GetWindowLong(handle, GWL_EXSTYLE);
 
             // 添加分层和透明样式
-            SetWindowLong(handle, GWL_EXSTYLE, extendedStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+            _ = SetWindowLong(handle, GWL_EXSTYLE, extendedStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT);
 
             // 可选：设置透明度（这里设置为完全透明，但保留鼠标穿透特性）
             SetLayeredWindowAttributes(handle, 0, 255, LWA_ALPHA);
@@ -46,7 +46,7 @@ namespace BongoCat_Like.Utilities
             int extendedStyle = GetWindowLong(handle, GWL_EXSTYLE);
 
             // 移除透明样式（保留分层样式以支持透明度调整）
-            SetWindowLong(handle, GWL_EXSTYLE, (extendedStyle & ~WS_EX_TRANSPARENT) | WS_EX_LAYERED);
+            _ = SetWindowLong(handle, GWL_EXSTYLE, (extendedStyle & ~WS_EX_TRANSPARENT) | WS_EX_LAYERED);
 
             // 恢复完全不透明状态
             SetLayeredWindowAttributes(handle, 0, 255, LWA_ALPHA);
