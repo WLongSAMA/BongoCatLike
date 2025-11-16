@@ -312,8 +312,7 @@ namespace BongoCat_Like.Views
 
         public void SetFlip(bool isFlip)
         {
-            double scaling = GlobalHelper.GetScaling(GlobalHelper.Config.Zoom);
-            MainGrid.RenderTransform = new ScaleTransform(isFlip ? -1 * scaling : scaling, scaling);
+            MainGrid.RenderTransform = new ScaleTransform(isFlip ? -1 : 1, 1);
             MainGrid.HorizontalAlignment = isFlip ? Avalonia.Layout.HorizontalAlignment.Right : Avalonia.Layout.HorizontalAlignment.Left;
             GlobalHelper.Config.Flip = isFlip;
         }
