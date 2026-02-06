@@ -7,7 +7,7 @@ namespace BongoCat_Like.Utilities
     {
         public static string ProjectName { get; } = "BongoCat_Like";
         public static string Name { get; } = "BongoCat-Like";
-        public static string Version { get; } = "1.0.20260115";
+        public static string Version { get; } = "1.0.20260206";
         public static string Url { get; } = "https://github.com/WLongSAMA/BongoCatLike";
         public static int WindowWidth { get; } = 256;
         public static int WindowHeight { get; } = 256;
