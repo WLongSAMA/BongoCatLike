@@ -16,21 +16,22 @@ def generate_inventory(client, game_id):
     url = "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid={}&digest={}".format(game_id, inventory.body.digest)
     print(url)
     if os.path.exists("config.json"):
-        with open("config.json", "r+") as config_file:
+        with open("config.json", "r+", encoding="utf-8") as config_file:
             data = json.load(config_file)
             data["url"] = url
             config_file.seek(0)
             json.dump(data, config_file, ensure_ascii=False, indent=4)
             config_file.truncate()
     else:
-        with open("config.json", "w") as config_file:
+        with open("config.json", "w", encoding="utf-8") as config_file:
             data = {}
             data["url"] = url
             json.dump(data, config_file, indent=4, ensure_ascii=False)
 
     response = requests.get(url)
     if response.status_code == 200:
-        return response.text.rstrip(b'\x00'.decode())
+        content = response.content.rstrip(b'\x00')
+        return json.loads(content.decode("utf-8"))
     else:
         return None
 
@@ -42,8 +43,8 @@ def main():
 
     inventory_data = generate_inventory(client, appid)
     if inventory_data is not None:
-        with open("inventory.json", "w") as file:
-            file.write(inventory_data)
+        with open("inventory.json", "w", encoding="utf-8") as file:
+            json.dump(inventory_data, file)
 
 if __name__ == "__main__":
     main()

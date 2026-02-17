@@ -1,9 +1,9 @@
 import json
 
-with open("config.json", "r") as config:
+with open("config.json", "r", encoding="utf-8") as config:
     config_data = json.load(config)
 
-with open("inventory.json", "r") as file:
+with open("inventory.json", "r", encoding="utf-8") as file:
     json_data = json.load(file)
 
 newdata = []
@@ -14,5 +14,5 @@ for item in json_data:
             "position": {"x": 30, "y": -70},
         })
 
-with open(config_data.get("destination_path") + "offset.json", "w") as json_file:
+with open(config_data.get("destination_path") + "offset.json", "w", encoding="utf-8") as json_file:
     json.dump(newdata, json_file)

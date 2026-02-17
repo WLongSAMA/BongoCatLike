@@ -1,19 +1,19 @@
 import os
 import json
 
-with open("config.json", "r") as config:
+with open("config.json", "r", encoding="utf-8") as config:
     config_data = json.load(config)
 
 content = ""
 if os.path.exists("inventory.json"):
-    with open("inventory.json", "r") as file:
+    with open("inventory.json", "r", encoding="utf-8") as file:
         content = file.read()
 else:
     import requests
     response = requests.get(config_data.get("url"))
     content = response.text.rstrip(b'\x00'.decode())
     if response.status_code == 200:
-        with open("inventory.json", "w") as file:
+        with open("inventory.json", "w", encoding="utf-8") as file:
             file.write(content)
 
 json_data = json.loads(content)
@@ -22,6 +22,7 @@ def remove_keywords(text):
     keywords = [";itemslot:skin",
                 ";itemslot:hat",
                 ";itemslot:emote",
+                ";itemslot:consumable",
                 ";cosmetics_quality:common",
                 ";cosmetics_quality:uncommon",
                 ";cosmetics_quality:rare",
@@ -73,7 +74,7 @@ newdata = {
     "emote": emotedata
 }
 
-with open(config_data.get("destination_path") + "items.json", "w") as json_file:
+with open(config_data.get("destination_path") + "items.json", "w", encoding="utf-8") as json_file:
     json.dump(newdata, json_file)
 
 print("skin:", len(newdata["skin"]))

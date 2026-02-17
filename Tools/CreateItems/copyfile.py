@@ -2,7 +2,7 @@ import shutil
 import json
 import os
 
-with open("config.json", "r") as config:
+with open("config.json", "r", encoding="utf-8") as config:
     config_data = json.load(config)
 
 skin_path = config_data.get("destination_path") + "skin\\"
@@ -15,7 +15,7 @@ if not os.path.exists(hat_path):
 if not os.path.exists(emote_path):
     os.makedirs(emote_path)
 
-with open(config_data.get("destination_path") + "items.json", "r") as file:
+with open(config_data.get("destination_path") + "items.json", "r", encoding="utf-8") as file:
     json_data = json.load(file)
 
 for item in json_data["skin"]:
