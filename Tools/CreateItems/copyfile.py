@@ -8,12 +8,15 @@ with open("config.json", "r", encoding="utf-8") as config:
 skin_path = config_data.get("destination_path") + "skin\\"
 hat_path = config_data.get("destination_path") + "hat\\"
 emote_path = config_data.get("destination_path") + "emote\\"
+consumable_path = config_data.get("destination_path") + "consumable\\"
 if not os.path.exists(skin_path):
     os.makedirs(skin_path)
 if not os.path.exists(hat_path):
     os.makedirs(hat_path)
 if not os.path.exists(emote_path):
     os.makedirs(emote_path)
+if not os.path.exists(consumable_path):
+    os.makedirs(consumable_path)
 
 with open(config_data.get("destination_path") + "items.json", "r", encoding="utf-8") as file:
     json_data = json.load(file)
@@ -30,3 +33,8 @@ for item in json_data["hat"]:
 for item in json_data["emote"]:
     shutil.copy(config_data.get("images_path") + json_data["emote"][item].get("icon"), emote_path + json_data["emote"][item].get("icon"))
     shutil.copy(config_data.get("images_path") + json_data["emote"][item].get("image"), emote_path + json_data["emote"][item].get("image"))
+
+for item in json_data["consumable"]:
+    shutil.copy(config_data.get("images_path") + json_data["consumable"][item].get("icon"), consumable_path + json_data["consumable"][item].get("icon"))
+    shutil.copy(config_data.get("images_path") + json_data["consumable"][item].get("image"), consumable_path + json_data["consumable"][item].get("image"))
+

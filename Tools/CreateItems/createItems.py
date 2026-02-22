@@ -41,6 +41,7 @@ def remove_keywords(text):
 skindata = {}
 hatdata = {}
 emotedata = {}
+consumabledata = {}
 for item in json_data:
     if item.get("type") == "item" and item.get("tags") != "quality:special":
         data = {
@@ -67,11 +68,15 @@ for item in json_data:
         elif item.get("item_slot") == "emote":
             data["image"] = data["icon"].replace("Icon.", ".")
             emotedata[item.get("itemdefid")] = data
+        elif item.get("item_slot") == "consumable":
+            data["image"] = data["icon"].replace("Icon.", ".")
+            consumabledata[item.get("itemdefid")] = data
 
 newdata = {
     "skin": skindata,
     "hat": hatdata,
-    "emote": emotedata
+    "emote": emotedata,
+    "consumable": consumabledata
 }
 
 with open(config_data.get("destination_path") + "items.json", "w", encoding="utf-8") as json_file:
@@ -80,3 +85,4 @@ with open(config_data.get("destination_path") + "items.json", "w", encoding="utf
 print("skin:", len(newdata["skin"]))
 print("hat:", len(newdata["hat"]))
 print("emote:", len(newdata["emote"]))
+print("consumable:", len(newdata["consumable"]))
