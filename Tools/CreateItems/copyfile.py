@@ -2,39 +2,39 @@ import shutil
 import json
 import os
 
+# 加载配置
 with open("config.json", "r", encoding="utf-8") as config:
     config_data = json.load(config)
 
-skin_path = config_data.get("destination_path") + "skin\\"
-hat_path = config_data.get("destination_path") + "hat\\"
-emote_path = config_data.get("destination_path") + "emote\\"
-consumable_path = config_data.get("destination_path") + "consumable\\"
-if not os.path.exists(skin_path):
-    os.makedirs(skin_path)
-if not os.path.exists(hat_path):
-    os.makedirs(hat_path)
-if not os.path.exists(emote_path):
-    os.makedirs(emote_path)
-if not os.path.exists(consumable_path):
-    os.makedirs(consumable_path)
+base_dest = config_data.get("destination_path")
+base_images = config_data.get("images_path")
 
-with open(config_data.get("destination_path") + "items.json", "r", encoding="utf-8") as file:
+# 定义类别
+categories = ["skin", "hat", "emote", "consumable"]
+
+# 清空并创建目录
+for cat in categories:
+    path = os.path.join(base_dest, cat)
+    if os.path.exists(path):
+        shutil.rmtree(path)
+    os.makedirs(path)
+
+# 加载物品数据
+with open(os.path.join(base_dest, "items.json"), "r", encoding="utf-8") as file:
     json_data = json.load(file)
 
-for item in json_data["skin"]:
-    shutil.copy(config_data.get("images_path") + json_data["skin"][item].get("icon"), skin_path + json_data["skin"][item].get("icon"))
-    for file in json_data["skin"][item].get("image"):
-        shutil.copy(config_data.get("images_path") + file, skin_path + file)
-
-for item in json_data["hat"]:
-    shutil.copy(config_data.get("images_path") + json_data["hat"][item].get("icon"), hat_path + json_data["hat"][item].get("icon"))
-    shutil.copy(config_data.get("images_path") + json_data["hat"][item].get("image"), hat_path + json_data["hat"][item].get("image"))
-
-for item in json_data["emote"]:
-    shutil.copy(config_data.get("images_path") + json_data["emote"][item].get("icon"), emote_path + json_data["emote"][item].get("icon"))
-    shutil.copy(config_data.get("images_path") + json_data["emote"][item].get("image"), emote_path + json_data["emote"][item].get("image"))
-
-for item in json_data["consumable"]:
-    shutil.copy(config_data.get("images_path") + json_data["consumable"][item].get("icon"), consumable_path + json_data["consumable"][item].get("icon"))
-    shutil.copy(config_data.get("images_path") + json_data["consumable"][item].get("image"), consumable_path + json_data["consumable"][item].get("image"))
-
+# 复制文件
+for cat in categories:
+    dest_dir = os.path.join(base_dest, cat)
+    for item_name, item_info in json_data.get(cat, {}).items():
+        # 复制 icon
+        icon = item_info.get("icon")
+        if icon:
+            shutil.copy2(os.path.join(base_images, icon), os.path.join(dest_dir, icon))
+        
+        # 复制 image(s)
+        images = item_info.get("image")
+        if isinstance(images, str):
+            images = [images]
+        for img in images or []:
+            shutil.copy2(os.path.join(base_images, img), os.path.join(dest_dir, img))
