@@ -10,7 +10,7 @@
         Height="{Binding Source={x:Static utilities:GlobalHelper.WindowHeight}}"
         Background="Transparent"
         TransparencyLevelHint="Transparent"
-        SystemDecorations="None"
+        WindowDecorations="None"
         WindowStartupLocation="Manual">
 
     <Grid x:Name="MainGrid"
