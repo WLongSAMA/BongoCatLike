@@ -43,7 +43,7 @@ hatdata = {}
 emotedata = {}
 consumabledata = {}
 for item in json_data:
-    if item.get("type") == "item" and item.get("tags") != "quality:special":
+    if item.get("type") == "item" and item.get("tags") != "quality:special" and item.get("tags", "") != "":
         data = {
             "name": item.get("name"),
             "description": item.get("description"),
@@ -53,7 +53,7 @@ for item in json_data:
             "image": "",
             "tags": remove_keywords(item.get("tags")),
         }
-        if item.get("item_slot") == "skin":
+        if item.get("tags").find("itemslot:skin;") != -1:
             name = data["icon"][:-8]
             data["image"] = [
                 name + "Left.png",
@@ -62,13 +62,13 @@ for item in json_data:
                 name + "RightPunch.png"
             ]
             skindata[item.get("itemdefid")] = data
-        elif item.get("item_slot") == "hat":
+        elif item.get("tags").find("itemslot:hat;") != -1:
             data["image"] = data["icon"].replace("Icon.", ".")
             hatdata[item.get("itemdefid")] = data
-        elif item.get("item_slot") == "emote":
+        elif item.get("tags").find("itemslot:emote;") != -1:
             data["image"] = data["icon"].replace("Icon.", ".")
             emotedata[item.get("itemdefid")] = data
-        elif item.get("item_slot") == "consumable":
+        elif item.get("tags").find("itemslot:consumable;") != -1:
             data["image"] = data["icon"].replace("Icon.", ".")
             consumabledata[item.get("itemdefid")] = data
 

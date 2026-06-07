@@ -1,5 +1,5 @@
 {
-    "images_path": "..\\..\\Decompile\\20260414\\ExportedProject\\Assets\\Texture2D\\",
+    "images_path": "..\\..\\Decompile\\20260606\\ExportedProject\\Assets\\Texture2D\\",
     "destination_path": "..\\..\\Assets\\",
-    "url": "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=9C49151D43CB89E8E33C0DE1D83896D2CA4D3791"
+    "url": "https://api.steampowered.com/IGameInventory/GetItemDefArchive/v0001?appid=3419430&digest=80EEAA1E00A2E6B93E662136A1733419E7FD7C7F"
 }
