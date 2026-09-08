@@ -5,11 +5,13 @@
     "cosmetics_quality:legendary",
     "cosmetics_quality:rare",
     "cosmetics_quality:uncommon",
+    "cosmetics_quality:unique",
     "emote_quality:common",
     "emote_quality:epic",
     "emote_quality:legendary",
     "emote_quality:rare",
     "emote_quality:uncommon",
+    "emote_quality:unique",
     "event:achievement",
     "event:adoptable",
     "event:advent2025_deluxe",
@@ -23,6 +25,7 @@
     "event:lunar2026_deluxe",
     "event:lunar2026_free",
     "event:oku",
+    "event:pawpass2609",
     "event:rewards",
     "event:socials",
     "event:summer2025",
@@ -39,5 +42,6 @@
     "quality:legendary",
     "quality:rare",
     "quality:special",
-    "quality:uncommon"
+    "quality:uncommon",
+    "quality:unique"
 ]

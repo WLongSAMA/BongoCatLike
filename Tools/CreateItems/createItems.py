@@ -28,11 +28,13 @@ def remove_keywords(text):
                 ";cosmetics_quality:rare",
                 ";cosmetics_quality:epic",
                 ";cosmetics_quality:legendary",
+                ";cosmetics_quality:unique",
                 ";emote_quality:common",
                 ";emote_quality:uncommon",
                 ";emote_quality:rare",
                 ";emote_quality:epic",
-                ";emote_quality:legendary"
+                ";emote_quality:legendary",
+                ";emote_quality:unique"
                 ]
     for keyword in keywords:
         text = text.replace(keyword, '')
