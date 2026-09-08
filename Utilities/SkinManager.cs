@@ -106,7 +106,9 @@ namespace BongoCat_Like.Utilities
 
         public static IImmutableSolidColorBrush GetQuality(string tags)
         {
-            if (tags.Contains("quality:legendary"))
+            if (tags.Contains("quality:unique"))
+                return Brushes.Fuchsia;
+            else if(tags.Contains("quality:legendary"))
                 return Brushes.Orange;
             else if (tags.Contains("quality:epic"))
                 return Brushes.DarkMagenta;
